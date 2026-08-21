@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Binary Search Visualizer | Maurekar</title>
+    <meta
+      name="description"
+      content="Visualize Binary Search step by step with Java code and a sorted array dry run."
+    />
+    <link
+      rel="canonical"
+      href="https://example.com/dsa/binary-search/visualizer.html"
+    />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <style>
+      .visual-page {
+        padding: 70px 0 100px;
+      }
+      .visual-page h1 {
+        font-size: clamp(44px, 6vw, 70px);
+        line-height: 1.04;
+        letter-spacing: -0.05em;
+        margin: 0 0 14px;
+      }
+      .visual-page h1 em {
+        font-family: var(--serif);
+      }
+      .visual-lead {
+        color: var(--muted);
+        max-width: 620px;
+        font-size: 18px;
+      }
+      .visual-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        margin-top: 48px;
+      }
+      .visual-panel {
+        background: var(--white);
+        border-top: 3px solid var(--ink);
+        padding: 25px;
+      }
+      .panel-label {
+        font: 500 11px var(--mono);
+        color: var(--lime-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .array-view {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 42px 0 25px;
+      }
+      .array-cell {
+        min-width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        background: #e8eee1;
+        font: 500 14px var(--mono);
+        border-bottom: 3px solid #b9c8ae;
+      }
+      .array-cell.active {
+        background: var(--lime);
+        border-color: var(--lime-dark);
+      }
+      .array-cell.target {
+        background: var(--orange);
+        color: #fff;
+        border-color: #c75f3d;
+      }
+      .legend {
+        display: flex;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+        background: #e8eee1;
+      }
+      .legend i:nth-child(2) {
+        background: var(--lime);
+      }
+      .legend i:nth-child(3) {
+        background: var(--orange);
+      }
+      .step-message {
+        min-height: 58px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .visual-controls {
+        display: flex;
+        gap: 10px;
+      }
+      .visual-controls button {
+        border: 0;
+        background: var(--ink);
+        color: #fff;
+        padding: 11px 15px;
+        font: 600 13px var(--sans);
+        cursor: pointer;
+      }
+      .visual-controls button:disabled {
+        opacity: 0.4;
+      }
+      .code-block {
+        background: #17221d;
+        color: #e8f1df;
+        padding: 20px;
+        overflow: auto;
+        font: 12px/1.7 var(--mono);
+        white-space: pre;
+      }
+      .code-block .highlight {
+        color: var(--lime);
+      }
+      @media (max-width: 760px) {
+        .visual-page {
+          padding-top: 52px;
+        }
+        .visual-grid {
+          grid-template-columns: 1fr;
+        }
+        .array-cell {
+          min-width: 38px;
+          height: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../"
+        ><span class="brand-mark">MK</span><span>Maurekar</span></a
+      >
+      <nav aria-label="Primary">
+        <a href="../">DSA Library</a><a href="./">Binary Search</a>
+      </nav>
+      <a class="header-button" href="index.html"
+        >All questions <span>→</span></a
+      >
+    </header>
+    <main class="page-width visual-page">
+      <p class="eyebrow">Interactive dry run</p>
+      <h1>Binary Search <em>in motion.</em></h1>
+      <p class="visual-lead">
+        Watch the search range shrink one decision at a time. The code and the
+        visual state stay side by side.
+      </p>
+      <div class="visual-grid">
+        <section class="visual-panel">
+          <span class="panel-label">Sorted array · target 34</span>
+          <div id="array-view" class="array-view"></div>
+          <p id="step-message" class="step-message"></p>
+          <div class="visual-controls">
+            <button id="previous" type="button">← Previous</button
+            ><button id="next" type="button">Next step →</button>
+          </div>
+        </section>
+        <section class="visual-panel">
+          <span class="panel-label">Java implementation</span>
+          <pre id="code-block" class="code-block"></pre>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Maurekar · Visual learning</span
+      ><a href="index.html">Back to questions</a>
+    </footer>
+    <script>
+      const data = {
+        array: [3, 8, 12, 19, 27, 34, 41, 56, 72],
+        target: 34,
+        steps: [
+          {
+            low: 0,
+            middle: 4,
+            high: 8,
+            message: "27 is smaller than 34, so search the right half.",
+          },
+          {
+            low: 5,
+            middle: 6,
+            high: 8,
+            message: "41 is greater than 34, so search the left half.",
+          },
+          { low: 5, middle: 5, high: 5, message: "34 matches the target." },
+        ],
+      };
+      const code = [
+        "public static int search(int[] numbers, int target) {",
+        "    int low = 0, high = numbers.length - 1;",
+        "    while (low <= high) {",
+        "        int middle = low + (high - low) / 2;",
+        "        if (numbers[middle] == target) return middle;",
+        "        if (numbers[middle] < target) low = middle + 1;",
+        "        else high = middle - 1;",
+        "    }",
+        "    return -1;",
+        "}",
+      ];
+      let step = 0;
+      const render = () => {
+        const state = data.steps[step];
+        document.querySelector("#array-view").innerHTML = data.array
+          .map(
+            (value, index) =>
+              '<span class="array-cell ' +
+              (index >= state.low && index <= state.high ? "active " : "") +
+              (value === data.target ? "target" : "") +
+              '">' +
+              value +
+              "</span>",
+          )
+          .join("");
+        document.querySelector("#step-message").textContent = state.message;
+        document.querySelector("#previous").disabled = step === 0;
+        document.querySelector("#next").disabled =
+          step === data.steps.length - 1;
+        document.querySelector("#code-block").textContent = code.join("\n");
+      };
+      document.querySelector("#previous").onclick = () => {
+        step--;
+        render();
+      };
+      document.querySelector("#next").onclick = () => {
+        step++;
+        render();
+      };
+      render();
+    </script>
+  </body>
+</html>

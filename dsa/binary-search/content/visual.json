@@ -1,0 +1,9 @@
+{
+  "array": [3, 8, 12, 19, 27, 34, 41, 56, 72],
+  "target": 34,
+  "steps": [
+    {"low": 0, "middle": 4, "high": 8, "message": "27 is smaller than 34, so search the right half."},
+    {"low": 5, "middle": 6, "high": 8, "message": "41 is greater than 34, so search the left half."},
+    {"low": 5, "middle": 5, "high": 5, "message": "34 matches the target."}
+  ]
+}

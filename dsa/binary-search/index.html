@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Binary Search Questions | Maurekar</title>
+    <meta
+      name="description"
+      content="Study 37 Binary Search questions from basics to binary search on answer, with complexity notes, Java code, and a visualizer."
+    />
+    <link rel="canonical" href="https://example.com/dsa/binary-search/" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <style>
+      .topic-hero {
+        padding: 76px 0 54px;
+        max-width: 850px;
+      }
+      .topic-hero h1 {
+        font-size: clamp(48px, 6vw, 78px);
+        line-height: 1.02;
+        letter-spacing: -0.055em;
+        margin: 0 0 20px;
+      }
+      .topic-hero h1 em {
+        font-family: var(--serif);
+        font-weight: 600;
+      }
+      .topic-hero p:not(.eyebrow) {
+        color: var(--muted);
+        font-size: 18px;
+        max-width: 660px;
+      }
+      .topic-tools {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        margin-top: 30px;
+      }
+      .topic-tools input {
+        width: min(410px, 100%);
+        border: 1px solid var(--line);
+        background: var(--white);
+        padding: 13px 15px;
+        font: 14px var(--sans);
+        color: var(--ink);
+      }
+      .visualizer-link {
+        font-size: 13px;
+        font-weight: 700;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 3px;
+      }
+      .question-groups {
+        padding-bottom: 100px;
+        max-width: 980px;
+      }
+      .question-group {
+        border-top: 1px solid var(--line);
+        margin-top: 28px;
+      }
+      .question-group h2 {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font: 500 11px var(--mono);
+        color: var(--lime-dark);
+        padding: 18px 0;
+        margin: 0;
+      }
+      .question-row {
+        display: grid;
+        grid-template-columns: 45px 1fr 130px 25px;
+        gap: 18px;
+        align-items: center;
+        border-top: 1px solid var(--line);
+        padding: 16px 0;
+      }
+      .question-row span,
+      .question-row small {
+        font: 12px var(--mono);
+        color: var(--muted);
+      }
+      .question-row strong {
+        font-size: 16px;
+      }
+      .question-row b {
+        font-size: 19px;
+        font-weight: 400;
+      }
+      .question-row:hover strong,
+      .question-row:hover b {
+        color: var(--lime-dark);
+      }
+      @media (max-width: 760px) {
+        .topic-hero {
+          padding-top: 58px;
+        }
+        .topic-hero h1 {
+          font-size: 52px;
+        }
+        .topic-tools {
+          display: block;
+        }
+        .topic-tools input {
+          width: 100%;
+        }
+        .visualizer-link {
+          display: inline-block;
+          margin-top: 22px;
+        }
+        .question-row {
+          grid-template-columns: 32px 1fr 20px;
+          gap: 12px;
+        }
+        .question-row small {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../"
+        ><span class="brand-mark">MK</span><span>Maurekar</span></a
+      >
+      <nav aria-label="Primary">
+        <a href="../">DSA Library</a
+        ><a class="active" href="./">Binary Search</a>
+      </nav>
+      <a class="header-button" href="visualizer.html"
+        >Open visualizer <span>→</span></a
+      >
+    </header>
+    <main class="page-width">
+      <section class="topic-hero">
+        <p class="eyebrow">Arrays / Search Algorithms</p>
+        <h1>Binary Search <em>questions.</em></h1>
+        <p>
+          Start with the sorted-array invariant, then move through the
+          variations in the master sheet. Every row opens a focused problem
+          page.
+        </p>
+        <div class="topic-tools">
+          <input
+            id="question-search"
+            type="search"
+            placeholder="Search questions..."
+            aria-label="Search Binary Search questions"
+          /><a class="visualizer-link" href="visualizer.html"
+            >See Binary Search in motion →</a
+          >
+        </div>
+      </section>
+      <section
+        id="question-list"
+        class="question-groups"
+        aria-label="Binary Search question list"
+      ></section>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Maurekar · Binary Search path</span
+      ><a href="../">Back to library</a>
+    </footer>
+    <script src="../../js/app.js"></script>
+  </body>
+</html>

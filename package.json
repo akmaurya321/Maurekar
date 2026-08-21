@@ -1,0 +1,5 @@
+{
+  "name": "maurekar-dsa",
+  "private": true,
+  "scripts": { "dev": "npx serve ." }
+}

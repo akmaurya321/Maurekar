@@ -1,0 +1,252 @@
+/* Shared layout safeguards for phones, tablets, and narrow desktop windows. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+pre,
+.code-block,
+.article-code {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+@media (max-width: 960px) {
+  .page-width {
+    width: 100%;
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  }
+
+  .site-header {
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+    gap: 18px !important;
+  }
+
+  .hero {
+    grid-template-columns: 1fr !important;
+    gap: 42px !important;
+    padding-top: 58px;
+    padding-bottom: 72px;
+  }
+
+  .hero-copy {
+    max-width: 720px;
+  }
+
+  .hero-board {
+    width: min(100%, 620px);
+    margin: 0 auto;
+  }
+
+  .visual-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .topic-directory,
+  .question-groups {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    height: auto !important;
+    min-height: 64px;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .site-header nav {
+    display: none !important;
+  }
+
+  .header-button {
+    white-space: nowrap;
+  }
+
+  .hero h1,
+  .library-page h1,
+  .problem-page h1,
+  .visual-page h1 {
+    font-size: clamp(42px, 13vw, 58px) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .hero-lead,
+  .listing-intro,
+  .problem-lead,
+  .visual-lead {
+    font-size: 16px !important;
+  }
+
+  .hero-actions {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+  }
+
+  .hero-board {
+    min-height: 310px !important;
+    padding: 24px !important;
+  }
+
+  .journey-title {
+    font-size: 30px !important;
+  }
+
+  .signal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
+
+  .signal-grid div {
+    padding-left: 0 !important;
+  }
+
+  .section-heading {
+    display: block !important;
+  }
+
+  .section-heading .text-link {
+    display: inline-block;
+    margin-top: 18px;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .directory-row,
+  .question-row {
+    grid-template-columns: 34px minmax(0, 1fr) 22px !important;
+    gap: 10px !important;
+    align-items: start !important;
+    padding: 16px 0 !important;
+  }
+
+  .directory-row strong,
+  .question-row strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .directory-row small,
+  .question-row small {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 11px;
+  }
+
+  .directory-row b,
+  .question-row b {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .difficulty-key {
+    line-height: 1.8;
+    margin-bottom: -16px;
+  }
+
+  .problem-meta {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px 14px !important;
+  }
+
+  .prose {
+    font-size: 16px !important;
+  }
+
+  .visual-page,
+  .problem-page,
+  .library-page {
+    padding-top: 48px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .visual-panel {
+    min-width: 0;
+    padding: 18px !important;
+  }
+
+  .array-view {
+    gap: 5px !important;
+    margin-top: 28px !important;
+  }
+
+  .array-cell {
+    min-width: 34px !important;
+    height: 38px !important;
+    font-size: 12px !important;
+  }
+
+  .visual-controls {
+    flex-wrap: wrap;
+  }
+
+  .visual-controls button {
+    flex: 1 1 140px;
+  }
+
+  .site-footer {
+    display: block !important;
+  }
+
+  .site-footer a {
+    display: inline-block;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .page-width {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+
+  .site-header {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+
+  .brand {
+    font-size: 14px;
+  }
+
+  .header-button {
+    padding: 8px 9px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-board {
+    min-height: 280px !important;
+  }
+
+  .journey-labels {
+    right: 16px !important;
+    left: 16px !important;
+    font-size: 10px !important;
+  }
+
+  .journey-road {
+    right: 16px !important;
+    left: 16px !important;
+  }
+
+  .question-row strong,
+  .directory-row strong {
+    font-size: 14px !important;
+  }
+}
