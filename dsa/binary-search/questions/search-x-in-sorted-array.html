@@ -1,28 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Binary Search — Intro | Maurekar</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Intro of Binary Search | Maurekar</title>
     <meta
       name="description"
-      content="The complete beginner's guide to Binary Search."
-    >
+      content="Learn Intro of Binary Search with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="index,follow" />
     <link
       rel="canonical"
-      href="https://example.com/dsa/binary-search/questions/search-x-in-sorted-array.html"
-    >
-    <link rel="stylesheet" href="../../../css/style.css">
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-x-in-sorted-array.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Intro of Binary Search | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn Intro of Binary Search with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-x-in-sorted-array.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Intro of Binary Search | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn Intro of Binary Search with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../../css/style.css" />
     <style>
-      html { scroll-behavior: auto; }
+      html {
+        scroll-behavior: auto;
+      }
       body {
         background:
-          radial-gradient(circle at 92% 4%, rgba(200, 243, 107, .18), transparent 24rem),
+          radial-gradient(
+            circle at 92% 4%,
+            rgba(200, 243, 107, 0.18),
+            transparent 24rem
+          ),
           var(--paper);
         color: #20302a;
         letter-spacing: 0;
       }
-      .site-header { background: rgba(244, 245, 239, .96); }
+      .site-header {
+        background: rgba(244, 245, 239, 0.96);
+      }
       .article-hero {
         padding: 70px 0 42px;
         max-width: 920px;
@@ -60,15 +87,19 @@
         color: var(--muted);
         font: 10px var(--mono);
         text-transform: uppercase;
-        letter-spacing: .06em;
+        letter-spacing: 0.06em;
       }
-      .article-fact strong { display: block; margin-top: 3px; font-size: 17px; }
+      .article-fact strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 17px;
+      }
       .article-nav-title {
         margin: 0 0 16px;
         color: var(--ink);
         font: 700 11px var(--mono);
         text-transform: uppercase;
-        letter-spacing: .08em;
+        letter-spacing: 0.08em;
       }
       .article-layout {
         display: grid;
@@ -96,7 +127,11 @@
         line-height: 1.35;
         margin: 30px 0 10px;
       }
-      .article p, .article li { color: #405148; line-height: 1.8; }
+      .article p,
+      .article li {
+        color: #405148;
+        line-height: 1.8;
+      }
       .article li {
         margin: 8px 0;
       }
@@ -115,7 +150,7 @@
         color: #e8f1df;
         padding: 20px;
         font: 13px/1.75 var(--mono);
-        box-shadow: 0 10px 24px rgba(21, 33, 29, .1);
+        box-shadow: 0 10px 24px rgba(21, 33, 29, 0.1);
       }
       .article code {
         font-family: var(--mono);
@@ -144,10 +179,19 @@
         left: 18px;
         color: #64756b;
       }
-      .syntax-keyword { color: #72b7ff; }
-      .syntax-number { color: #ffb86b; }
-      .syntax-variable { color: #d79cff; }
-      .syntax-comment { color: #72c995; font-style: italic; }
+      .syntax-keyword {
+        color: #72b7ff;
+      }
+      .syntax-number {
+        color: #ffb86b;
+      }
+      .syntax-variable {
+        color: #d79cff;
+      }
+      .syntax-comment {
+        color: #72c995;
+        font-style: italic;
+      }
       .article-nav {
         position: fixed;
         top: 98px;
@@ -161,7 +205,7 @@
         border-top: 3px solid var(--ink);
         background: var(--white);
         padding: 18px 16px 12px;
-        box-shadow: 0 8px 24px rgba(21, 33, 29, .06);
+        box-shadow: 0 8px 24px rgba(21, 33, 29, 0.06);
       }
       .article-nav a {
         display: block;
@@ -170,8 +214,13 @@
         margin-bottom: 12px;
         padding: 3px 0;
       }
-      .article-nav a.active { color: var(--lime-dark); font-weight: 700; }
-      .article-nav a.active::before { content: "→ "; }
+      .article-nav a.active {
+        color: var(--lime-dark);
+        font-weight: 700;
+      }
+      .article-nav a.active::before {
+        content: "→ ";
+      }
       .visualizer-button {
         border: 1px solid var(--line);
         background: var(--paper);
@@ -230,10 +279,19 @@
         .article-hero {
           padding-top: 58px;
         }
-        .article-hero h1 { font-size: 50px; }
-        .article-lead { font-size: 16px; }
-        .article h2 { font-size: 24px; }
-        .article-facts { grid-template-columns: 1fr; margin-bottom: 32px; }
+        .article-hero h1 {
+          font-size: 50px;
+        }
+        .article-lead {
+          font-size: 16px;
+        }
+        .article h2 {
+          font-size: 24px;
+        }
+        .article-facts {
+          grid-template-columns: 1fr;
+          margin-bottom: 32px;
+        }
         .article-nav {
           display: flex;
           gap: 14px;
@@ -243,15 +301,52 @@
           border-right: 1px solid var(--line);
           border-bottom: 1px solid var(--line);
           background: var(--white);
-          box-shadow: 0 6px 18px rgba(21, 33, 29, .1);
+          box-shadow: 0 6px 18px rgba(21, 33, 29, 0.1);
           padding: 14px 14px 10px;
           margin-bottom: 22px;
           margin-bottom: 22px;
         }
-        .article-nav-title { display: none; }
-        .article-nav a { flex: 0 0 auto; margin: 0; }
+        .article-nav-title {
+          display: none;
+        }
+        .article-nav a {
+          flex: 0 0 auto;
+          margin: 0;
+        }
       }
     </style>
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Intro of Binary Search",
+        "description": "Learn Intro of Binary Search with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-x-in-sorted-array.html",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Intro of Binary Search",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-x-in-sorted-array.html"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -278,9 +373,15 @@
         </p>
       </section>
       <section class="article-facts" aria-label="Binary Search quick facts">
-        <div class="article-fact"><span>Requirement</span><strong>Sorted data</strong></div>
-        <div class="article-fact"><span>Time</span><strong>O(log N)</strong></div>
-        <div class="article-fact"><span>Iterative space</span><strong>O(1)</strong></div>
+        <div class="article-fact">
+          <span>Requirement</span><strong>Sorted data</strong>
+        </div>
+        <div class="article-fact">
+          <span>Time</span><strong>O(log N)</strong>
+        </div>
+        <div class="article-fact">
+          <span>Iterative space</span><strong>O(1)</strong>
+        </div>
       </section>
       <div class="article-layout">
         <article class="article">
@@ -363,14 +464,19 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             <p>Target: <strong>26</strong>.</p>
             <h3>Step 1 → L=0, H=15, M=7</h3>
             <p>
-              <code>arr[M] = 16</code>; target 26 is bigger. Throw away 0–7. L=8.
+              <code>arr[M] = 16</code>; target 26 is bigger. Throw away 0–7.
+              L=8.
             </p>
             <h3>Step 2 → L=8, H=15, M=11</h3>
             <p>
-              <code>arr[M] = 24</code>; target 26 is bigger. Throw away 8–11. L=12.
+              <code>arr[M] = 24</code>; target 26 is bigger. Throw away 8–11.
+              L=12.
             </p>
             <h3>Step 3 → L=12, H=15, M=13</h3>
-            <p><code>arr[M] = 28</code>; target 26 is smaller. Throw away 13–15. H=12.</p>
+            <p>
+              <code>arr[M] = 28</code>; target 26 is smaller. Throw away 13–15.
+              H=12.
+            </p>
             <h3>Step 4 → L=12, H=12, M=12</h3>
             <p>
               <code>arr[M] = 26</code> →
@@ -549,8 +655,15 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
           </section>
           <section id="download-notes">
             <h2>Download Binary Search Notes</h2>
-            <p>Save this complete Binary Search lesson for offline reading and revision.</p>
-            <a class="download-notes" href="../../../notes-visualizer/?topic=binary-search-intro">Watch notes &amp; download ↓</a>
+            <p>
+              Save this complete Binary Search lesson for offline reading and
+              revision.
+            </p>
+            <a
+              class="download-notes"
+              href="../../../notes-visualizer/?topic=binary-search-intro"
+              >Watch notes &amp; download ↓</a
+            >
           </section>
         </article>
         <nav class="article-nav" aria-label="Article sections">
@@ -626,20 +739,41 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
       };
       const codePanel = document.querySelector("#language-code code");
       const visualizerLink = document.querySelector("#open-code-visualizer");
-      const escapeCode = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const escapeCode = (value) =>
+        value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
       const colorizeCode = (line) => {
         const commentMatch = line.match(/(\/\/|#)/);
-        const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
+        const codePart = commentMatch
+          ? line.slice(0, commentMatch.index)
+          : line;
         const commentPart = commentMatch ? line.slice(commentMatch.index) : "";
         const colored = escapeCode(codePart)
-          .replace(/\b(public|static|int|while|if|else|return|def|elif|vector|class)\b/g, '<span class="syntax-keyword">$1</span>')
-          .replace(/\b(arr|target|low|high|mid|binary_search)\b/g, '<span class="syntax-variable">$1</span>')
+          .replace(
+            /\b(public|static|int|while|if|else|return|def|elif|vector|class)\b/g,
+            '<span class="syntax-keyword">$1</span>',
+          )
+          .replace(
+            /\b(arr|target|low|high|mid|binary_search)\b/g,
+            '<span class="syntax-variable">$1</span>',
+          )
           .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
-        return colored + (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : "");
+        return (
+          colored +
+          (commentPart
+            ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>`
+            : "")
+        );
       };
       const showCode = (language) => {
-        codePanel.innerHTML = codeByLanguage[language].split("\n")
-          .map((line, index) => `<span class="code-line" data-line="${index + 1}">${colorizeCode(line)}</span>`)
+        codePanel.innerHTML = codeByLanguage[language]
+          .split("\n")
+          .map(
+            (line, index) =>
+              `<span class="code-line" data-line="${index + 1}">${colorizeCode(line)}</span>`,
+          )
           .join("");
       };
       showCode("python");
@@ -653,14 +787,19 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
           });
         });
       });
-      const articleSections = document.querySelectorAll(".article > section[id]");
+      const articleSections = document.querySelectorAll(
+        ".article > section[id]",
+      );
       const articleLinks = document.querySelectorAll(".article-nav a");
       const sectionObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             articleLinks.forEach((link) => {
-              link.classList.toggle("active", link.hash === `#${entry.target.id}`);
+              link.classList.toggle(
+                "active",
+                link.hash === `#${entry.target.id}`,
+              );
             });
           });
         },

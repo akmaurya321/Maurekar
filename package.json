@@ -1,5 +1,5 @@
 {
   "name": "maurekar-dsa",
   "private": true,
-  "scripts": { "dev": "npx serve ." }
+  "scripts": { "dev": "npx serve .", "seo": "node scripts/seo-optimize.js" }
 }

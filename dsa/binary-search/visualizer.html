@@ -1,18 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Binary Search Visualizer | Maurekar</title>
     <meta
       name="description"
-      content="Visualize Binary Search step by step with Java code and a sorted array dry run."
-    >
+      content="Learn Binary Search Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="noindex,follow" />
     <link
       rel="canonical"
-      href="https://example.com/dsa/binary-search/visualizer.html"
-      >
-    <link rel="stylesheet" href="../../css/style.css">
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/visualizer.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Binary Search Visualizer | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn Binary Search Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/visualizer.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Binary Search Visualizer | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn Binary Search Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <style>
       html,
       body {
@@ -68,7 +87,11 @@
         border: 1px solid #cfd9c9;
         border-bottom: 3px solid #aebb9e;
         font-family: var(--mono);
-        transition: background 1100ms ease, opacity 1300ms linear, transform 1100ms ease, filter 1300ms linear;
+        transition:
+          background 1100ms ease,
+          opacity 1300ms linear,
+          transform 1100ms ease,
+          filter 1300ms linear;
         will-change: background, opacity, transform, filter;
       }
       .array-cell.active {
@@ -106,9 +129,15 @@
         background: var(--white);
         border: 1px solid currentColor;
       }
-      .pointer-low { color: #247b67; }
-      .pointer-mid { color: #c75f3d; }
-      .pointer-high { color: #5277a8; }
+      .pointer-low {
+        color: #247b67;
+      }
+      .pointer-mid {
+        color: #c75f3d;
+      }
+      .pointer-high {
+        color: #5277a8;
+      }
       .pointer-float {
         position: absolute;
         top: 2px;
@@ -118,12 +147,23 @@
         border: 1px solid currentColor;
         font: 700 9px var(--mono);
         transform: translateX(-50%);
-        transition: left 1300ms linear, top 600ms ease, opacity 250ms ease;
+        transition:
+          left 1300ms linear,
+          top 600ms ease,
+          opacity 250ms ease;
         pointer-events: none;
       }
-      #pointer-low { color: #247b67; }
-      #pointer-mid { color: #c75f3d; top: 27px; }
-      #pointer-high { color: #5277a8; top: 2px; }
+      #pointer-low {
+        color: #247b67;
+      }
+      #pointer-mid {
+        color: #c75f3d;
+        top: 27px;
+      }
+      #pointer-high {
+        color: #5277a8;
+        top: 2px;
+      }
       .array-cell.target {
         background: var(--orange);
         color: #fff;
@@ -184,7 +224,10 @@
         padding: 0 22px 0 58px;
         position: relative;
         background: transparent;
-        transition: background 1300ms linear, color 1300ms linear, box-shadow 1300ms linear;
+        transition:
+          background 1300ms linear,
+          color 1300ms linear,
+          box-shadow 1300ms linear;
       }
       .code-line::before {
         content: attr(data-line);
@@ -199,13 +242,26 @@
         animation: code-pulse 1300ms linear;
       }
       @keyframes code-pulse {
-        from { background: #466a35; }
-        to { background: #2b4027; }
+        from {
+          background: #466a35;
+        }
+        to {
+          background: #2b4027;
+        }
       }
-      .syntax-keyword { color: #72b7ff; }
-      .syntax-number { color: #ffb86b; }
-      .syntax-comment { color: #72c995; font-style: italic; }
-      .syntax-type { color: #d79cff; }
+      .syntax-keyword {
+        color: #72b7ff;
+      }
+      .syntax-number {
+        color: #ffb86b;
+      }
+      .syntax-comment {
+        color: #72c995;
+        font-style: italic;
+      }
+      .syntax-type {
+        color: #d79cff;
+      }
       .variable-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -272,22 +328,85 @@
         .array-cell {
           min-height: 62px;
         }
-        .array-view { gap: 3px; padding-left: 2px; padding-right: 2px; }
-        .cell-index { padding-left: 1px; padding-right: 1px; }
-        .cell-value { padding-left: 1px; padding-right: 1px; }
-        .cell-pointers { font-size: 6px; gap: 0; }
-        .cell-pointers span { padding: 1px; }
-        .visual-panel { padding: 12px; }
-        .code-block { font-size: 9px; line-height: 1.45; }
-        .variable-card { padding: 6px 8px; }
-        .variable-card strong { font-size: 16px; }
-        .step-detail { font-size: 11px; }
+        .array-view {
+          gap: 3px;
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+        .cell-index {
+          padding-left: 1px;
+          padding-right: 1px;
+        }
+        .cell-value {
+          padding-left: 1px;
+          padding-right: 1px;
+        }
+        .cell-pointers {
+          font-size: 6px;
+          gap: 0;
+        }
+        .cell-pointers span {
+          padding: 1px;
+        }
+        .visual-panel {
+          padding: 12px;
+        }
+        .code-block {
+          font-size: 9px;
+          line-height: 1.45;
+        }
+        .variable-card {
+          padding: 6px 8px;
+        }
+        .variable-card strong {
+          font-size: 16px;
+        }
+        .step-detail {
+          font-size: 11px;
+        }
       }
     </style>
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Binary Search Visualizer",
+        "description": "Learn Binary Search Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/visualizer.html",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Binary Search Visualizer",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/visualizer.html"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
-      <a id="back-to-code" class="header-button" href="questions/search-x-in-sorted-array.html#code">← Back</a>
+      <a
+        id="back-to-code"
+        class="header-button"
+        href="questions/search-x-in-sorted-array.html#code"
+        >← Back</a
+      >
     </header>
     <main class="page-width visual-page">
       <div class="visual-grid">
@@ -336,12 +455,14 @@
       </div>
     </main>
     <script>
-      document.querySelector("#back-to-code").addEventListener("click", (event) => {
-        if (document.referrer.includes("search-x-in-sorted-array.html")) {
-          event.preventDefault();
-          window.history.back();
-        }
-      });
+      document
+        .querySelector("#back-to-code")
+        .addEventListener("click", (event) => {
+          if (document.referrer.includes("search-x-in-sorted-array.html")) {
+            event.preventDefault();
+            window.history.back();
+          }
+        });
       let data;
       let language =
         new URLSearchParams(window.location.search).get("language") || "java";
@@ -350,17 +471,28 @@
         const state = data.steps[step];
         const cells = document.querySelectorAll(".array-cell");
         cells.forEach((cell, index) => {
-              const inRange = state.low === null || state.high === null || (index >= state.low && index <= state.high);
+          const inRange =
+            state.low === null ||
+            state.high === null ||
+            (index >= state.low && index <= state.high);
           const pointers = [
             index === state.low ? '<span class="pointer-low">LOW</span>' : "",
-            index === state.middle ? '<span class="pointer-mid">MID</span>' : "",
-            index === state.high ? '<span class="pointer-high">HIGH</span>' : "",
+            index === state.middle
+              ? '<span class="pointer-mid">MID</span>'
+              : "",
+            index === state.high
+              ? '<span class="pointer-high">HIGH</span>'
+              : "",
           ].join("");
           cell.className = `array-cell ${inRange ? "active" : "discarded"} ${index === state.middle ? "mid" : ""} ${data.array[index] === data.target ? "target" : ""}`;
           cell.querySelector(".cell-pointers").innerHTML = pointers;
         });
         requestAnimationFrame(() => {
-          [["pointer-low", state.low], ["pointer-mid", state.middle], ["pointer-high", state.high]].forEach(([pointerId, index]) => {
+          [
+            ["pointer-low", state.low],
+            ["pointer-mid", state.middle],
+            ["pointer-high", state.high],
+          ].forEach(([pointerId, index]) => {
             const pointer = document.querySelector(`#${pointerId}`);
             if (index === null) {
               pointer.style.opacity = "0";
@@ -379,7 +511,10 @@
         const nextMove = nextState
           ? ` Next step: low = ${nextState.low}, mid = ${nextState.middle}, high = ${nextState.high}.`
           : " This is the final step: the target is found.";
-        const middleText = state.middle === null ? "not calculated yet" : `${state.middle} (value ${data.array[state.middle]})`;
+        const middleText =
+          state.middle === null
+            ? "not calculated yet"
+            : `${state.middle} (value ${data.array[state.middle]})`;
         document.querySelector("#step-detail").textContent =
           `This step: low = ${state.low ?? "not set"}, mid = ${middleText}, high = ${state.high ?? "not set"}.${nextMove}`;
         document.querySelector("#low-value").textContent = state.low ?? "—";
@@ -389,16 +524,35 @@
         document.querySelector("#next").disabled =
           step === data.steps.length - 1;
         const highlightedLine = state.highlightLine;
-        const escapeCode = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const escapeCode = (value) =>
+          value
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
         const colorize = (line) => {
           const commentMatch = line.match(/(\/\/|#)/);
-          const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
-          const commentPart = commentMatch ? line.slice(commentMatch.index) : "";
+          const codePart = commentMatch
+            ? line.slice(0, commentMatch.index)
+            : line;
+          const commentPart = commentMatch
+            ? line.slice(commentMatch.index)
+            : "";
           let colored = escapeCode(codePart)
-            .replace(/\b(public|static|int|while|if|else|return|def|elif|vector)\b/g, '<span class="syntax-keyword">$1</span>')
-            .replace(/\b(arr|target|low|high|mid)\b/g, '<span class="syntax-type">$1</span>')
+            .replace(
+              /\b(public|static|int|while|if|else|return|def|elif|vector)\b/g,
+              '<span class="syntax-keyword">$1</span>',
+            )
+            .replace(
+              /\b(arr|target|low|high|mid)\b/g,
+              '<span class="syntax-type">$1</span>',
+            )
             .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
-          return colored + (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : "");
+          return (
+            colored +
+            (commentPart
+              ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>`
+              : "")
+          );
         };
         const codeBlock = document.querySelector("#code-block");
         if (codeBlock.dataset.language !== language) {
@@ -443,9 +597,14 @@
         .then((response) => response.json())
         .then((json) => {
           data = json;
-          document.querySelector("#array-view").innerHTML = data.array
-            .map((value, index) => `<span class="array-cell"><span class="cell-pointers"></span><span class="cell-index">${index}</span><span class="cell-value">${value}</span></span>`)
-            .join("") + '<span id="pointer-low" class="pointer-float">LOW</span><span id="pointer-mid" class="pointer-float">MID</span><span id="pointer-high" class="pointer-float">HIGH</span>';
+          document.querySelector("#array-view").innerHTML =
+            data.array
+              .map(
+                (value, index) =>
+                  `<span class="array-cell"><span class="cell-pointers"></span><span class="cell-index">${index}</span><span class="cell-value">${value}</span></span>`,
+              )
+              .join("") +
+            '<span id="pointer-low" class="pointer-float">LOW</span><span id="pointer-mid" class="pointer-float">MID</span><span id="pointer-high" class="pointer-float">HIGH</span>';
           render();
         });
       window.addEventListener("resize", () => {

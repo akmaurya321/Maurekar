@@ -2,7 +2,7 @@
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img,
@@ -18,6 +18,20 @@ pre,
   max-width: 100%;
   overflow-x: auto;
   white-space: pre;
+}
+
+main,
+section,
+article,
+.page-width,
+.visual-panel {
+  min-width: 0;
+}
+
+img,
+video,
+canvas {
+  height: auto;
 }
 
 @media (max-width: 960px) {
@@ -207,6 +221,20 @@ pre,
   .site-footer a {
     display: inline-block;
     margin-top: 8px;
+  }
+
+  .visual-page {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .visual-page .visual-grid {
+    height: auto !important;
+  }
+
+  .visual-page .visual-panel {
+    overflow: visible !important;
   }
 }
 
