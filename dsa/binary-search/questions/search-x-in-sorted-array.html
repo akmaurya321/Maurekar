@@ -1,6 +1,672 @@
-<!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search X in Sorted Array | Binary Search | Maurekar</title><meta name="description" content="Understand Search X in Sorted Array, a Binary Search problem, with an approachable explanation and complexity analysis."><link rel="canonical" href="https://example.com/dsa/binary-search/questions/search-x-in-sorted-array.html"><link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/problem.css"></head><body><header class="site-header"><a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a><nav aria-label="Primary"><a href="../../">DSA Library</a><a href="../">Binary Search</a></nav><a class="header-button" href="../visualizer.html">Visualizer <span>→</span></a></header><main class="page-width problem-page"><p class="eyebrow">Binary Search / Basics</p><h1>Search X in Sorted Array</h1><p class="problem-lead">A focused explanation of this Binary Search pattern, with the key decision and the complexity to remember.</p><div class="problem-meta"><span>Complexity</span><strong>O(log n)</strong><span>Topic</span><strong>Binary Search</strong></div><article class="prose"><h2>Problem idea</h2><p>Work with the sorted structure and use the middle position to eliminate the part of the search space that cannot contain the answer.</p><h2>How to think about it</h2><ol><li>Define the search range clearly.</li><li>Choose the middle safely with <code>low + (high - low) / 2</code>.</li><li>Keep the half that can still contain the answer.</li></ol><h2>Java pattern</h2><pre class="code-block"><code>int low = 0, high = numbers.length - 1;
-while (low <= high) {
-    int middle = low + (high - low) / 2;
-    // Compare and keep the valid half.
-}</code></pre></article><p class="back-link"><a href="../">← All Binary Search questions</a></p></main><footer class="site-footer page-width"><span>Maurekar · Focused problem page</span><a href="../visualizer.html">Open visualizer</a></footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Binary Search — Intro | Maurekar</title>
+    <meta
+      name="description"
+      content="The complete beginner's guide to Binary Search."
+    >
+    <link
+      rel="canonical"
+      href="https://example.com/dsa/binary-search/questions/search-x-in-sorted-array.html"
+    >
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+      html { scroll-behavior: auto; }
+      body {
+        background:
+          radial-gradient(circle at 92% 4%, rgba(200, 243, 107, .18), transparent 24rem),
+          var(--paper);
+        color: #20302a;
+        letter-spacing: 0;
+      }
+      .site-header { background: rgba(244, 245, 239, .96); }
+      .article-hero {
+        padding: 70px 0 42px;
+        max-width: 920px;
+      }
+      .article-hero h1 {
+        font-size: clamp(48px, 7vw, 88px);
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        margin: 0 0 22px;
+      }
+      .article-hero h1 em {
+        font-family: var(--serif);
+      }
+      .article-lead {
+        max-width: 760px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #506159;
+      }
+      .article-facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 820px;
+        margin: 0 0 46px;
+      }
+      .article-fact {
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--lime-dark);
+        background: var(--white);
+        padding: 13px 16px;
+      }
+      .article-fact span {
+        display: block;
+        color: var(--muted);
+        font: 10px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .article-fact strong { display: block; margin-top: 3px; font-size: 17px; }
+      .article-nav-title {
+        margin: 0 0 16px;
+        color: var(--ink);
+        font: 700 11px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: .08em;
+      }
+      .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 820px) 190px;
+        gap: 58px;
+        padding-bottom: 100px;
+        align-items: start;
+      }
+      .article section {
+        border-top: 2px solid #d3dbd1;
+        padding: 42px 0 18px;
+        scroll-margin-top: 24px;
+      }
+      .article h2 {
+        max-width: 760px;
+        margin: 0 0 20px;
+        padding-left: 14px;
+        border-left: 4px solid var(--lime-dark);
+        font-size: 29px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+      .article h3 {
+        font-size: 19px;
+        line-height: 1.35;
+        margin: 30px 0 10px;
+      }
+      .article p, .article li { color: #405148; line-height: 1.8; }
+      .article li {
+        margin: 8px 0;
+      }
+      .article blockquote {
+        margin: 26px 0;
+        border: 1px solid #c8d5bf;
+        border-left: 4px solid var(--lime-dark);
+        padding: 14px 20px;
+        background: #fbfff5;
+        color: #314238;
+      }
+      .article pre {
+        overflow-x: auto;
+        border: 1px solid #263b31;
+        background: #111b17;
+        color: #e8f1df;
+        padding: 20px;
+        font: 13px/1.75 var(--mono);
+        box-shadow: 0 10px 24px rgba(21, 33, 29, .1);
+      }
+      .article code {
+        font-family: var(--mono);
+        font-size: 0.9em;
+        background: #e8eee1;
+        padding: 2px 5px;
+      }
+      .article pre code {
+        background: transparent;
+      }
+      #language-code {
+        background: #101815;
+        color: #e8f1df;
+        padding: 14px 0;
+        overflow-x: auto;
+        font: 13px/1.75 var(--mono);
+      }
+      #language-code .code-line {
+        display: block;
+        padding: 0 18px 0 52px;
+        position: relative;
+      }
+      #language-code .code-line::before {
+        content: attr(data-line);
+        position: absolute;
+        left: 18px;
+        color: #64756b;
+      }
+      .syntax-keyword { color: #72b7ff; }
+      .syntax-number { color: #ffb86b; }
+      .syntax-variable { color: #d79cff; }
+      .syntax-comment { color: #72c995; font-style: italic; }
+      .article-nav {
+        position: fixed;
+        top: 98px;
+        right: max(18px, calc((100vw - 1180px) / 2 + 32px));
+        width: 190px;
+        align-self: start;
+        height: fit-content;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--ink);
+        background: var(--white);
+        padding: 18px 16px 12px;
+        box-shadow: 0 8px 24px rgba(21, 33, 29, .06);
+      }
+      .article-nav a {
+        display: block;
+        color: var(--muted);
+        font: 12px/1.5 var(--mono);
+        margin-bottom: 12px;
+        padding: 3px 0;
+      }
+      .article-nav a.active { color: var(--lime-dark); font-weight: 700; }
+      .article-nav a.active::before { content: "→ "; }
+      .visualizer-button {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        padding: 8px 12px;
+        font: 700 12px var(--sans);
+        cursor: pointer;
+      }
+      .code-switch {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0 0;
+      }
+      .visualizer-button.active {
+        background: var(--lime);
+        border-color: var(--lime-dark);
+      }
+      .download-notes {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 8px;
+        background: var(--ink);
+        color: var(--white);
+        padding: 11px 15px;
+        font-weight: 700;
+      }
+      .code-note {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+      @media (min-width: 851px) and (max-width: 1050px) {
+        .article-nav {
+          position: sticky;
+          top: 22px;
+          right: auto;
+          width: auto;
+        }
+      }
+      @media (max-width: 850px) {
+        .article-layout {
+          display: flex;
+          flex-direction: column;
+        }
+        .article-nav {
+          order: -1;
+          position: sticky;
+          top: 0;
+          right: auto;
+          width: auto;
+          z-index: 5;
+          max-height: none;
+          overflow-x: auto;
+          overflow-y: hidden;
+        }
+        .article-hero {
+          padding-top: 58px;
+        }
+        .article-hero h1 { font-size: 50px; }
+        .article-lead { font-size: 16px; }
+        .article h2 { font-size: 24px; }
+        .article-facts { grid-template-columns: 1fr; margin-bottom: 32px; }
+        .article-nav {
+          display: flex;
+          gap: 14px;
+          overflow-x: auto;
+          border-left: 1px solid var(--line);
+          border-top: 1px solid var(--line);
+          border-right: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+          background: var(--white);
+          box-shadow: 0 6px 18px rgba(21, 33, 29, .1);
+          padding: 14px 14px 10px;
+          margin-bottom: 22px;
+          margin-bottom: 22px;
+        }
+        .article-nav-title { display: none; }
+        .article-nav a { flex: 0 0 auto; margin: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../../"
+        ><span class="brand-mark">MK</span><span>Maurekar</span></a
+      >
+      <nav aria-label="Primary">
+        <a href="../../">DSA Library</a
+        ><a class="active" href="../">Binary Search</a>
+      </nav>
+      <a class="header-button" href="../">Back to library <span>→</span></a>
+    </header>
+    <main class="page-width">
+      <section class="article-hero">
+        <p class="eyebrow">Arrays / Search Algorithms · Topic 01</p>
+        <h1>Intro of Binary <em>Search.</em></h1>
+        <p class="article-lead">
+          <strong>Big Picture (read this first, 30 seconds):</strong> Binary
+          Search finds a number in a <strong>sorted</strong> list by checking
+          the <strong>middle</strong> item, then throwing away half the list
+          based on whether your target is bigger or smaller. It repeats this on
+          the smaller half until it finds the answer. For 1 billion items, it
+          needs only about 30 checks instead of a billion.
+        </p>
+      </section>
+      <section class="article-facts" aria-label="Binary Search quick facts">
+        <div class="article-fact"><span>Requirement</span><strong>Sorted data</strong></div>
+        <div class="article-fact"><span>Time</span><strong>O(log N)</strong></div>
+        <div class="article-fact"><span>Iterative space</span><strong>O(1)</strong></div>
+      </section>
+      <div class="article-layout">
+        <article class="article">
+          <section id="why">
+            <h2>1. WHY (Motive) — Linear Search vs Binary Search</h2>
+            <p>
+              Imagine you have <strong>1 Billion sorted numbers</strong> and
+              need to find one number.
+            </p>
+            <h3>Linear Search (the slow way)</h3>
+            <ul>
+              <li>Checks one item at a time.</li>
+              <li>
+                In the worst case, checks <strong>all 1 billion items</strong>.
+              </li>
+              <li>That is a LOT of work.</li>
+            </ul>
+            <h3>Binary Search (the fast way)</h3>
+            <ul>
+              <li>Cuts the search area in <strong>half</strong> every time.</li>
+              <li>
+                Needs about <strong>30 steps</strong> for 1 billion items.
+              </li>
+            </ul>
+            <p>
+              <strong>Simple takeaway:</strong> Linear Search = O(N). Binary
+              Search = O(log N). For big data, this difference is huge. This is
+              <strong>why</strong> we learn Binary Search.
+            </p>
+          </section>
+          <section id="condition">
+            <h2>2. CONDITION (Prerequisite) — The Data Must Be Sorted</h2>
+            <p>
+              Binary Search only works if the list is <strong>sorted</strong>,
+              small to large or large to small.
+            </p>
+            <p>
+              <strong>Why?</strong> If the middle is checked and the answer is
+              smaller, we can skip the right side because everything there is
+              even bigger. Without order, the middle tells us nothing.
+            </p>
+            <blockquote>
+              <strong>Rule to remember:</strong> No sorted data = No Binary
+              Search. Sort first, or use Linear Search.
+            </blockquote>
+          </section>
+          <section id="intuition">
+            <h2>3. INTUITION (The Core Logic) — The “Guess the Number” Game</h2>
+            <p>
+              “I am thinking of a number between 1 and 100. Guess it. I will
+              only say higher or lower.” The smartest first guess is
+              <strong>50</strong>.
+            </p>
+            <ul>
+              <li>Guess 50; “higher” means 1–50 are gone.</li>
+              <li>Guess 75; “lower” means the answer is 51–74.</li>
+              <li>Guess the middle again, and repeat.</li>
+            </ul>
+            <p>
+              Every guess <strong>cuts possibilities in half</strong>. In 7
+              guesses, any number from 1 to 100 can be found.
+            </p>
+            <p>
+              <strong>This exact idea is Binary Search:</strong> Higher → right
+              half. Lower → left half. Repeat until you land on the answer.
+              Throwing away half each time is
+              <strong>Divide and Conquer</strong>.
+            </p>
+          </section>
+          <section id="dry-run">
+            <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
+            <p>
+              <code>low</code> (L) is the start, <code>high</code> (H) is the
+              end, and <code>mid</code> (M) is the middle of the current search
+              area.
+            </p>
+            <pre>
+Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value: [2,  4,  6,  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</pre
+            >
+            <p>Target: <strong>26</strong>.</p>
+            <h3>Step 1 → L=0, H=15, M=7</h3>
+            <p>
+              <code>arr[M] = 16</code>; target 26 is bigger. Throw away 0–7. L=8.
+            </p>
+            <h3>Step 2 → L=8, H=15, M=11</h3>
+            <p>
+              <code>arr[M] = 24</code>; target 26 is bigger. Throw away 8–11. L=12.
+            </p>
+            <h3>Step 3 → L=12, H=15, M=13</h3>
+            <p><code>arr[M] = 28</code>; target 26 is smaller. Throw away 13–15. H=12.</p>
+            <h3>Step 4 → L=12, H=12, M=12</h3>
+            <p>
+              <code>arr[M] = 26</code> →
+              <strong>Match found! Return index 12.</strong>
+            </p>
+            <p>
+              The area shrinks: 16 → 8 → 4 → 1. Answer in
+              <strong>4 checks</strong>.
+            </p>
+          </section>
+          <section id="code">
+            <h2>5. CODE (Implementation + Comments)</h2>
+            <p class="code-note">
+              Choose a language to read its commented implementation. The
+              visualizer button opens the same algorithm with that language
+              selected.
+            </p>
+            <div
+              class="code-switch"
+              role="tablist"
+              aria-label="Programming language"
+            >
+              <button
+                class="visualizer-button active"
+                type="button"
+                data-code-language="python"
+              >
+                Python</button
+              ><button
+                class="visualizer-button"
+                type="button"
+                data-code-language="java"
+              >
+                Java</button
+              ><button
+                class="visualizer-button"
+                type="button"
+                data-code-language="cpp"
+              >
+                C++</button
+              ><a
+                class="visualizer-button"
+                id="open-code-visualizer"
+                href="../visualizer.html?language=python"
+                >Open visualizer →</a
+              >
+            </div>
+            <pre id="language-code"><code>def binary_search(arr, target):
+        low = 0                      # start of the search area
+        high = len(arr) - 1          # end of the search area
+
+        while low &lt;= high:           # keep going while something remains
+          mid = low + (high - low) // 2   # safe middle point
+
+          if arr[mid] == target:   # middle value matches what we want
+            return mid           # we found it
+          elif arr[mid] &lt; target:  # our target is bigger
+            low = mid + 1        # search the right half
+          else:                    # our target is smaller
+            high = mid - 1       # search the left half
+
+        return -1                    # not in the list</code></pre>
+          </section>
+          <section id="mistakes">
+            <h2>6. MISTAKES &amp; EDGE CASES (The Bugs)</h2>
+            <ol>
+              <li>
+                <strong>Overflow:</strong> Use
+                <code>low + (high - low) / 2</code>, not
+                <code>(low + high) / 2</code>.
+              </li>
+              <li>
+                <strong>Forgotten -1:</strong> Return <code>-1</code> when
+                absent.
+              </li>
+              <li>
+                <strong>Wrong condition:</strong> Use
+                <code>low &lt;= high</code>, not <code>low &lt; high</code>.
+              </li>
+              <li>
+                <strong>Wrong update:</strong> Use
+                <code>low = mid + 1</code> and <code>high = mid - 1</code> or
+                the loop can run forever.
+              </li>
+              <li><strong>Unsorted data:</strong> Sort it first.</li>
+            </ol>
+          </section>
+          <section id="complexity">
+            <h2>7. COMPLEXITY (The Math)</h2>
+            <h3>Time Complexity: O(log N)</h3>
+            <p>
+              N → N/2 → N/4 → N/8 → ... → 1. For 1 billion items, log₂(N) is
+              about <strong>30</strong>.
+            </p>
+            <h3>Space Complexity: O(1)</h3>
+            <p>
+              The iterative version uses only <code>low</code>,
+              <code>high</code>, and <code>mid</code>. A recursive version uses
+              O(log N) stack space.
+            </p>
+          </section>
+          <section id="real-world">
+            <h2>8. REAL WORLD (Applications)</h2>
+            <ul>
+              <li>
+                <strong>Git Bisect:</strong> Finds the commit that caused a bug.
+              </li>
+              <li>
+                <strong>Database Indexing:</strong> Finds rows quickly in huge
+                tables.
+              </li>
+              <li>
+                <strong>Autocomplete &amp; Spell Checkers:</strong> Search
+                sorted word lists.
+              </li>
+              <li>
+                <strong>Photo/Video Editing:</strong> Jump through large
+                histories or timelines.
+              </li>
+              <li>
+                <strong>Rate Limiters &amp; Logs:</strong> Find events in
+                time-ordered logs.
+              </li>
+            </ul>
+          </section>
+          <section id="answer">
+            <h2>
+              9. PATTERN RECOGNITION (Advanced) — “Binary Search on the Answer”
+            </h2>
+            <p>
+              Binary Search can cut any search area in half when it has
+              <strong>monotonicity</strong>: answers keep getting better or
+              worse in one direction.
+            </p>
+            <p>
+              Example: Find the smallest truck capacity to deliver packages
+              within 5 days. Guess a capacity and ask, “Is it enough?”
+            </p>
+            <ul>
+              <li>Yes → try a smaller capacity.</li>
+              <li>No → try a bigger capacity.</li>
+            </ul>
+            <p>
+              This appears in “minimize the maximum,” “maximize the minimum,”
+              square roots, ranked values, and fair resource splitting.
+            </p>
+            <blockquote>
+              <strong>Key takeaway:</strong> Ordered, predictable possible
+              answers mean Binary Search may apply, even without a sorted array.
+            </blockquote>
+          </section>
+          <section id="practice">
+            <h2>10. PRACTICE &amp; NEXT STEP (Retention)</h2>
+            <ol>
+              <li>
+                <a href="https://leetcode.com/problems/binary-search/"
+                  >Binary Search (Easy)</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
+                  >Search in Rotated Sorted Array (Medium)</a
+                >
+              </li>
+              <li>
+                <a href="https://leetcode.com/problems/koko-eating-bananas/"
+                  >Koko Eating Bananas (Medium)</a
+                >
+              </li>
+            </ol>
+            <p>
+              After these 3, study
+              <strong>Binary Search on the Answer</strong> as its own topic.
+            </p>
+          </section>
+          <section id="download-notes">
+            <h2>Download Binary Search Notes</h2>
+            <p>Save this complete Binary Search lesson for offline reading and revision.</p>
+            <a class="download-notes" href="../../../notes-visualizer/?topic=binary-search-intro">Watch notes &amp; download ↓</a>
+          </section>
+        </article>
+        <nav class="article-nav" aria-label="Article sections">
+          <p class="article-nav-title">On this page</p>
+          <a href="#download-notes">Study sheet</a>
+          <a href="#why">01 · Why</a><a href="#condition">02 · Condition</a
+          ><a href="#intuition">03 · Intuition</a
+          ><a href="#dry-run">04 · Dry run</a><a href="#code">05 · Code</a
+          ><a href="#mistakes">06 · Mistakes</a
+          ><a href="#complexity">07 · Complexity</a
+          ><a href="#real-world">08 · Real world</a
+          ><a href="#answer">09 · Pattern</a
+          ><a href="#practice">10 · Practice</a
+          ><a href="#download-notes">↓ Download Notes</a>
+        </nav>
+      </div>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Maurekar · Binary Search · Intro</span
+      ><a href="../">Back to library</a>
+    </footer>
+    <script>
+      const codeByLanguage = {
+        python: `def binary_search(arr, target):
+    low = 0                      # start of the search area
+    high = len(arr) - 1          # end of the search area
+
+    while low <= high:           # keep going while something remains
+      mid = low + (high - low) // 2   # safe middle point
+
+      if arr[mid] == target:   # middle value matches what we want
+        return mid           # we found it
+      elif arr[mid] < target:  # our target is bigger
+        low = mid + 1        # search the right half
+      else:                    # our target is smaller
+        high = mid - 1       # search the left half
+
+    return -1                    # not in the list`,
+        java: `public static int binarySearch(int[] arr, int target) {
+    int low = 0;                          // start of the search area
+    int high = arr.length - 1;            // end of the search area
+
+    while (low <= high) {                 // keep checking while an area remains
+      int mid = low + (high - low) / 2; // safe middle point
+
+      if (arr[mid] == target) {         // middle value matches
+        return mid;                   // we found it
+      } else if (arr[mid] < target) {   // target is bigger
+        low = mid + 1;                 // search the right half
+      } else {                           // target is smaller
+        high = mid - 1;                // search the left half
+      }
+    }
+    return -1;                             // target is not in the list
+  }`,
+        cpp: `int binarySearch(vector<int>& arr, int target) {
+    int low = 0;                          // start of the search area
+    int high = arr.size() - 1;            // end of the search area
+
+    while (low <= high) {                 // keep checking while an area remains
+      int mid = low + (high - low) / 2; // safe middle point
+
+      if (arr[mid] == target) {         // middle value matches
+        return mid;                   // we found it
+      } else if (arr[mid] < target) {   // target is bigger
+        low = mid + 1;                 // search the right half
+      } else {                           // target is smaller
+        high = mid - 1;                // search the left half
+      }
+    }
+    return -1;                             // target is not in the list
+  }`,
+      };
+      const codePanel = document.querySelector("#language-code code");
+      const visualizerLink = document.querySelector("#open-code-visualizer");
+      const escapeCode = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const colorizeCode = (line) => {
+        const commentMatch = line.match(/(\/\/|#)/);
+        const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
+        const commentPart = commentMatch ? line.slice(commentMatch.index) : "";
+        const colored = escapeCode(codePart)
+          .replace(/\b(public|static|int|while|if|else|return|def|elif|vector|class)\b/g, '<span class="syntax-keyword">$1</span>')
+          .replace(/\b(arr|target|low|high|mid|binary_search)\b/g, '<span class="syntax-variable">$1</span>')
+          .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
+        return colored + (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : "");
+      };
+      const showCode = (language) => {
+        codePanel.innerHTML = codeByLanguage[language].split("\n")
+          .map((line, index) => `<span class="code-line" data-line="${index + 1}">${colorizeCode(line)}</span>`)
+          .join("");
+      };
+      showCode("python");
+      document.querySelectorAll("[data-code-language]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const language = button.dataset.codeLanguage;
+          showCode(language);
+          visualizerLink.href = `../visualizer.html?language=${language}`;
+          document.querySelectorAll("[data-code-language]").forEach((item) => {
+            item.classList.toggle("active", item === button);
+          });
+        });
+      });
+      const articleSections = document.querySelectorAll(".article > section[id]");
+      const articleLinks = document.querySelectorAll(".article-nav a");
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            articleLinks.forEach((link) => {
+              link.classList.toggle("active", link.hash === `#${entry.target.id}`);
+            });
+          });
+        },
+        { rootMargin: "-18% 0px -68% 0px" },
+      );
+      articleSections.forEach((section) => sectionObserver.observe(section));
+    </script>
+  </body>
+</html>

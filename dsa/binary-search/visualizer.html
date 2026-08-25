@@ -1,46 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Binary Search Visualizer | Maurekar</title>
     <meta
       name="description"
       content="Visualize Binary Search step by step with Java code and a sorted array dry run."
-    />
+    >
     <link
       rel="canonical"
       href="https://example.com/dsa/binary-search/visualizer.html"
-    />
-    <link rel="stylesheet" href="../../css/style.css" />
+      >
+    <link rel="stylesheet" href="../../css/style.css">
     <style>
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
       .visual-page {
-        padding: 70px 0 100px;
-      }
-      .visual-page h1 {
-        font-size: clamp(44px, 6vw, 70px);
-        line-height: 1.04;
-        letter-spacing: -0.05em;
-        margin: 0 0 14px;
-      }
-      .visual-page h1 em {
-        font-family: var(--serif);
-      }
-      .visual-lead {
-        color: var(--muted);
-        max-width: 620px;
-        font-size: 18px;
+        height: calc(100vh - 76px);
+        padding: 18px 0;
+        overflow: hidden;
       }
       .visual-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
         gap: 18px;
-        margin-top: 48px;
+        height: 100%;
+        margin-top: 0;
+        align-items: start;
       }
       .visual-panel {
         background: var(--white);
         border-top: 3px solid var(--ink);
-        padding: 25px;
+        padding: 18px;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
       }
       .panel-label {
         font: 500 11px var(--mono);
@@ -49,24 +47,83 @@
         letter-spacing: 0.08em;
       }
       .array-view {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(16, minmax(0, 1fr));
+        position: relative;
         gap: 8px;
-        flex-wrap: wrap;
-        margin: 42px 0 25px;
+        margin: 20px 0 12px;
+        width: 100%;
+        padding: 28px 8px 8px;
       }
       .array-cell {
-        min-width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
+        width: 100%;
+        min-width: 0;
+        min-height: 78px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        overflow: visible;
         background: #e8eee1;
-        font: 500 14px var(--mono);
-        border-bottom: 3px solid #b9c8ae;
+        border: 1px solid #cfd9c9;
+        border-bottom: 3px solid #aebb9e;
+        font-family: var(--mono);
+        transition: background 1100ms ease, opacity 1300ms linear, transform 1100ms ease, filter 1300ms linear;
+        will-change: background, opacity, transform, filter;
       }
       .array-cell.active {
         background: var(--lime);
         border-color: var(--lime-dark);
       }
+      .array-cell.discarded {
+        opacity: 0.16;
+        filter: grayscale(1) blur(1px);
+        transform: scale(0.96);
+      }
+      .array-cell.mid {
+        transform: translateY(4px);
+        box-shadow: 0 0 0 3px var(--orange);
+      }
+      .cell-index {
+        display: block;
+        padding: 6px 8px 2px;
+        color: #778277;
+        font-size: clamp(7px, 1vw, 10px);
+        text-align: center;
+      }
+      .cell-value {
+        display: block;
+        padding: 3px 8px 10px;
+        font-size: clamp(10px, 1.5vw, 16px);
+        font-weight: 600;
+        text-align: center;
+      }
+      .cell-pointers {
+        display: none;
+      }
+      .cell-pointers span {
+        padding: 2px 3px;
+        background: var(--white);
+        border: 1px solid currentColor;
+      }
+      .pointer-low { color: #247b67; }
+      .pointer-mid { color: #c75f3d; }
+      .pointer-high { color: #5277a8; }
+      .pointer-float {
+        position: absolute;
+        top: 2px;
+        z-index: 3;
+        padding: 2px 4px;
+        background: var(--white);
+        border: 1px solid currentColor;
+        font: 700 9px var(--mono);
+        transform: translateX(-50%);
+        transition: left 1300ms linear, top 600ms ease, opacity 250ms ease;
+        pointer-events: none;
+      }
+      #pointer-low { color: #247b67; }
+      #pointer-mid { color: #c75f3d; top: 27px; }
+      #pointer-high { color: #5277a8; top: 2px; }
       .array-cell.target {
         background: var(--orange);
         color: #fff;
@@ -92,9 +149,10 @@
         background: var(--orange);
       }
       .step-message {
-        min-height: 58px;
+        min-height: 0;
+        margin: 8px 0;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 12px;
       }
       .visual-controls {
         display: flex;
@@ -112,53 +170,148 @@
         opacity: 0.4;
       }
       .code-block {
-        background: #17221d;
+        background: #101815;
         color: #e8f1df;
-        padding: 20px;
-        overflow: auto;
-        font: 12px/1.7 var(--mono);
+        padding: 10px 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        font: 11px/1.55 var(--mono);
         white-space: pre;
+        min-height: 0;
       }
-      .code-block .highlight {
+      .code-line {
+        display: block;
+        padding: 0 22px 0 58px;
+        position: relative;
+        background: transparent;
+        transition: background 1300ms linear, color 1300ms linear, box-shadow 1300ms linear;
+      }
+      .code-line::before {
+        content: attr(data-line);
+        position: absolute;
+        left: 22px;
+        color: #64756b;
+      }
+      .code-line.highlight {
+        background: #2b4027;
         color: var(--lime);
+        box-shadow: inset 3px 0 var(--lime);
+        animation: code-pulse 1300ms linear;
+      }
+      @keyframes code-pulse {
+        from { background: #466a35; }
+        to { background: #2b4027; }
+      }
+      .syntax-keyword { color: #72b7ff; }
+      .syntax-number { color: #ffb86b; }
+      .syntax-comment { color: #72c995; font-style: italic; }
+      .syntax-type { color: #d79cff; }
+      .variable-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 12px 0;
+      }
+      .variable-card {
+        background: #e8eee1;
+        padding: 10px 12px;
+      }
+      .variable-card span {
+        display: block;
+        color: var(--muted);
+        font: 11px var(--mono);
+      }
+      .variable-card strong {
+        font: 600 20px var(--mono);
+      }
+      .step-detail {
+        margin: 0 0 10px;
+        padding: 10px 12px;
+        font-size: 12px;
+        border-left: 3px solid var(--lime-dark);
+        background: var(--paper);
+      }
+      .comparison {
+        margin: 8px 0 12px;
+        padding: 8px 10px;
+        background: #17221d;
+        color: var(--lime);
+        font: 600 13px var(--mono);
+      }
+      .step-count {
+        color: var(--lime-dark);
+        font: 500 11px var(--mono);
+        text-transform: uppercase;
+      }
+      .language-controls {
+        display: flex;
+        gap: 8px;
+        margin: 14px 0;
+      }
+      .language-controls button {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        padding: 8px 12px;
+        font: 600 12px var(--sans);
+        cursor: pointer;
+      }
+      .language-controls button.active {
+        background: var(--lime);
+        border-color: var(--lime-dark);
       }
       @media (max-width: 760px) {
         .visual-page {
-          padding-top: 52px;
+          padding: 10px 0;
         }
         .visual-grid {
           grid-template-columns: 1fr;
+          grid-template-rows: minmax(220px, 0.9fr) minmax(280px, 1.1fr);
+          gap: 10px;
         }
         .array-cell {
-          min-width: 38px;
-          height: 42px;
+          min-height: 62px;
         }
+        .array-view { gap: 3px; padding-left: 2px; padding-right: 2px; }
+        .cell-index { padding-left: 1px; padding-right: 1px; }
+        .cell-value { padding-left: 1px; padding-right: 1px; }
+        .cell-pointers { font-size: 6px; gap: 0; }
+        .cell-pointers span { padding: 1px; }
+        .visual-panel { padding: 12px; }
+        .code-block { font-size: 9px; line-height: 1.45; }
+        .variable-card { padding: 6px 8px; }
+        .variable-card strong { font-size: 16px; }
+        .step-detail { font-size: 11px; }
       }
     </style>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../"
-        ><span class="brand-mark">MK</span><span>Maurekar</span></a
-      >
-      <nav aria-label="Primary">
-        <a href="../">DSA Library</a><a href="./">Binary Search</a>
-      </nav>
-      <a class="header-button" href="index.html"
-        >All questions <span>→</span></a
-      >
+      <a id="back-to-code" class="header-button" href="questions/search-x-in-sorted-array.html#code">← Back</a>
     </header>
     <main class="page-width visual-page">
-      <p class="eyebrow">Interactive dry run</p>
-      <h1>Binary Search <em>in motion.</em></h1>
-      <p class="visual-lead">
-        Watch the search range shrink one decision at a time. The code and the
-        visual state stay side by side.
-      </p>
       <div class="visual-grid">
         <section class="visual-panel">
-          <span class="panel-label">Sorted array · target 34</span>
+          <span class="panel-label">Sorted array · target 26</span>
           <div id="array-view" class="array-view"></div>
+          <p id="comparison" class="comparison"></p>
+          <div
+            class="variable-grid"
+            role="group"
+            aria-label="Current pointer values"
+          >
+            <div class="variable-card">
+              <span>low</span><strong id="low-value">-</strong>
+            </div>
+            <div class="variable-card">
+              <span>mid</span><strong id="mid-value">-</strong>
+            </div>
+            <div class="variable-card">
+              <span>high</span><strong id="high-value">-</strong>
+            </div>
+          </div>
+          <p id="step-count" class="step-count"></p>
+          <p id="step-detail" class="step-detail"></p>
           <p id="step-message" class="step-message"></p>
           <div class="visual-controls">
             <button id="previous" type="button">← Previous</button
@@ -166,66 +319,111 @@
           </div>
         </section>
         <section class="visual-panel">
-          <span class="panel-label">Java implementation</span>
+          <span id="language-label" class="panel-label"
+            >Java implementation</span
+          >
+          <div
+            class="language-controls"
+            role="group"
+            aria-label="Choose programming language"
+          >
+            <button type="button" data-language="python">Python</button>
+            <button type="button" data-language="java">Java</button>
+            <button type="button" data-language="cpp">C++</button>
+          </div>
           <pre id="code-block" class="code-block"></pre>
         </section>
       </div>
     </main>
-    <footer class="site-footer page-width">
-      <span>Maurekar · Visual learning</span
-      ><a href="index.html">Back to questions</a>
-    </footer>
     <script>
-      const data = {
-        array: [3, 8, 12, 19, 27, 34, 41, 56, 72],
-        target: 34,
-        steps: [
-          {
-            low: 0,
-            middle: 4,
-            high: 8,
-            message: "27 is smaller than 34, so search the right half.",
-          },
-          {
-            low: 5,
-            middle: 6,
-            high: 8,
-            message: "41 is greater than 34, so search the left half.",
-          },
-          { low: 5, middle: 5, high: 5, message: "34 matches the target." },
-        ],
-      };
-      const code = [
-        "public static int search(int[] numbers, int target) {",
-        "    int low = 0, high = numbers.length - 1;",
-        "    while (low <= high) {",
-        "        int middle = low + (high - low) / 2;",
-        "        if (numbers[middle] == target) return middle;",
-        "        if (numbers[middle] < target) low = middle + 1;",
-        "        else high = middle - 1;",
-        "    }",
-        "    return -1;",
-        "}",
-      ];
+      document.querySelector("#back-to-code").addEventListener("click", (event) => {
+        if (document.referrer.includes("search-x-in-sorted-array.html")) {
+          event.preventDefault();
+          window.history.back();
+        }
+      });
+      let data;
+      let language =
+        new URLSearchParams(window.location.search).get("language") || "java";
       let step = 0;
       const render = () => {
         const state = data.steps[step];
-        document.querySelector("#array-view").innerHTML = data.array
-          .map(
-            (value, index) =>
-              '<span class="array-cell ' +
-              (index >= state.low && index <= state.high ? "active " : "") +
-              (value === data.target ? "target" : "") +
-              '">' +
-              value +
-              "</span>",
-          )
-          .join("");
+        const cells = document.querySelectorAll(".array-cell");
+        cells.forEach((cell, index) => {
+              const inRange = state.low === null || state.high === null || (index >= state.low && index <= state.high);
+          const pointers = [
+            index === state.low ? '<span class="pointer-low">LOW</span>' : "",
+            index === state.middle ? '<span class="pointer-mid">MID</span>' : "",
+            index === state.high ? '<span class="pointer-high">HIGH</span>' : "",
+          ].join("");
+          cell.className = `array-cell ${inRange ? "active" : "discarded"} ${index === state.middle ? "mid" : ""} ${data.array[index] === data.target ? "target" : ""}`;
+          cell.querySelector(".cell-pointers").innerHTML = pointers;
+        });
+        requestAnimationFrame(() => {
+          [["pointer-low", state.low], ["pointer-mid", state.middle], ["pointer-high", state.high]].forEach(([pointerId, index]) => {
+            const pointer = document.querySelector(`#${pointerId}`);
+            if (index === null) {
+              pointer.style.opacity = "0";
+              return;
+            }
+            const cell = cells[index];
+            pointer.style.opacity = "1";
+            pointer.style.left = `${cell.offsetLeft + cell.offsetWidth / 2}px`;
+          });
+        });
+        document.querySelector("#comparison").textContent = state.comparison;
         document.querySelector("#step-message").textContent = state.message;
+        document.querySelector("#step-count").textContent =
+          `Step ${step + 1} of ${data.steps.length}`;
+        const nextState = data.steps[step + 1];
+        const nextMove = nextState
+          ? ` Next step: low = ${nextState.low}, mid = ${nextState.middle}, high = ${nextState.high}.`
+          : " This is the final step: the target is found.";
+        const middleText = state.middle === null ? "not calculated yet" : `${state.middle} (value ${data.array[state.middle]})`;
+        document.querySelector("#step-detail").textContent =
+          `This step: low = ${state.low ?? "not set"}, mid = ${middleText}, high = ${state.high ?? "not set"}.${nextMove}`;
+        document.querySelector("#low-value").textContent = state.low ?? "—";
+        document.querySelector("#mid-value").textContent = state.middle ?? "—";
+        document.querySelector("#high-value").textContent = state.high ?? "—";
         document.querySelector("#previous").disabled = step === 0;
         document.querySelector("#next").disabled =
           step === data.steps.length - 1;
-        document.querySelector("#code-block").textContent = code.join("\n");
+        const highlightedLine = state.highlightLine;
+        const escapeCode = (value) => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const colorize = (line) => {
+          const commentMatch = line.match(/(\/\/|#)/);
+          const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
+          const commentPart = commentMatch ? line.slice(commentMatch.index) : "";
+          let colored = escapeCode(codePart)
+            .replace(/\b(public|static|int|while|if|else|return|def|elif|vector)\b/g, '<span class="syntax-keyword">$1</span>')
+            .replace(/\b(arr|target|low|high|mid)\b/g, '<span class="syntax-type">$1</span>')
+            .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
+          return colored + (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : "");
+        };
+        const codeBlock = document.querySelector("#code-block");
+        if (codeBlock.dataset.language !== language) {
+          codeBlock.innerHTML = data.languages[language].code
+            .split("\n")
+            .map(
+              (line, index) =>
+                `<span class="code-line" data-line="${index + 1}">${colorize(line)}</span>`,
+            )
+            .join("");
+          codeBlock.dataset.language = language;
+        }
+        codeBlock.querySelectorAll(".code-line").forEach((line, index) => {
+          line.classList.toggle("highlight", index + 1 === highlightedLine);
+        });
+        document.querySelector("#language-label").textContent =
+          data.languages[language].label + " implementation";
+        document
+          .querySelectorAll("[data-language]")
+          .forEach((button) =>
+            button.classList.toggle(
+              "active",
+              button.dataset.language === language,
+            ),
+          );
       };
       document.querySelector("#previous").onclick = () => {
         step--;
@@ -235,7 +433,24 @@
         step++;
         render();
       };
-      render();
+      document.querySelectorAll("[data-language]").forEach((button) => {
+        button.onclick = () => {
+          language = button.dataset.language;
+          render();
+        };
+      });
+      fetch("content/visual.json")
+        .then((response) => response.json())
+        .then((json) => {
+          data = json;
+          document.querySelector("#array-view").innerHTML = data.array
+            .map((value, index) => `<span class="array-cell"><span class="cell-pointers"></span><span class="cell-index">${index}</span><span class="cell-value">${value}</span></span>`)
+            .join("") + '<span id="pointer-low" class="pointer-float">LOW</span><span id="pointer-mid" class="pointer-float">MID</span><span id="pointer-high" class="pointer-float">HIGH</span>';
+          render();
+        });
+      window.addEventListener("resize", () => {
+        if (data) render();
+      });
     </script>
   </body>
 </html>

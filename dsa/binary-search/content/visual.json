@@ -1,9 +1,24 @@
 {
-  "array": [3, 8, 12, 19, 27, 34, 41, 56, 72],
-  "target": 34,
+  "array": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32],
+  "target": 26,
+  "languages": {
+    "python": {"label": "Python", "code": "def binary_search(arr, target):\n    low = 0                      # start of the search area\n    high = len(arr) - 1          # end of the search area\n\n    while low <= high:           # keep going while something remains\n        mid = low + (high - low) // 2   # safe middle point\n        if arr[mid] == target:   # middle value matches\n            return mid           # we found it\n        elif arr[mid] < target:  # target is bigger\n            low = mid + 1        # search the right half\n        else:                    # target is smaller\n            high = mid - 1       # search the left half\n\n    return -1                    # target is not in the list"},
+    "java": {"label": "Java", "code": "public static int binarySearch(int[] arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.length - 1;            // end of the search area\n\n    while (low <= high) {                 // keep checking while an area remains\n        int mid = low + (high - low) / 2; // safe middle point\n        if (arr[mid] == target) {         // middle value matches\n            return mid;                   // we found it\n        } else if (arr[mid] < target) {   // target is bigger\n            low = mid + 1;                 // search the right half\n        } else {                           // target is smaller\n            high = mid - 1;                // search the left half\n        }\n    }\n    return -1;                             // target is not in the list\n}"},
+    "cpp": {"label": "C++", "code": "int binarySearch(vector<int>& arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.size() - 1;            // end of the search area\n\n    while (low <= high) {                 // keep checking while an area remains\n        int mid = low + (high - low) / 2; // safe middle point\n        if (arr[mid] == target) {         // middle value matches\n            return mid;                   // we found it\n        } else if (arr[mid] < target) {   // target is bigger\n            low = mid + 1;                 // search the right half\n        } else {                           // target is smaller\n            high = mid - 1;                // search the left half\n        }\n    }\n    return -1;                             // target is not in the list\n}"}
+  },
   "steps": [
-    {"low": 0, "middle": 4, "high": 8, "message": "27 is smaller than 34, so search the right half."},
-    {"low": 5, "middle": 6, "high": 8, "message": "41 is greater than 34, so search the left half."},
-    {"low": 5, "middle": 5, "high": 5, "message": "34 matches the target."}
+    {"low": 0, "middle": null, "high": null, "highlightLine": 2, "comparison": "Set low = 0  →  Start at the first index", "message": "First, set low to the beginning of the array."},
+    {"low": 0, "middle": null, "high": 15, "highlightLine": 3, "comparison": "Set high = 15  →  End at the last index", "message": "Now set high to the last index, 15."},
+    {"low": 0, "middle": 7, "high": 15, "highlightLine": 6, "comparison": "mid = 0 + (15 - 0) / 2 = 7", "message": "Calculate the middle index. mid becomes 7, whose value is 16."},
+    {"low": 0, "middle": 7, "high": 15, "highlightLine": 7, "comparison": "16 < 26  →  Target is on the right", "message": "16 is smaller than 26, so the left half can be discarded."},
+    {"low": 8, "middle": 7, "high": 15, "highlightLine": 10, "comparison": "low = mid + 1 = 8", "message": "Move low from 0 to 8. The next search starts at index 8."},
+    {"low": 8, "middle": 11, "high": 15, "highlightLine": 6, "comparison": "mid = 8 + (15 - 8) / 2 = 11", "message": "Calculate the new middle. mid becomes 11, whose value is 24."},
+    {"low": 8, "middle": 11, "high": 15, "highlightLine": 7, "comparison": "24 < 26  →  Target is on the right", "message": "24 is smaller than 26, so discard indexes 8–11."},
+    {"low": 12, "middle": 11, "high": 15, "highlightLine": 10, "comparison": "low = mid + 1 = 12", "message": "Move low from 8 to 12."},
+    {"low": 12, "middle": 13, "high": 15, "highlightLine": 6, "comparison": "mid = 12 + (15 - 12) / 2 = 13", "message": "Calculate the new middle. mid becomes 13, whose value is 28."},
+    {"low": 12, "middle": 13, "high": 15, "highlightLine": 9, "comparison": "28 > 26  →  Target is on the left", "message": "28 is greater than 26, so discard indexes 13–15."},
+    {"low": 12, "middle": 13, "high": 12, "highlightLine": 12, "comparison": "high = mid - 1 = 12", "message": "Move high from 15 to 12. Only index 12 remains."},
+    {"low": 12, "middle": 12, "high": 12, "highlightLine": 6, "comparison": "mid = 12 + (12 - 12) / 2 = 12", "message": "Calculate the final middle. mid is 12, whose value is 26."},
+    {"low": 12, "middle": 12, "high": 12, "highlightLine": 7, "comparison": "26 = 26  →  Target found", "message": "26 matches the target. Return index 12."}
   ]
 }

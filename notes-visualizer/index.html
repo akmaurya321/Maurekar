@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes Visualizer | Maurekar</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    html, body { min-height: 100%; }
+    body { margin: 0; background: #edf0e8; color: var(--ink); }
+    .notes-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 2; }
+    .notes-header a { display: inline-flex; background: var(--lime); border: 1px solid var(--lime-dark); padding: 10px 14px; font: 700 12px var(--sans); }
+    .notes-title { font: 700 13px var(--mono); }
+    .notes-stage { min-height: calc(100vh - 70px); display: grid; place-items: start center; padding: 28px; }
+    .notes-frame { position: relative; width: min(100%, 980px); padding: 14px; margin: 0; background: var(--white); box-shadow: 0 14px 35px rgba(21, 33, 29, .16); }
+    .notes-frame img { display: block; width: 100%; height: auto; }
+    .notes-download { position: absolute; top: 28px; right: 28px; background: var(--lime); color: var(--ink); border: 1px solid var(--lime-dark); padding: 11px 15px; font: 700 12px var(--sans); box-shadow: 0 5px 14px rgba(21, 33, 29, .2); }
+    @media (max-width: 600px) { .notes-header { padding: 12px 14px; } .notes-stage { padding: 12px; } .notes-frame { padding: 6px; } .notes-download { top: 16px; right: 16px; padding: 8px 10px; } }
+  </style>
+</head>
+<body>
+  <header class="notes-header"><a id="back-link" href="../dsa/binary-search/questions/search-x-in-sorted-array.html#download-notes">← Back</a><span id="notes-title" class="notes-title">Notes Visualizer</span></header>
+  <main class="notes-stage"><figure class="notes-frame"><a id="download-link" class="notes-download" href="../content/notes/binary-search/intro-to-binary-search-study-sheet.png" download>Download notes ↓</a><img id="notes-image" src="../content/notes/binary-search/intro-to-binary-search-study-sheet.png" alt="Binary Search notes"></figure></main>
+  <script>
+    const topics = {
+      "binary-search-intro": {
+        title: "Binary Search · Intro Notes",
+        image: "../content/notes/binary-search/intro-to-binary-search-study-sheet.png",
+        back: "../dsa/binary-search/questions/search-x-in-sorted-array.html#download-notes",
+        filename: "intro-to-binary-search-study-sheet.png",
+      },
+    };
+    const topic = topics[new URLSearchParams(location.search).get("topic")] || topics["binary-search-intro"];
+    document.title = `${topic.title} | Maurekar`;
+    document.querySelector("#notes-title").textContent = topic.title;
+    document.querySelector("#back-link").href = topic.back;
+    document.querySelector("#notes-image").src = topic.image;
+    document.querySelector("#notes-image").alt = topic.title;
+    document.querySelector("#download-link").href = topic.image;
+    document.querySelector("#download-link").download = topic.filename;
+  </script>
+</body>
+</html>
