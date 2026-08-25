@@ -1,22 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Binary Search questions | Maurekar</title>
-    <meta name="description" content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Maurekar">
-    <meta property="og:title" content="Binary Search questions | Maurekar">
-    <meta property="og:description" content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Binary Search questions | Maurekar">
-    <meta name="twitter:description" content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="theme-color" content="#15211d">
-    <link rel="stylesheet" href="../../css/style.css" >
+    <meta
+      name="description"
+      content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Binary Search questions | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Binary Search questions | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <style>
       .topic-hero {
         padding: 76px 0 54px;
@@ -98,33 +113,86 @@
       .question-row:hover b {
         color: var(--lime-dark);
       }
-      @media (max-width: 760px) {
+      @media (max-width: 1023px) {
         .topic-hero {
-          padding-top: 58px;
-        }
-        .topic-hero h1 {
-          font-size: 52px;
+          padding-top: 64px;
         }
         .topic-tools {
-          display: block;
+          flex-direction: column;
+          align-items: stretch;
         }
         .topic-tools input {
           width: 100%;
         }
-        .visualizer-link {
-          display: inline-block;
-          margin-top: 22px;
+      }
+      @media (max-width: 767px) {
+        .topic-hero {
+          padding-top: 56px;
         }
-        .question-row {
-          grid-template-columns: 32px 1fr 20px;
+        .topic-hero h1 {
+          font-size: clamp(42px, 13vw, 56px);
+        }
+        .topic-hero p:not(.eyebrow) {
+          font-size: 16px;
+        }
+        .topic-tools {
+          display: grid;
           gap: 12px;
         }
+        .visualizer-link {
+          display: inline-block;
+          margin-top: 0;
+          width: fit-content;
+        }
+        .question-row {
+          grid-template-columns: 32px minmax(0, 1fr) 20px;
+          gap: 10px;
+          align-items: start;
+        }
+        .question-row strong {
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
         .question-row small {
-          display: none;
+          display: block;
+          grid-column: 2;
+          grid-row: 2;
+          font-size: 11px;
         }
       }
     </style>
-      <script type="application/ld+json" id="seo-schema">{"@context":"https://schema.org","@type":"LearningResource","name":"Binary Search questions","description":"Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources.","url":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Maurekar","url":"https://akmaurya321.github.io/Maurekar/"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DSA","item":"https://akmaurya321.github.io/Maurekar/dsa/"},{"@type":"ListItem","position":2,"name":"Binary Search questions","item":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/"}]}}</script>
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Binary Search questions",
+        "description": "Learn Binary Search questions with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Binary Search questions",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -154,7 +222,7 @@
             type="search"
             placeholder="Search questions..."
             aria-label="Search Binary Search questions"
-          ><a class="visualizer-link" href="visualizer.html"
+          /><a class="visualizer-link" href="visualizer.html"
             >See Binary Search in motion →</a
           >
         </div>

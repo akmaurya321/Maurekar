@@ -2,41 +2,86 @@
 html,
 body {
   max-width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 img,
 video,
 canvas,
 svg {
+  display: block;
   max-width: 100%;
+  height: auto;
 }
 
 pre,
+code,
 .code-block,
 .article-code {
+  display: block;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   white-space: pre;
+}
+
+.code-line {
+  width: max-content;
+  min-width: 100%;
 }
 
 main,
 section,
 article,
 .page-width,
-.visual-panel {
+.article-layout,
+.article-layout > *,
+.article,
+.article section,
+.visual-panel,
+.topic-directory,
+.question-groups {
+  width: 100%;
   min-width: 0;
+  max-width: 100%;
 }
 
-img,
-video,
-canvas {
-  height: auto;
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
-@media (max-width: 960px) {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+}
+
+.table-wrap,
+.table-container,
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap table,
+.table-container table,
+.table-scroll table {
+  width: 100%;
+  min-width: 480px;
+}
+
+@media (max-width: 1023px) {
   .page-width {
     width: 100%;
+    max-width: 100%;
     padding-right: 24px !important;
     padding-left: 24px !important;
   }
@@ -45,6 +90,14 @@ canvas {
     padding-right: 24px !important;
     padding-left: 24px !important;
     gap: 18px !important;
+    height: auto !important;
+    min-height: 72px;
+    flex-wrap: wrap;
+  }
+
+  .site-header nav {
+    gap: 16px !important;
+    flex-wrap: wrap;
   }
 
   .hero {
@@ -54,8 +107,14 @@ canvas {
     padding-bottom: 72px;
   }
 
-  .hero-copy {
-    max-width: 720px;
+  .hero-copy,
+  .hero-board,
+  .visual-panel,
+  .article,
+  .topic-directory,
+  .question-groups,
+  .article-layout {
+    max-width: 100%;
   }
 
   .hero-board {
@@ -71,11 +130,14 @@ canvas {
   .question-groups {
     width: 100%;
   }
+
+  .feature-row {
+    grid-template-columns: 1fr !important;
+  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .site-header {
-    height: auto !important;
     min-height: 64px;
     padding-top: 14px !important;
     padding-bottom: 14px !important;
@@ -85,14 +147,16 @@ canvas {
     display: none !important;
   }
 
-  .header-button {
+  .header-button,
+  .button {
     white-space: nowrap;
   }
 
   .hero h1,
   .library-page h1,
   .problem-page h1,
-  .visual-page h1 {
+  .visual-page h1,
+  .article-hero h1 {
     font-size: clamp(42px, 13vw, 58px) !important;
     line-height: 1.04 !important;
     letter-spacing: -0.045em !important;
@@ -101,7 +165,8 @@ canvas {
   .hero-lead,
   .listing-intro,
   .problem-lead,
-  .visual-lead {
+  .visual-lead,
+  .article-lead {
     font-size: 16px !important;
   }
 
@@ -138,10 +203,6 @@ canvas {
     margin-top: 18px;
   }
 
-  .feature-row {
-    grid-template-columns: 1fr !important;
-  }
-
   .directory-row,
   .question-row {
     grid-template-columns: 34px minmax(0, 1fr) 22px !important;
@@ -169,23 +230,20 @@ canvas {
     grid-row: 1;
   }
 
-  .difficulty-key {
-    line-height: 1.8;
-    margin-bottom: -16px;
-  }
-
   .problem-meta {
     grid-template-columns: 1fr 1fr !important;
     gap: 8px 14px !important;
   }
 
-  .prose {
+  .prose,
+  .article {
     font-size: 16px !important;
   }
 
   .visual-page,
   .problem-page,
-  .library-page {
+  .library-page,
+  .article-hero {
     padding-top: 48px !important;
     padding-bottom: 72px !important;
   }
@@ -215,12 +273,14 @@ canvas {
   }
 
   .site-footer {
-    display: block !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px 16px;
   }
 
   .site-footer a {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 0;
   }
 
   .visual-page {
@@ -238,7 +298,7 @@ canvas {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .page-width {
     padding-right: 16px !important;
     padding-left: 16px !important;
@@ -276,5 +336,9 @@ canvas {
   .question-row strong,
   .directory-row strong {
     font-size: 14px !important;
+  }
+
+  .site-footer {
+    justify-content: flex-start;
   }
 }
