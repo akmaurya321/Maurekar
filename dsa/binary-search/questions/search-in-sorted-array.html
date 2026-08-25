@@ -1,43 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Search in a Sorted Array | Maurekar</title>
-    <meta name="description" content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Maurekar">
-    <meta property="og:title" content="Search in a Sorted Array | Maurekar">
-    <meta property="og:description" content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Search in a Sorted Array | Maurekar">
-    <meta name="twitter:description" content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="theme-color" content="#15211d">
-    <link rel="stylesheet" href="../../../css/style.css" >
-    <link rel="stylesheet" href="../../../css/problem.css" >
-      <script type="application/ld+json" id="seo-schema">{"@context":"https://schema.org","@type":"LearningResource","name":"Search in a Sorted Array","description":"Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources.","url":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Maurekar","url":"https://akmaurya321.github.io/Maurekar/"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DSA","item":"https://akmaurya321.github.io/Maurekar/dsa/"},{"@type":"ListItem","position":2,"name":"Search in a Sorted Array","item":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html"}]}}</script>
+    <meta
+      name="description"
+      content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Search in a Sorted Array | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Search in a Sorted Array | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../../../css/problem.css" />
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Search in a Sorted Array",
+        "description": "Learn Search in a Sorted Array with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Search in a Sorted Array",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-in-sorted-array.html"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../../"
-        ><span class="brand-mark">MK</span><span>Maurekar</span></a
-      >
+      <a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a>
       <nav aria-label="Primary">
         <a href="../../">DSA Library</a><a href="../">Binary Search</a>
       </nav>
-      <a class="header-button" href="../visualizer.html"
-        >Visualizer <span>→</span></a
-      >
+      <a class="header-button" href="../visualizer.html">Visualizer <span>â†’</span></a>
     </header>
     <main class="page-width problem-page">
       <p class="eyebrow">Binary Search / Basics</p>
       <h1>Search in a Sorted Array</h1>
       <p class="problem-lead">
-        A focused explanation of this Binary Search pattern, with the key
-        decision and the complexity to remember.
+        A focused explanation of this Binary Search pattern, with the key decision and the
+        complexity to remember.
       </p>
       <div class="problem-meta">
         <span>Complexity</span><strong>O(log n)</strong><span>Topic</span
@@ -46,15 +88,13 @@
       <article class="prose">
         <h2>Problem idea</h2>
         <p>
-          Work with the sorted structure and use the middle position to
-          eliminate the part of the search space that cannot contain the answer.
+          Work with the sorted structure and use the middle position to eliminate the part of the
+          search space that cannot contain the answer.
         </p>
         <h2>How to think about it</h2>
         <ol>
           <li>Define the search range clearly.</li>
-          <li>
-            Choose the middle safely with <code>low + (high - low) / 2</code>.
-          </li>
+          <li>Choose the middle safely with <code>low + (high - low) / 2</code>.</li>
           <li>Keep the half that can still contain the answer.</li>
         </ol>
         <h2>Java pattern</h2>
@@ -67,8 +107,9 @@ while (low &lt;= high) {
       <p class="back-link"><a href="../">← All Binary Search questions</a></p>
     </main>
     <footer class="site-footer page-width">
-      <span>Maurekar · Focused problem page</span
-      ><a href="../visualizer.html">Open visualizer</a>
+      <span>Maurekar · Focused problem page</span><a href="../visualizer.html">Open visualizer</a>
     </footer>
+    <script src="../../../js/article-nav.js"></script>
+    <script src="../../../js/site-navigation.js"></script>
   </body>
 </html>

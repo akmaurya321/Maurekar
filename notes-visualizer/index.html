@@ -9,10 +9,7 @@
       content="Learn Notes Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources."
     />
     <meta name="robots" content="noindex,follow" />
-    <link
-      rel="canonical"
-      href="https://akmaurya321.github.io/Maurekar/notes-visualizer/"
-    />
+    <link rel="canonical" href="https://akmaurya321.github.io/Maurekar/notes-visualizer/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Maurekar" />
     <meta property="og:title" content="Notes Visualizer | Maurekar" />
@@ -20,10 +17,7 @@
       property="og:description"
       content="Learn Notes Visualizer with clear explanations, examples, complexity analysis, code, and visual learning resources."
     />
-    <meta
-      property="og:url"
-      content="https://akmaurya321.github.io/Maurekar/notes-visualizer/"
-    />
+    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/notes-visualizer/" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Notes Visualizer | Maurekar" />
     <meta
@@ -168,31 +162,41 @@
       </figure>
     </main>
     <script>
-      const topics = {
-        "binary-search-intro": {
-          title: "Binary Search · Intro Notes",
-          image:
-            "../content/notes/binary-search/intro-to-binary-search-study-sheet.png",
-          back: "../dsa/binary-search/questions/search-x-in-sorted-array.html#download-notes",
-          filename: "intro-to-binary-search-study-sheet.png",
+      const legacyTopics = {
+        'binary-search-intro': {
+          title: 'Binary Search · Intro Notes',
+          image: '../content/notes/binary-search/intro-to-binary-search-study-sheet.png',
+          back: '../dsa/binary-search/questions/search-x-in-sorted-array.html#download-notes',
+          filename: 'intro-to-binary-search-study-sheet.png',
         },
-        "lower-bound": {
-          title: "Lower Bound Notes",
-          image: "../content/notes/binary-search/lower%20bound.png",
-          back: "../dsa/binary-search/questions/lower-bound.html#download-notes",
-          filename: "lower-bound.png",
+        'lower-bound': {
+          title: 'Lower Bound Notes',
+          image: '../content/notes/binary-search/lower%20bound.png',
+          back: '../dsa/binary-search/questions/lower-bound.html#download-notes',
+          filename: 'lower-bound.png',
+        },
+        'upper-bound': {
+          title: 'Upper Bound Notes',
+          image: '../content/notes/binary-search/upper%20bound.png',
+          back: '../dsa/binary-search/questions/upper-bound.html#download-notes',
+          filename: 'upper-bound.png',
         },
       };
-      const topic =
-        topics[new URLSearchParams(location.search).get("topic")] ||
-        topics["binary-search-intro"];
+      const topicSlug = new URLSearchParams(location.search).get('topic');
+      const topic = legacyTopics[topicSlug] || {
+        title: `${topicSlug || 'binary-search-intro'} Notes`,
+        image: `../content/notes/binary-search/${(topicSlug || 'binary-search-intro').replace(/-/g, '%20')}.png`,
+        back: `../dsa/binary-search/questions/${topicSlug || 'search-x-in-sorted-array'}.html#download-notes`,
+        filename: `${topicSlug || 'binary-search-intro'}.png`,
+      };
       document.title = `${topic.title} | Maurekar`;
-      document.querySelector("#notes-title").textContent = topic.title;
-      document.querySelector("#back-link").href = topic.back;
-      document.querySelector("#notes-image").src = topic.image;
-      document.querySelector("#notes-image").alt = topic.title;
-      document.querySelector("#download-link").href = topic.image;
-      document.querySelector("#download-link").download = topic.filename;
+      document.querySelector('#notes-title').textContent = topic.title;
+      document.querySelector('#back-link').href = topic.back;
+      document.querySelector('#notes-image').src = topic.image;
+      document.querySelector('#notes-image').alt = topic.title;
+      document.querySelector('#download-link').href = topic.image;
+      document.querySelector('#download-link').download = topic.filename;
     </script>
+    <script src="../js/site-navigation.js"></script>
   </body>
 </html>

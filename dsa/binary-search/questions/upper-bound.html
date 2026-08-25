@@ -1,18 +1,721 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Upper Bound | Maurekar</title><meta name="description" content="Learn Upper Bound with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="robots" content="index,follow"><link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Maurekar">
-    <meta property="og:title" content="Upper Bound | Maurekar">
-    <meta property="og:description" content="Learn Upper Bound with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Upper Bound | Maurekar">
-    <meta name="twitter:description" content="Learn Upper Bound with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="theme-color" content="#15211d"><link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/problem.css">
-      <script type="application/ld+json" id="seo-schema">{"@context":"https://schema.org","@type":"LearningResource","name":"Upper Bound","description":"Learn Upper Bound with clear explanations, examples, complexity analysis, code, and visual learning resources.","url":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Maurekar","url":"https://akmaurya321.github.io/Maurekar/"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DSA","item":"https://akmaurya321.github.io/Maurekar/dsa/"},{"@type":"ListItem","position":2,"name":"Upper Bound","item":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html"}]}}</script>
-  </head><body><header class="site-header"><a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a><nav aria-label="Primary"><a href="../../">DSA Library</a><a href="../">Binary Search</a></nav><a class="header-button" href="../visualizer.html">Visualizer <span>→</span></a></header><main class="page-width problem-page"><p class="eyebrow">Binary Search / Basics</p><h1>Upper Bound</h1><p class="problem-lead">A focused explanation of this Binary Search pattern, with the key decision and the complexity to remember.</p><div class="problem-meta"><span>Complexity</span><strong>O(log n)</strong><span>Topic</span><strong>Binary Search</strong></div><article class="prose"><h2>Problem idea</h2><p>Work with the sorted structure and use the middle position to eliminate the part of the search space that cannot contain the answer.</p><h2>How to think about it</h2><ol><li>Define the search range clearly.</li><li>Choose the middle safely with <code>low + (high - low) / 2</code>.</li><li>Keep the half that can still contain the answer.</li></ol><h2>Java pattern</h2><pre class="code-block"><code>int low = 0, high = numbers.length - 1;
-while (low &lt;= high) {
-    int middle = low + (high - low) / 2;
-    // Compare and keep the valid half.
-}</code></pre></article><p class="back-link"><a href="../">← All Binary Search questions</a></p></main><footer class="site-footer page-width"><span>Maurekar · Focused problem page</span><a href="../visualizer.html">Open visualizer</a></footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upper Bound | Maurekar</title>
+    <meta
+      name="description"
+      content="The complete beginner's guide to Upper Bound: intuition, dry run, implementations, mistakes, complexity, applications, and practice."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Upper Bound | Maurekar" />
+    <meta
+      property="og:description"
+      content="The complete beginner's guide to Upper Bound: intuition, dry run, implementations, mistakes, complexity, applications, and practice."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Upper Bound | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="The complete beginner's guide to Upper Bound: intuition, dry run, implementations, mistakes, complexity, applications, and practice."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Upper Bound",
+        "description": "The complete beginner's guide to Upper Bound.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/upper-bound.html",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../../../css/problem.css" />
+    <style>
+      .code-switch {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+      }
+      .visualizer-button {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        padding: 8px 12px;
+        font: 700 12px var(--sans);
+        cursor: pointer;
+      }
+      .visualizer-button.active {
+        background: var(--lime);
+        border-color: var(--lime-dark);
+      }
+      .dynamic-code {
+        background: #101815 !important;
+        color: #e8f1df !important;
+        padding: 14px 0 !important;
+        overflow-x: auto !important;
+        font: 13px/1.75 var(--mono) !important;
+        white-space: pre !important;
+      }
+      .dynamic-code .code-line {
+        display: block;
+        width: max-content;
+        min-width: 100%;
+        padding: 0 18px 0 52px;
+        position: relative;
+      }
+      .dynamic-code .code-line::before {
+        content: attr(data-line);
+        position: absolute;
+        left: 18px;
+        color: #64756b;
+      }
+      .syntax-keyword {
+        color: #72b7ff;
+      }
+      .syntax-number {
+        color: #ffb86b;
+      }
+      .syntax-variable {
+        color: #d79cff;
+      }
+      .syntax-comment {
+        color: #72c995;
+        font-style: italic;
+      }
+      .article #code > h3,
+      .article #code > pre:not(#upper-bound-code) {
+        display: none !important;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      body {
+        background:
+          radial-gradient(circle at 92% 4%, rgba(200, 243, 107, 0.18), transparent 24rem),
+          var(--paper);
+        color: #20302a;
+        letter-spacing: 0;
+      }
+      .article-hero {
+        padding: 70px 0 42px;
+        max-width: 920px;
+      }
+      .article-hero h1 {
+        font-size: clamp(48px, 7vw, 88px);
+        line-height: 1.02;
+        margin: 0 0 22px;
+      }
+      .article-lead {
+        max-width: 760px;
+        font-size: 18px;
+        line-height: 1.8;
+        color: #506159;
+      }
+      .article-facts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 820px;
+        margin: 0 0 46px;
+      }
+      .article-fact {
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--lime-dark);
+        background: var(--white);
+        padding: 13px 16px;
+      }
+      .article-fact span {
+        display: block;
+        color: var(--muted);
+        font: 10px var(--mono);
+        text-transform: uppercase;
+      }
+      .article-fact strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 17px;
+      }
+      .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 820px) 190px;
+        gap: 58px;
+        padding-bottom: 100px;
+        align-items: start;
+      }
+      .article section {
+        border-top: 2px solid #d3dbd1;
+        padding: 42px 0 18px;
+        scroll-margin-top: 24px;
+      }
+      .article h2 {
+        margin: 0 0 20px;
+        padding-left: 14px;
+        border-left: 4px solid var(--lime-dark);
+        font-size: 29px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+      .article h3 {
+        font-size: 19px;
+        line-height: 1.35;
+        margin: 30px 0 10px;
+      }
+      .article p,
+      .article li {
+        color: #405148;
+        line-height: 1.8;
+      }
+      .article li {
+        margin: 8px 0;
+      }
+      .article blockquote {
+        margin: 26px 0;
+        border: 1px solid #c8d5bf;
+        border-left: 4px solid var(--lime-dark);
+        padding: 14px 20px;
+        background: #fbfff5;
+        color: #314238;
+      }
+      .article pre {
+        max-width: 100%;
+        overflow-x: auto;
+        border: 1px solid #263b31;
+        background: #111b17;
+        color: #e8f1df;
+        padding: 20px;
+        font: 13px/1.75 var(--mono);
+        white-space: pre;
+      }
+      .article code {
+        font-family: var(--mono);
+        font-size: 0.9em;
+        background: #e8eee1;
+        padding: 2px 5px;
+      }
+      .article pre code {
+        background: transparent;
+      }
+      .article-nav {
+        position: fixed;
+        top: 98px;
+        right: max(18px, calc((100vw - 1180px) / 2 + 32px));
+        width: 190px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--ink);
+        background: var(--white);
+        padding: 18px 16px 12px;
+        box-shadow: 0 8px 24px rgba(21, 33, 29, 0.06);
+      }
+      .article-nav-title {
+        margin: 0 0 16px;
+        font: 700 11px var(--mono);
+        text-transform: uppercase;
+      }
+      .article-nav a {
+        display: block;
+        color: var(--muted);
+        font: 12px/1.5 var(--mono);
+        margin-bottom: 12px;
+        padding: 3px 0;
+      }
+      .notes-link {
+        display: inline-flex;
+        margin-top: 8px;
+        background: var(--ink);
+        color: var(--white);
+        padding: 11px 15px;
+        font-weight: 700;
+      }
+      @media (max-width: 850px) {
+        .article-hero {
+          padding-top: 58px;
+        }
+        .article-hero h1 {
+          font-size: 50px;
+        }
+        .article-lead {
+          font-size: 16px;
+        }
+        .article-facts {
+          grid-template-columns: 1fr;
+          margin-bottom: 32px;
+        }
+        .article-layout {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+        .article,
+        .article section,
+        .article pre {
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
+        }
+        .article-nav {
+          order: -1;
+          position: sticky;
+          top: 0;
+          width: 100%;
+          max-height: none;
+          overflow-x: auto;
+          overflow-y: hidden;
+          display: flex;
+          gap: 14px;
+          padding: 14px;
+          margin-bottom: 22px;
+        }
+        .article-nav-title {
+          display: none;
+        }
+        .article-nav a {
+          flex: 0 0 auto;
+          margin: 0;
+        }
+        .article h2 {
+          font-size: 24px;
+          overflow-wrap: anywhere;
+        }
+        .article pre {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../../index.html"
+        ><span class="brand-mark">MK</span><span>Maurekar</span></a
+      >
+      <nav aria-label="Primary">
+        <a href="../../index.html">DSA Library</a
+        ><a class="active" href="../index.html">Binary Search</a>
+      </nav>
+      <a class="header-button" href="../visualizer.html?topic=upper-bound"
+        ><span>Visualizer</span><span>→</span></a
+      >
+    </header>
+    <main class="page-width">
+      <section class="article-hero">
+        <p class="eyebrow">Binary Search / Basics · Topic 03</p>
+        <h1>Upper <em>Bound.</em></h1>
+        <p class="article-lead">
+          <strong>Big Picture (read this first, 30 seconds):</strong> Upper Bound answers one
+          question:
+          <em
+            >"In a sorted list, what is the first position where a value becomes strictly greater
+            than my target?"</em
+          >
+          It is almost identical to Lower Bound: Lower Bound looks for
+          <code>&gt;= target</code>, while Upper Bound looks for <code>&gt; target</code>. That tiny
+          difference changes the boundary when duplicates exist.
+        </p>
+      </section>
+      <section class="article-facts" aria-label="Upper Bound quick facts">
+        <div class="article-fact"><span>Requirement</span><strong>Sorted data</strong></div>
+        <div class="article-fact"><span>Time</span><strong>O(log N)</strong></div>
+        <div class="article-fact">
+          <span>Boundary</span><strong>First arr[i] &gt; target</strong>
+        </div>
+      </section>
+      <div class="article-layout">
+        <article class="article">
+          <section id="why">
+            <h2>1. WHY (Motive) — Why Do We Need Upper Bound?</h2>
+            <p>
+              Imagine an online store with <strong>1 million products</strong>, sorted by price.
+              Your budget is Rs 2000 and you want the first product that costs strictly more than Rs
+              2000.
+            </p>
+            <blockquote>"What is the first product I truly cannot afford?"</blockquote>
+            <h3>Without Upper Bound (checking one by one)</h3>
+            <ul>
+              <li>Scan prices one at a time until one crosses the budget.</li>
+              <li>In the worst case, that means up to 1 million checks.</li>
+            </ul>
+            <h3>With Upper Bound</h3>
+            <ul>
+              <li>Check the middle and ask: "Is this strictly greater than 2000?"</li>
+              <li>Cut the list in half repeatedly and find the answer in about 20 steps.</li>
+            </ul>
+            <p>
+              <strong>Simple takeaway:</strong> Upper Bound is Lower Bound's twin. Both find a
+              boundary in O(log N); Lower Bound uses <code>&gt;=</code>, while Upper Bound uses
+              <code>&gt;</code> and skips every value equal to the target.
+            </p>
+          </section>
+          <section id="condition">
+            <h2>2. CONDITION (Prerequisite) — The List Must Be Sorted</h2>
+            <p>Upper Bound only works on a <strong>sorted list</strong> in ascending order.</p>
+            <p>
+              <strong>Why?</strong> Once one value is strictly greater than the target, every value
+              after it is also strictly greater. This guarantee lets binary search remove half the
+              list at every step.
+            </p>
+            <blockquote>
+              <strong>Rule to remember:</strong> No sorted list means no Upper Bound. Sort first if
+              needed. The sorted order is what makes the boundary monotonic.
+            </blockquote>
+          </section>
+          <section id="intuition">
+            <h2>3. INTUITION (The Core Logic) — The Online Shopping Budget Story</h2>
+            <p>
+              Consider sorted prices:
+              <code>500, 800, 1200, 2000, 2000, 2000, 3500, 5000</code>. With a budget of 2000, all
+              three products priced exactly 2000 are affordable. The first unaffordable price is
+              3500.
+            </p>
+            <p>
+              If the middle value is strictly greater than the target, it may be the answer, but an
+              earlier answer could exist on the left. If it is less than or equal to the target, it
+              is still affordable, so the boundary must be on the right.
+            </p>
+            <ul>
+              <li>Ask: "Is the middle price strictly greater than 2000?"</li>
+              <li>
+                If <strong>yes</strong>, it may be the answer. Save it and search left for an
+                earlier one.
+              </li>
+              <li>
+                If <strong>no</strong> (the value is less than or equal to 2000), the boundary must
+                be to the right.
+              </li>
+              <li>Repeat until the first strictly greater position remains.</li>
+            </ul>
+            <p>
+              <strong>This is Upper Bound in one sentence:</strong> Find the first position where a
+              sorted value stops being affordable or equal and becomes strictly more than the limit.
+              Lower Bound stops at the first 2000; Upper Bound skips all 2000 values.
+            </p>
+          </section>
+          <section id="dry-run">
+            <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
+            <p>
+              We want the <strong>Upper Bound of 20</strong> in this duplicate-heavy sorted list:
+              the first value strictly greater than 20.
+            </p>
+            <pre>
+Index:  0    1    2    3    4    5    6
+Value: [10, 20,  20,  20,  30,  40,  50]</pre>
+            <p>
+              <code>low</code> starts at 0, <code>high</code> is one past the end (7), and
+              <code>mid</code> is the checked position.
+            </p>
+            <h3>Step 1 → L=0, H=7, M=3</h3>
+            <pre>
+[10, 20, 20, 20, 30, 40, 50]
+ L               M          H</pre>
+            <p>
+              <code>arr[3] = 20</code>. It is not strictly greater, so search right:
+              <strong>low = 4</strong>.
+            </p>
+            <h3>Step 2 → L=4, H=7, M=5</h3>
+            <pre>
+[30, 40, 50]  (checking original indexes 4–6)
+ L       M   H</pre>
+            <p>
+              <code>arr[5] = 40</code>. This is strictly greater and could be the answer, so search
+              left: <strong>high = 5</strong>.
+            </p>
+            <h3>Step 3 → L=4, H=5, M=4</h3>
+            <pre>
+[30, 40]  (checking original index 4)
+ L/M      H</pre>
+            <p>
+              <code>arr[4] = 30</code>. This is also strictly greater, so keep looking left:
+              <strong>high = 4</strong>.
+            </p>
+            <h3>Step 4 → L=4, H=4</h3>
+            <p>
+              The loop stops. <strong>Answer: index 4</strong>, where the first value strictly
+              greater than 20 is 30.
+            </p>
+            <p>
+              Lower Bound on the same array returns index 1. Therefore
+              <code>upper_bound - lower_bound = 4 - 1 = 3</code>, the count of values equal to 20.
+              The gap between the two boundaries is the frequency of the target.
+            </p>
+          </section>
+          <section id="code">
+            <h2>5. CODE (Implementation + Comments)</h2>
+            <h3>Python</h3>
+            <pre><code>def upper_bound(arr, target):
+        low = 0                      # start of the search area
+    high = len(arr)              # one past the last index
+
+        while low &lt; high:            # keep searching while a range remains
+          mid = low + (high - low) // 2   # safe middle point
+
+          if arr[mid] &lt;= target:   # equal or smaller, still affordable: go right
+            low = mid + 1
+          else:                    # strictly greater: possible answer
+            high = mid           # search left for an earlier one
+
+        return low                   # low == high: upper bound index
+
+# from bisect import bisect_right
+# bisect_right(arr, target)</code></pre>
+            <h3>C++</h3>
+            <pre><code>int upperBound(vector&lt;int&gt;&amp; arr, int target) {
+    int low = 0;
+    int high = arr.size();
+
+    while (low &lt; high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] &lt;= target) low = mid + 1;
+        else high = mid;
+    }
+    return low;
+}
+
+// upper_bound(arr.begin(), arr.end(), target) - arr.begin();</code></pre>
+            <h3>Java</h3>
+            <pre><code>public static int upperBound(int[] arr, int target) {
+        int low = 0;                          // start of the search area
+        int high = arr.length;                // one past the last index
+
+        while (low &lt; high) {                  // keep searching while a range remains
+          int mid = low + (high - low) / 2; // safe middle point
+          if (arr[mid] &lt;= target) {         // equal or smaller: go right
+            low = mid + 1;
+          } else {                           // strictly greater: possible answer
+            high = mid;                    // search left for an earlier one
+          }
+    }
+        return low;                           // low == high: upper bound index
+      }
+
+      public static void main(String[] args) {
+        int[] arr = {10, 20, 20, 20, 30, 40, 50};
+        int target = 20;
+        System.out.println("Upper Bound index: " + upperBound(arr, target));
+      }</code></pre>
+          </section>
+          <section id="mistakes">
+            <h2>6. MISTAKES &amp; EDGE CASES (The Bugs)</h2>
+            <ol>
+              <li>
+                <strong>Using <code>&lt;</code> instead of <code>&lt;=</code>:</strong>
+                that gives Lower Bound's answer and stops on an equal value.
+              </li>
+              <li>
+                <strong>Using <code>high = arr.length - 1</code>:</strong> the answer can be the
+                insertion position at the very end, so use <code>arr.length</code>.
+              </li>
+              <li>
+                <strong>Using <code>high = mid - 1</code>:</strong> a strictly greater value may be
+                the answer, so retain it with <code>high = mid</code>.
+              </li>
+              <li>
+                <strong>Assuming Upper Bound finds the target:</strong> it finds a boundary. Compare
+                Lower and Upper Bound to test existence and count duplicates.
+              </li>
+              <li>
+                <strong>Forgetting equality:</strong> equal values are not Upper Bound candidates;
+                only strictly greater values qualify.
+              </li>
+            </ol>
+          </section>
+          <section id="complexity">
+            <h2>7. COMPLEXITY (The Math)</h2>
+            <h3>Time Complexity: O(log N)</h3>
+            <p>
+              Every iteration halves the remaining search area, so 1 million values take about 20
+              checks.
+            </p>
+            <h3>Space Complexity: O(1)</h3>
+            <p>The loop uses only <code>low</code>, <code>high</code>, and <code>mid</code>.</p>
+          </section>
+          <section id="real-world">
+            <h2>8. REAL WORLD (Applications)</h2>
+            <ul>
+              <li>
+                <strong>Counting occurrences:</strong>
+                <code>upper_bound(x) - lower_bound(x)</code> counts x.
+              </li>
+              <li>
+                <strong>Range queries:</strong>
+                <code>upper_bound(2000)</code> counts sorted prices less than or equal to 2000.
+              </li>
+              <li>
+                <strong>Bucket boundaries:</strong> find where a sorted grade or measurement band
+                ends.
+              </li>
+              <li>
+                <strong>Database range scans:</strong> quickly find the cutoff row for
+                <code>price &lt;= 2000</code>.
+              </li>
+              <li>
+                <strong>Scheduling:</strong> find the first meeting strictly after a given time.
+              </li>
+            </ul>
+          </section>
+          <section id="answer">
+            <h2>9. PATTERN RECOGNITION (Advanced) — Lower Bound vs Upper Bound</h2>
+            <p>Both are one template: find the first position where a condition becomes true.</p>
+            <ul>
+              <li>
+                <strong>Lower Bound:</strong> first position where <code>arr[i] &gt;= target</code>.
+              </li>
+              <li>
+                <strong>Upper Bound:</strong> first position where <code>arr[i] &gt; target</code>.
+              </li>
+              <li>
+                <strong>Count equal to X:</strong>
+                <code>upper_bound(X) - lower_bound(X)</code>.
+              </li>
+              <li>
+                <strong>Count less than or equal to X:</strong>
+                <code>upper_bound(X)</code>.
+              </li>
+              <li>
+                <strong>Range [first,last]:</strong>
+                <code>first = lower_bound(X)</code>, <code>last = upper_bound(X) - 1</code>.
+              </li>
+            </ul>
+            <blockquote>
+              <strong>Key takeaway:</strong> Memorize one "find the first true" template and turn
+              the comparison dial from <code>&gt;=</code> to <code>&gt;</code>.
+            </blockquote>
+          </section>
+          <section id="practice">
+            <h2>10. PRACTICE &amp; NEXT STEP (Retention)</h2>
+            <p><strong>Practice these 3 problems, in this order:</strong></p>
+            <ol>
+              <li>
+                <a
+                  href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+                  >Find First and Last Position of Element in Sorted Array (LeetCode, Medium)</a
+                >
+                — use both boundaries.
+              </li>
+              <li>
+                <a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/"
+                  >Count of Smaller Numbers After Self (LeetCode, Hard)</a
+                >
+                — apply boundary counting.
+              </li>
+              <li>
+                <a href="https://www.geeksforgeeks.org/problems/implement-upper-bound/1"
+                  >Implement Upper Bound (GeeksforGeeks)</a
+                >
+                — direct practice.
+              </li>
+            </ol>
+            <p>
+              You now know the trio: Binary Search, Lower Bound, and Upper Bound. Revisit Binary
+              Search on Answer and look for the same first-true boundary over a range of possible
+              answers.
+            </p>
+          </section>
+          <section id="download-notes">
+            <h2>Upper Bound Notes</h2>
+            <p>
+              Open the Upper Bound notes image for visual revision and download it for offline
+              reading.
+            </p>
+            <a class="notes-link" href="../../../notes-visualizer/?topic=upper-bound"
+              >View Upper Bound notes →</a
+            >
+          </section>
+        </article>
+        <nav class="article-nav" aria-label="Article sections">
+          <p class="article-nav-title">On this page</p>
+          <a href="#why">01 · Why</a><a href="#condition">02 · Condition</a
+          ><a href="#intuition">03 · Intuition</a><a href="#dry-run">04 · Dry run</a
+          ><a href="#code">05 · Code</a><a href="#mistakes">06 · Mistakes</a
+          ><a href="#complexity">07 · Complexity</a><a href="#real-world">08 · Real world</a
+          ><a href="#answer">09 · Pattern</a><a href="#practice">10 · Practice</a
+          ><a href="#download-notes">↓ Notes</a>
+        </nav>
+      </div>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Maurekar · Binary Search · Upper Bound</span><a href="../index.html">Back to library</a>
+    </footer>
+    <script src="../../../js/article-nav.js"></script>
+    <script>
+      const upperBoundCode = {
+        python: `def upper_bound(arr, target):\n    low = 0\n    high = len(arr)              # one past the last index\n\n    while low < high:\n        mid = low + (high - low) // 2\n\n        if arr[mid] <= target:   # equal is still affordable, go right\n            low = mid + 1\n        else:                    # strictly greater, possible answer\n            high = mid            # search left for an earlier one\n\n    return low\n\n# from bisect import bisect_right\n# bisect_right(arr, target)`,
+        cpp: `int upperBound(vector<int>& arr, int target) {\n    int low = 0;\n    int high = arr.size();\n\n    while (low < high) {\n        int mid = low + (high - low) / 2;\n        if (arr[mid] <= target) low = mid + 1;\n        else high = mid;\n    }\n    return low;\n}`,
+        java: `public static int upperBound(int[] arr, int target) {\n    int low = 0;\n    int high = arr.length;\n\n    while (low < high) {\n        int mid = low + (high - low) / 2;\n        if (arr[mid] <= target) low = mid + 1;\n        else high = mid;\n    }\n    return low;\n}`,
+      };
+      const escape = (value) =>
+        value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const colorize = (line) => {
+        const match = line.match(/(\/\/|#)/);
+        const code = match ? line.slice(0, match.index) : line;
+        const comment = match ? line.slice(match.index) : '';
+        const colored = escape(code)
+          .replace(
+            /\b(public|static|int|while|if|else|return|def|class|vector)\b/g,
+            '<span class="syntax-keyword">$1</span>',
+          )
+          .replace(
+            /\b(arr|target|low|high|mid|upper_bound)\b/g,
+            '<span class="syntax-variable">$1</span>',
+          )
+          .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
+        return colored + (comment ? `<span class="syntax-comment">${escape(comment)}</span>` : '');
+      };
+      const section = document.querySelector('#code');
+      const heading = section.querySelector('h2');
+      const controls = document.createElement('div');
+      controls.className = 'code-switch';
+      controls.innerHTML =
+        '<button class="visualizer-button active" type="button" data-upper-language="python">Python</button><button class="visualizer-button" type="button" data-upper-language="java">Java</button><button class="visualizer-button" type="button" data-upper-language="cpp">C++</button><a class="visualizer-button" id="upper-bound-visualizer" href="../visualizer.html?topic=upper-bound&language=python">Open visualizer →</a>';
+      const pre = document.createElement('pre');
+      pre.id = 'upper-bound-code';
+      pre.className = 'dynamic-code';
+      pre.innerHTML = '<code></code>';
+      section.insertBefore(controls, heading.nextSibling);
+      section.insertBefore(pre, controls.nextSibling);
+      section.querySelectorAll('h3, pre:not(#upper-bound-code)').forEach((node) => node.remove());
+      const showCode = (language) => {
+        pre.querySelector('code').innerHTML = upperBoundCode[language]
+          .split('\n')
+          .map(
+            (line, index) =>
+              `<span class="code-line" data-line="${index + 1}">${colorize(line)}</span>`,
+          )
+          .join('');
+        controls
+          .querySelectorAll('[data-upper-language]')
+          .forEach((button) =>
+            button.classList.toggle('active', button.dataset.upperLanguage === language),
+          );
+        document.querySelector('#upper-bound-visualizer').href =
+          `../visualizer.html?topic=upper-bound&language=${language}`;
+      };
+      showCode('python');
+      controls
+        .querySelectorAll('[data-upper-language]')
+        .forEach((button) =>
+          button.addEventListener('click', () => showCode(button.dataset.upperLanguage)),
+        );
+    </script>
+    <script src="../../../js/site-navigation.js"></script>
+  </body>
+</html>

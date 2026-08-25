@@ -77,11 +77,7 @@
       }
       body {
         background:
-          radial-gradient(
-            circle at 92% 4%,
-            rgba(200, 243, 107, 0.18),
-            transparent 24rem
-          ),
+          radial-gradient(circle at 92% 4%, rgba(200, 243, 107, 0.18), transparent 24rem),
           var(--paper);
         color: #20302a;
         letter-spacing: 0;
@@ -277,53 +273,41 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../../"
-        ><span class="brand-mark">MK</span><span>Maurekar</span></a
-      >
+      <a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a>
       <nav aria-label="Primary">
-        <a href="../../">DSA Library</a
-        ><a class="active" href="../">Binary Search</a>
+        <a href="../../">DSA Library</a><a class="active" href="../">Binary Search</a>
       </nav>
-      <a class="header-button" href="../visualizer.html"
-        >Visualizer <span>→</span></a
-      >
+      <a class="header-button" href="../visualizer.html">Visualizer <span>→</span></a>
     </header>
     <main class="page-width">
       <section class="article-hero">
         <p class="eyebrow">Binary Search / Basics · Topic 02</p>
         <h1>Lower <em>Bound.</em></h1>
         <p class="article-lead">
-          <strong>Big Picture (read this first, 30 seconds):</strong> Lower
-          Bound answers one question:
+          <strong>Big Picture (read this first, 30 seconds):</strong> Lower Bound answers one
+          question:
           <em
-            >“In a sorted list, what is the first position where a value that is
-            greater than or equal to my target could go?”</em
+            >“In a sorted list, what is the first position where a value that is greater than or
+            equal to my target could go?”</em
           >
-          It is basically Binary Search, but instead of just finding an exact
-          match, it finds the <strong>first valid boundary point</strong>. This
-          one idea powers “insert position,” “first occurrence,” and hundreds of
-          LeetCode/GFG problems. Keep this one line in your head — everything
-          below just explains it in full detail, step by step.
+          It is basically Binary Search, but instead of just finding an exact match, it finds the
+          <strong>first valid boundary point</strong>. This one idea powers “insert position,”
+          “first occurrence,” and hundreds of LeetCode/GFG problems. Keep this one line in your head
+          — everything below just explains it in full detail, step by step.
         </p>
       </section>
       <section class="article-facts" aria-label="Lower Bound quick facts">
-        <div class="article-fact">
-          <span>Requirement</span><strong>Sorted data</strong>
-        </div>
-        <div class="article-fact">
-          <span>Time</span><strong>O(log N)</strong>
-        </div>
-        <div class="article-fact">
-          <span>Boundary</span><strong>First arr[i] ≥ target</strong>
-        </div>
+        <div class="article-fact"><span>Requirement</span><strong>Sorted data</strong></div>
+        <div class="article-fact"><span>Time</span><strong>O(log N)</strong></div>
+        <div class="article-fact"><span>Boundary</span><strong>First arr[i] ≥ target</strong></div>
       </section>
       <div class="article-layout">
         <article class="article">
           <section id="why">
             <h2>1. WHY (Motive) — Why Do We Need Lower Bound?</h2>
             <p>
-              Imagine a sorted list of <strong>1 million exam scores</strong>,
-              from lowest to highest. You want to answer:
+              Imagine a sorted list of <strong>1 million exam scores</strong>, from lowest to
+              highest. You want to answer:
             </p>
             <blockquote>
               “What is the first score that is at least 60 (the passing mark)?”
@@ -331,8 +315,8 @@
             <h3>Without Lower Bound (checking one by one)</h3>
             <ul>
               <li>
-                You would start from the first score and keep checking, one at a
-                time, until you find a score ≥ 60.
+                You would start from the first score and keep checking, one at a time, until you
+                find a score ≥ 60.
               </li>
               <li>In the worst case, that is up to 1 million checks.</li>
             </ul>
@@ -343,16 +327,13 @@
                 <strong>middle</strong> and ask: “Is this value ≥ 60?”
               </li>
               <li>Based on yes/no, cut the list in half again and again.</li>
-              <li>
-                Find the answer in about <strong>20 steps</strong> instead of a
-                million.
-              </li>
+              <li>Find the answer in about <strong>20 steps</strong> instead of a million.</li>
             </ul>
             <p>
-              <strong>Simple takeaway:</strong> Lower Bound is Binary Search’s
-              cousin. Instead of asking “does this exact value exist?”, it asks
-              “where is the first place this condition becomes true?” Same speed
-              — O(log N) — but it answers a more flexible, more useful question.
+              <strong>Simple takeaway:</strong> Lower Bound is Binary Search’s cousin. Instead of
+              asking “does this exact value exist?”, it asks “where is the first place this
+              condition becomes true?” Same speed — O(log N) — but it answers a more flexible, more
+              useful question.
             </p>
           </section>
           <section id="condition">
@@ -362,36 +343,28 @@
               <strong>sorted</strong> list in ascending order.
             </p>
             <p>
-              <strong>Why?</strong> Once you find one value that is ≥ target,
-              you know for certain that
-              <strong>everything after it is also ≥ target</strong>, because the
-              list is sorted. This lets you safely ignore half the list at every
-              step.
+              <strong>Why?</strong> Once you find one value that is ≥ target, you know for certain
+              that <strong>everything after it is also ≥ target</strong>, because the list is
+              sorted. This lets you safely ignore half the list at every step.
             </p>
             <p>
-              If the list is not sorted, this guarantee breaks, and Lower Bound
-              gives wrong answers.
+              If the list is not sorted, this guarantee breaks, and Lower Bound gives wrong answers.
             </p>
             <blockquote>
-              <strong>Rule to remember:</strong> Sorted list → Lower Bound works
-              perfectly. Unsorted list → sort it first, or do not use this
-              technique.
+              <strong>Rule to remember:</strong> Sorted list → Lower Bound works perfectly. Unsorted
+              list → sort it first, or do not use this technique.
             </blockquote>
           </section>
           <section id="intuition">
             <h2>3. INTUITION (The Core Logic) — The Exam Pass/Fail Story</h2>
             <p>
               A teacher has a list of
-              <strong
-                >10 students’ exam scores, already sorted from lowest to
-                highest</strong
-              >:
+              <strong>10 students’ exam scores, already sorted from lowest to highest</strong>:
             </p>
             <p><code>40, 45, 52, 58, 60, 65, 70, 78, 85, 90</code></p>
             <p>
-              The <strong>passing mark is 60</strong>. The teacher wants to
-              know: “Where does the passing zone begin?” — what is the
-              <strong>first score that is 60 or above</strong>?
+              The <strong>passing mark is 60</strong>. The teacher wants to know: “Where does the
+              passing zone begin?” — what is the <strong>first score that is 60 or above</strong>?
             </p>
             <p>
               Everything <strong>before</strong> that point failed. Everything
@@ -400,77 +373,72 @@
             <ul>
               <li>Check the middle score. Ask: “Is this score ≥ 60?”</li>
               <li>
-                If <strong>yes</strong>, this could be our answer, but maybe
-                there is an earlier one too. Keep this position in mind and
-                search the <strong>left half</strong>.
+                If <strong>yes</strong>, this could be our answer, but maybe there is an earlier one
+                too. Keep this position in mind and search the <strong>left half</strong>.
               </li>
               <li>
-                If <strong>no</strong>, this score failed, so the passing zone
-                must start somewhere to the <strong>right</strong>.
+                If <strong>no</strong>, this score failed, so the passing zone must start somewhere
+                to the <strong>right</strong>.
               </li>
               <li>
-                Repeat on the smaller half until you find the exact boundary —
-                the very first “passed” score.
+                Repeat on the smaller half until you find the exact boundary — the very first
+                “passed” score.
               </li>
             </ul>
             <p>
-              <strong>This is Lower Bound in one sentence:</strong> “Find the
-              first position in a sorted list where the value stops being ‘too
-              small’ and becomes ‘big enough.’” It is the same “cut in half”
-              trick as Binary Search, but instead of stopping at an exact match,
-              it hunts for a boundary line between “not enough” and “enough.”
+              <strong>This is Lower Bound in one sentence:</strong> “Find the first position in a
+              sorted list where the value stops being ‘too small’ and becomes ‘big enough.’” It is
+              the same “cut in half” trick as Binary Search, but instead of stopping at an exact
+              match, it hunts for a boundary line between “not enough” and “enough.”
             </p>
           </section>
           <section id="dry-run">
             <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
             <p>
               Let us dry run Lower Bound on a list
-              <strong>with duplicate values</strong>. This is where Lower Bound
-              really shows its power — plain Binary Search struggles here, but
-              Lower Bound handles it cleanly.
+              <strong>with duplicate values</strong>. This is where Lower Bound really shows its
+              power — plain Binary Search struggles here, but Lower Bound handles it cleanly.
             </p>
             <pre>
 Index:  0    1    2    3    4    5    6
-Value: [10, 20,  20,  20,  30,  40,  50]</pre
-            >
+Value: [10, 20,  20,  20,  30,  40,  50]</pre>
             <p>
               We want the <strong>Lower Bound of 20</strong> — the index of the
               <strong>first</strong> occurrence of 20.
             </p>
             <p>
-              <code>low</code> (L) is the start of the search area,
-              <code>high</code> (H) is <strong>one past the end</strong>, and
-              <code>mid</code> (M) is the middle point we check.
+              <code>low</code> (L) is the start of the search area, <code>high</code> (H) is
+              <strong>one past the end</strong>, and <code>mid</code> (M) is the middle point we
+              check.
             </p>
             <h3>Step 1 → L=0, H=7, M=3</h3>
             <p>
-              <code>arr[M] = 20</code>, which is ≥ 20. This could be our answer,
-              but there might be an earlier 20. Keep searching left →
+              <code>arr[M] = 20</code>, which is ≥ 20. This could be our answer, but there might be
+              an earlier 20. Keep searching left →
               <strong>H becomes M = 3.</strong>
             </p>
             <h3>Step 2 → L=0, H=3, M=1</h3>
             <p>
-              <code>arr[M] = 20</code>, still ≥ 20. Again, there could be an
-              earlier one. Keep searching left →
+              <code>arr[M] = 20</code>, still ≥ 20. Again, there could be an earlier one. Keep
+              searching left →
               <strong>H becomes M = 1.</strong>
             </p>
             <h3>Step 3 → L=0, H=1, M=0</h3>
             <p>
-              <code>arr[M] = 10</code>, which is <strong>less than</strong> 20.
-              This is not our answer, and nothing to the left matters. Search
-              right → <strong>L becomes M + 1 = 1.</strong>
+              <code>arr[M] = 10</code>, which is <strong>less than</strong> 20. This is not our
+              answer, and nothing to the left matters. Search right →
+              <strong>L becomes M + 1 = 1.</strong>
             </p>
             <h3>Step 4 → L=1, H=1</h3>
             <p>L and H are equal — the loop stops here.</p>
             <p>
-              <strong>Answer: index 1</strong> — the first 20 in the list. ✅
-              Check the array: index 1 is indeed the first 20.
+              <strong>Answer: index 1</strong> — the first 20 in the list. Check the array: index 1
+              is indeed the first 20.
             </p>
             <p>
-              Every time we find a value ≥ target, we do not stop immediately —
-              we remember it and keep checking the left side. Every time we find
-              a value &lt; target, the answer must be to the right. We stop when
-              low and high meet — that meeting point is the answer.
+              Every time we find a value ≥ target, we do not stop immediately — we remember it and
+              keep checking the left side. Every time we find a value &lt; target, the answer must
+              be to the right. We stop when low and high meet — that meeting point is the answer.
             </p>
           </section>
           <section id="code">
@@ -545,40 +513,33 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
                   >Using <code>high = arr.length - 1</code> instead of
                   <code>high = arr.length</code>:</strong
                 >
-                In normal Binary Search, the answer is always an existing index.
-                In Lower Bound, the answer could be “insert at the very end,” so
-                high must start at length, one past the last valid index.
+                In normal Binary Search, the answer is always an existing index. In Lower Bound, the
+                answer could be “insert at the very end,” so high must start at length, one past the
+                last valid index.
               </li>
               <li>
                 <strong
-                  >Using <code>high = mid - 1</code> instead of
-                  <code>high = mid</code>:</strong
+                  >Using <code>high = mid - 1</code> instead of <code>high = mid</code>:</strong
                 >
-                When <code>arr[mid] &gt;= target</code>, this position is a
-                possible answer. Keep it in the search area and move high to
-                mid.
+                When <code>arr[mid] &gt;= target</code>, this position is a possible answer. Keep it
+                in the search area and move high to mid.
               </li>
               <li>
                 <strong
-                  >Using <code>low &lt;= high</code> instead of
-                  <code>low &lt; high</code>:</strong
+                  >Using <code>low &lt;= high</code> instead of <code>low &lt; high</code>:</strong
                 >
-                Lower Bound narrows down to one meeting point, rather than
-                checking a specific index for equality.
+                Lower Bound narrows down to one meeting point, rather than checking a specific index
+                for equality.
               </li>
               <li>
-                <strong
-                  >Forgetting that “not found” means “insert position”:</strong
-                >
+                <strong>Forgetting that “not found” means “insert position”:</strong>
                 If the target is bigger than everything, Lower Bound returns
                 <code>arr.length</code>. This is a feature, not a bug.
               </li>
               <li>
-                <strong>Confusing Lower Bound with Upper Bound:</strong> Lower
-                Bound is the first index where <code>arr[i] &gt;= target</code>.
-                Upper Bound is the first index where
-                <code>arr[i] &gt; target</code>. Mixing them up gives wrong
-                answers with duplicates.
+                <strong>Confusing Lower Bound with Upper Bound:</strong> Lower Bound is the first
+                index where <code>arr[i] &gt;= target</code>. Upper Bound is the first index where
+                <code>arr[i] &gt; target</code>. Mixing them up gives wrong answers with duplicates.
               </li>
             </ol>
           </section>
@@ -586,56 +547,49 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
             <h2>7. COMPLEXITY (The Math)</h2>
             <h3>Time Complexity: O(log N)</h3>
             <p>
-              Like Binary Search, every step cuts the search area in half. For a
-              list of 1 million items, Lower Bound needs only about
+              Like Binary Search, every step cuts the search area in half. For a list of 1 million
+              items, Lower Bound needs only about
               <strong>20 steps</strong>.
             </p>
             <h3>Space Complexity: O(1)</h3>
             <p>
               The loop-based version uses only three variables —
-              <code>low</code>, <code>high</code>, and <code>mid</code> — no
-              matter how big the list is.
+              <code>low</code>, <code>high</code>, and <code>mid</code> — no matter how big the list
+              is.
             </p>
           </section>
           <section id="real-world">
             <h2>8. REAL WORLD (Applications)</h2>
             <ul>
               <li>
-                <strong>Search Insert Position:</strong> Finding where a new
-                value should be inserted to keep a sorted list sorted, as in
-                Python’s <code>bisect.insort</code> and database index
-                insertion.
+                <strong>Search Insert Position:</strong> Finding where a new value should be
+                inserted to keep a sorted list sorted, as in Python’s <code>bisect.insort</code> and
+                database index insertion.
               </li>
               <li>
-                <strong>Counting elements in a range:</strong> To count numbers
-                between X and Y, compute
-                <code>lower_bound(Y+1) - lower_bound(X)</code>.
+                <strong>Counting elements in a range:</strong> To count numbers between X and Y,
+                compute <code>lower_bound(Y+1) - lower_bound(X)</code>.
               </li>
               <li>
-                <strong>First Bad Version:</strong> Finding the first commit or
-                version where a bug appears is “find the first position where
-                the condition becomes true.”
+                <strong>First Bad Version:</strong> Finding the first commit or version where a bug
+                appears is “find the first position where the condition becomes true.”
               </li>
               <li>
-                <strong>Auto-suggestions / Range Queries:</strong> Databases and
-                search engines find the start of matching results, such as all
-                products priced ≥ ₹500.
+                <strong>Auto-suggestions / Range Queries:</strong> Databases and search engines find
+                the start of matching results, such as all products priced ≥ ₹500.
               </li>
               <li>
-                <strong>Leaderboards / Rankings:</strong> Finding the first
-                player with a score ≥ a cutoff in a sorted leaderboard.
+                <strong>Leaderboards / Rankings:</strong> Finding the first player with a score ≥ a
+                cutoff in a sorted leaderboard.
               </li>
             </ul>
           </section>
           <section id="answer">
-            <h2>
-              9. PATTERN RECOGNITION (Advanced) — The Boundary-Finding Pattern
-            </h2>
+            <h2>9. PATTERN RECOGNITION (Advanced) — The Boundary-Finding Pattern</h2>
             <p>
-              Whenever a problem asks for the <strong>first</strong> position
-              where a condition changes from <code>false</code> to
-              <code>true</code> in a sorted or monotonic sequence, it is a Lower
-              Bound style problem — even if the words “lower bound” never
+              Whenever a problem asks for the <strong>first</strong> position where a condition
+              changes from <code>false</code> to <code>true</code> in a sorted or monotonic
+              sequence, it is a Lower Bound style problem — even if the words “lower bound” never
               appear.
             </p>
             <h3>Examples of the same pattern</h3>
@@ -653,15 +607,13 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
                 <code>arr[i] &gt;= target</code>
               </li>
               <li>
-                “Count how many elements are smaller than X” → Lower Bound gives
-                this directly
+                “Count how many elements are smaller than X” → Lower Bound gives this directly
               </li>
             </ul>
             <blockquote>
-              <strong>Key takeaway:</strong> Lower Bound is a template for any
-              “find the first true” question on sorted or monotonic data. Once
-              you recognize it, dozens of hard problems start looking like the
-              same simple idea.
+              <strong>Key takeaway:</strong> Lower Bound is a template for any “find the first true”
+              question on sorted or monotonic data. Once you recognize it, dozens of hard problems
+              start looking like the same simple idea.
             </blockquote>
           </section>
           <section id="practice">
@@ -672,20 +624,18 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
                 <a href="https://leetcode.com/problems/search-insert-position/"
                   >Search Insert Position (LeetCode, Easy)</a
                 >
-                — this is Lower Bound, word for word. Solve it first to lock in
-                the template from Section 5.
+                — this is Lower Bound, word for word. Solve it first to lock in the template from
+                Section 5.
               </li>
               <li>
                 <a
                   href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
-                  >Find First and Last Position of Element in Sorted Array
-                  (LeetCode, Medium)</a
+                  >Find First and Last Position of Element in Sorted Array (LeetCode, Medium)</a
                 >
                 — uses Lower Bound and Upper Bound together.
               </li>
               <li>
-                <a
-                  href="https://www.geeksforgeeks.org/problems/implement-lower-bound/1"
+                <a href="https://www.geeksforgeeks.org/problems/implement-lower-bound/1"
                   >Implement Lower Bound (GeeksforGeeks)</a
                 >
                 — direct practice matching this exact guide.
@@ -693,21 +643,18 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
             </ol>
             <p>
               Once these three feel easy, learn
-              <strong>Upper Bound</strong> next. It is almost identical, with
-              one condition flipped. After that, revisit the “Binary Search on
-              Answer” pattern from the previous guide: it is really Lower Bound
-              applied to a range of possible answers instead of an array.
+              <strong>Upper Bound</strong> next. It is almost identical, with one condition flipped.
+              After that, revisit the “Binary Search on Answer” pattern from the previous guide: it
+              is really Lower Bound applied to a range of possible answers instead of an array.
             </p>
           </section>
           <section id="download-notes">
             <h2>Lower Bound Notes</h2>
             <p>
-              Open the Lower Bound notes image for visual revision and download
-              it for offline reading.
+              Open the Lower Bound notes image for visual revision and download it for offline
+              reading.
             </p>
-            <a
-              class="notes-link"
-              href="../../../notes-visualizer/?topic=lower-bound"
+            <a class="notes-link" href="../../../notes-visualizer/?topic=lower-bound"
               >View Lower Bound notes →</a
             >
           </section>
@@ -715,21 +662,18 @@ Value: [10, 20,  20,  20,  30,  40,  50]</pre
         <nav class="article-nav" aria-label="Article sections">
           <p class="article-nav-title">On this page</p>
           <a href="#why">01 · Why</a><a href="#condition">02 · Condition</a
-          ><a href="#intuition">03 · Intuition</a
-          ><a href="#dry-run">04 · Dry run</a><a href="#code">05 · Code</a
-          ><a href="#mistakes">06 · Mistakes</a
-          ><a href="#complexity">07 · Complexity</a
-          ><a href="#real-world">08 · Real world</a
-          ><a href="#answer">09 · Pattern</a
-          ><a href="#practice">10 · Practice</a
+          ><a href="#intuition">03 · Intuition</a><a href="#dry-run">04 · Dry run</a
+          ><a href="#code">05 · Code</a><a href="#mistakes">06 · Mistakes</a
+          ><a href="#complexity">07 · Complexity</a><a href="#real-world">08 · Real world</a
+          ><a href="#answer">09 · Pattern</a><a href="#practice">10 · Practice</a
           ><a href="#download-notes">↓ Notes</a>
         </nav>
       </div>
     </main>
     <footer class="site-footer page-width">
-      <span>Maurekar · Binary Search · Lower Bound</span
-      ><a href="../">Back to library</a>
+      <span>Maurekar · Binary Search · Lower Bound</span><a href="../">Back to library</a>
     </footer>
+    <script src="../../../js/article-nav.js"></script>
     <script>
       const lowerBoundCode = {
         python: `def lower_bound(arr, target):
@@ -789,14 +733,11 @@ public static void main(String[] args) {
 }`,
       };
       const lowerBoundEscape = (value) =>
-        value
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
+        value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const lowerBoundColorize = (line) => {
         const match = line.match(/(\/\/|#)/);
         const code = match ? line.slice(0, match.index) : line;
-        const comment = match ? line.slice(match.index) : "";
+        const comment = match ? line.slice(match.index) : '';
         let colored = lowerBoundEscape(code)
           .replace(
             /\b(public|static|int|while|if|else|return|def|class|vector)\b/g,
@@ -809,59 +750,47 @@ public static void main(String[] args) {
           .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
         return (
           colored +
-          (comment
-            ? `<span class="syntax-comment">${lowerBoundEscape(comment)}</span>`
-            : "")
+          (comment ? `<span class="syntax-comment">${lowerBoundEscape(comment)}</span>` : '')
         );
       };
-      const lowerBoundSection = document.querySelector("#code");
-      const lowerBoundHeading = lowerBoundSection.querySelector("h2");
-      const lowerBoundControls = document.createElement("div");
-      lowerBoundControls.className = "code-switch";
+      const lowerBoundSection = document.querySelector('#code');
+      const lowerBoundHeading = lowerBoundSection.querySelector('h2');
+      const lowerBoundControls = document.createElement('div');
+      lowerBoundControls.className = 'code-switch';
       lowerBoundControls.innerHTML =
         '<button class="visualizer-button active" type="button" data-lower-language="python">Python</button><button class="visualizer-button" type="button" data-lower-language="java">Java</button><button class="visualizer-button" type="button" data-lower-language="cpp">C++</button><a class="visualizer-button" id="lower-bound-visualizer" href="../visualizer.html?topic=lower-bound&language=python">Open visualizer →</a>';
-      const lowerBoundPre = document.createElement("pre");
-      lowerBoundPre.id = "lower-bound-code";
-      lowerBoundPre.className = "dynamic-code";
-      lowerBoundPre.innerHTML = "<code></code>";
-      lowerBoundSection.insertBefore(
-        lowerBoundControls,
-        lowerBoundHeading.nextSibling,
-      );
-      lowerBoundSection.insertBefore(
-        lowerBoundPre,
-        lowerBoundControls.nextSibling,
-      );
+      const lowerBoundPre = document.createElement('pre');
+      lowerBoundPre.id = 'lower-bound-code';
+      lowerBoundPre.className = 'dynamic-code';
+      lowerBoundPre.innerHTML = '<code></code>';
+      lowerBoundSection.insertBefore(lowerBoundControls, lowerBoundHeading.nextSibling);
+      lowerBoundSection.insertBefore(lowerBoundPre, lowerBoundControls.nextSibling);
       lowerBoundSection
-        .querySelectorAll("h3, pre:not(#lower-bound-code)")
+        .querySelectorAll('h3, pre:not(#lower-bound-code)')
         .forEach((node) => node.remove());
       const showLowerBoundCode = (language) => {
-        lowerBoundPre.querySelector("code").innerHTML = lowerBoundCode[language]
-          .split("\n")
+        lowerBoundPre.querySelector('code').innerHTML = lowerBoundCode[language]
+          .split('\n')
           .map(
             (line, index) =>
               `<span class="code-line" data-line="${index + 1}">${lowerBoundColorize(line)}</span>`,
           )
-          .join("");
+          .join('');
         lowerBoundControls
-          .querySelectorAll("[data-lower-language]")
+          .querySelectorAll('[data-lower-language]')
           .forEach((button) =>
-            button.classList.toggle(
-              "active",
-              button.dataset.lowerLanguage === language,
-            ),
+            button.classList.toggle('active', button.dataset.lowerLanguage === language),
           );
-        lowerBoundSection.querySelector("#lower-bound-visualizer").href =
+        lowerBoundSection.querySelector('#lower-bound-visualizer').href =
           `../visualizer.html?topic=lower-bound&language=${language}`;
       };
-      showLowerBoundCode("python");
+      showLowerBoundCode('python');
       lowerBoundControls
-        .querySelectorAll("[data-lower-language]")
+        .querySelectorAll('[data-lower-language]')
         .forEach((button) =>
-          button.addEventListener("click", () =>
-            showLowerBoundCode(button.dataset.lowerLanguage),
-          ),
+          button.addEventListener('click', () => showLowerBoundCode(button.dataset.lowerLanguage)),
         );
     </script>
+    <script src="../../../js/site-navigation.js"></script>
   </body>
 </html>

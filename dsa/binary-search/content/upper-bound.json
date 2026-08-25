@@ -1,0 +1,62 @@
+{
+  "array": [10, 20, 20, 20, 30, 40, 50],
+  "target": 20,
+  "mode": "upper-bound",
+  "label": "Upper Bound",
+  "languages": {
+    "python": {
+      "label": "Python",
+      "code": "def upper_bound(arr, target):\n    low = 0                      # left edge of the unresolved search range\n    high = len(arr)              # exclusive right edge; answer may equal len(arr)\n\n    while low < high:            # keep searching until both boundaries meet\n        mid = low + (high - low) // 2  # overflow-safe midpoint\n\n        if arr[mid] <= target:   # equal values are not upper-bound candidates\n            low = mid + 1        # discard this value and everything before it\n        else:                    # arr[mid] is a valid candidate (> target)\n            high = mid           # keep it and search left for an earlier candidate\n\n    return low                   # first index whose value is strictly greater"
+    },
+    "java": {
+      "label": "Java",
+      "code": "public static int upperBound(int[] arr, int target) {\n    int low = 0;                          // left edge of the search range\n    int high = arr.length;                // exclusive right edge\n\n    while (low < high) {                  // stop when the answer boundary is found\n        int mid = low + (high - low) / 2; // overflow-safe midpoint\n        if (arr[mid] <= target) {         // equal is still inside the valid prefix\n            low = mid + 1;                // move past the valid prefix\n        } else {                          // this is a possible upper-bound index\n            high = mid;                   // search left for an earlier candidate\n        }\n    }\n    return low;                           // first index with arr[index] > target\n}"
+    },
+    "cpp": {
+      "label": "C++",
+      "code": "int upperBound(vector<int>& arr, int target) {\n    int low = 0;                          // left edge of the search range\n    int high = arr.size();                // exclusive right edge\n\n    while (low < high) {                  // narrow the first-greater boundary\n        int mid = low + (high - low) / 2; // overflow-safe midpoint\n        if (arr[mid] <= target) {         // equal values belong to the prefix\n            low = mid + 1;                // continue searching to the right\n        } else {                          // arr[mid] can be the answer\n            high = mid;                   // retain it and search for an earlier one\n        }\n    }\n    return low;                           // first index with arr[index] > target\n}"
+    }
+  },
+  "steps": [
+    {
+      "low": 0,
+      "middle": 3,
+      "high": 7,
+      "highlightLine": 6,
+      "comparison": "mid = 0 + (7 - 0) / 2 = 3",
+      "message": "Start with low = 0 and high = 7. mid is 3 and arr[mid] is 20."
+    },
+    {
+      "low": 4,
+      "middle": 3,
+      "high": 7,
+      "highlightLine": 8,
+      "comparison": "20 <= 20  →  Search right",
+      "message": "20 is equal to the target, so it is not strictly greater. Move low to mid + 1 = 4."
+    },
+    {
+      "low": 4,
+      "middle": 5,
+      "high": 7,
+      "highlightLine": 10,
+      "comparison": "40 > 20  →  Search left",
+      "message": "40 is strictly greater and could be the answer. Move high to mid = 5."
+    },
+    {
+      "low": 4,
+      "middle": 4,
+      "high": 5,
+      "highlightLine": 10,
+      "comparison": "30 > 20  →  Search left",
+      "message": "30 is also strictly greater. Move high to mid = 4."
+    },
+    {
+      "low": 4,
+      "middle": null,
+      "high": 4,
+      "highlightLine": 13,
+      "comparison": "low = high = 4  →  Upper bound found",
+      "message": "The pointers meet at index 4. The first value strictly greater than 20 is 30."
+    }
+  ]
+}

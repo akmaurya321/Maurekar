@@ -2,7 +2,7 @@
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img,
@@ -15,7 +15,6 @@ svg {
 }
 
 pre,
-code,
 .code-block,
 .article-code {
   display: block;
@@ -25,6 +24,126 @@ code,
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   white-space: pre;
+}
+
+code {
+  display: inline;
+  width: auto;
+  max-width: none;
+  overflow: visible;
+  white-space: normal;
+}
+
+pre code,
+.code-block code,
+.article-code code,
+.dynamic-code code {
+  white-space: inherit;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.site-header a,
+.site-header button,
+.visual-controls button,
+.visualizer-button,
+.header-button,
+.button {
+  min-height: 44px;
+}
+
+.site-header a,
+.header-button,
+.button,
+.text-link,
+.directory-row,
+.question-row,
+.back-link a {
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.header-button:hover,
+.button:hover,
+.visual-controls button:hover,
+.visualizer-button:hover {
+  transform: translateY(-1px);
+}
+
+.site-header nav a.active,
+.article-nav a.active {
+  color: var(--lime-dark) !important;
+  font-weight: 700;
+}
+
+.article-nav a.active {
+  border-bottom: 2px solid var(--lime);
+}
+
+.syntax-comment {
+  display: inline-block;
+  margin-left: 1.5ch;
+}
+
+.problem-page > .article-nav {
+  position: fixed;
+  top: 98px;
+  right: max(18px, calc((100vw - 1180px) / 2 + 32px));
+  width: 190px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  background: var(--white);
+  padding: 18px 16px 12px;
+  box-shadow: 0 8px 24px rgba(21, 33, 29, 0.06);
+}
+
+.problem-page > .article-nav .article-nav-title {
+  margin: 0 0 16px;
+  font: 700 11px var(--mono);
+  text-transform: uppercase;
+}
+
+.problem-page > .article-nav a {
+  display: block;
+  color: var(--muted);
+  font: 12px/1.5 var(--mono);
+  margin-bottom: 12px;
+  padding: 3px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .code-line {
@@ -138,13 +257,99 @@ body {
 
 @media (max-width: 767px) {
   .site-header {
-    min-height: 64px;
-    padding-top: 14px !important;
-    padding-bottom: 14px !important;
+    min-height: 56px;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    gap: 8px !important;
+    position: sticky !important;
+    top: 0;
+    background: var(--paper) !important;
+    z-index: 10;
   }
 
   .site-header nav {
-    display: none !important;
+    display: flex !important;
+    flex: 1 0 100%;
+    order: 3;
+    gap: 20px !important;
+    min-width: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-header nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .site-header nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .article-nav {
+    position: sticky !important;
+    top: 83px !important;
+    z-index: 9;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 14px;
+    padding: 5px 10px !important;
+    min-height: 32px;
+    align-items: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .problem-page > .article-nav {
+    position: sticky !important;
+    top: 0 !important;
+    right: auto;
+    width: 100% !important;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    margin-bottom: 22px;
+  }
+
+  .problem-page > .article-nav .article-nav-title {
+    display: none;
+  }
+
+  .problem-page > .article-nav a {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .article-nav::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  .article-nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    line-height: 1.2;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .article-nav a.active {
+    color: var(--lime-dark) !important;
+    background: transparent !important;
+    border-bottom: 2px solid var(--lime) !important;
+    padding-right: 0;
+    padding-left: 0;
+    font-weight: 700;
   }
 
   .header-button,

@@ -38,11 +38,7 @@
       }
       body {
         background:
-          radial-gradient(
-            circle at 92% 4%,
-            rgba(200, 243, 107, 0.18),
-            transparent 24rem
-          ),
+          radial-gradient(circle at 92% 4%, rgba(200, 243, 107, 0.18), transparent 24rem),
           var(--paper);
         color: #20302a;
         letter-spacing: 0;
@@ -219,7 +215,7 @@
         font-weight: 700;
       }
       .article-nav a.active::before {
-        content: "→ ";
+        content: 'â†’ ';
       }
       .visualizer-button {
         border: 1px solid var(--line);
@@ -365,68 +361,53 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../../"
-        ><span class="brand-mark">MK</span><span>Maurekar</span></a
-      >
+      <a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a>
       <nav aria-label="Primary">
-        <a href="../../">DSA Library</a
-        ><a class="active" href="../">Binary Search</a>
+        <a href="../../">DSA Library</a><a class="active" href="../">Binary Search</a>
       </nav>
-      <a class="header-button" href="../">Back to library <span>→</span></a>
+      <a class="header-button" href="../">Back to library <span>â†’</span></a>
     </header>
     <main class="page-width">
       <section class="article-hero">
         <p class="eyebrow">Arrays / Search Algorithms · Topic 01</p>
         <h1>Intro of Binary <em>Search.</em></h1>
         <p class="article-lead">
-          <strong>Big Picture (read this first, 30 seconds):</strong> Binary
-          Search finds a number in a <strong>sorted</strong> list by checking
-          the <strong>middle</strong> item, then throwing away half the list
-          based on whether your target is bigger or smaller. It repeats this on
-          the smaller half, again and again, until it finds the answer. This is
-          why it is so fast: for 1 billion items, it needs only about 30 checks
-          instead of a billion. Keep this one line in your head — everything
-          below explains it in full detail, step by step.
+          <strong>Big Picture (read this first, 30 seconds):</strong> Binary Search finds a number
+          in a <strong>sorted</strong> list by checking the <strong>middle</strong> item, then
+          throwing away half the list based on whether your target is bigger or smaller. It repeats
+          this on the smaller half, again and again, until it finds the answer. This is why it is so
+          fast: for 1 billion items, it needs only about 30 checks instead of a billion. Keep this
+          one line in your head — everything below explains it in full detail, step by step.
         </p>
       </section>
       <section class="article-facts" aria-label="Binary Search quick facts">
-        <div class="article-fact">
-          <span>Requirement</span><strong>Sorted data</strong>
-        </div>
-        <div class="article-fact">
-          <span>Time</span><strong>O(log N)</strong>
-        </div>
-        <div class="article-fact">
-          <span>Iterative space</span><strong>O(1)</strong>
-        </div>
+        <div class="article-fact"><span>Requirement</span><strong>Sorted data</strong></div>
+        <div class="article-fact"><span>Time</span><strong>O(log N)</strong></div>
+        <div class="article-fact"><span>Iterative space</span><strong>O(1)</strong></div>
       </section>
       <div class="article-layout">
         <article class="article">
           <section id="why">
             <h2>1. WHY (Motive) — Linear Search vs Binary Search</h2>
             <p>
-              Imagine you have <strong>1 Billion sorted numbers</strong> in a
-              list. You need to find one number in it.
+              Imagine you have <strong>1 Billion sorted numbers</strong> in a list. You need to find
+              one number in it.
             </p>
             <h3>Linear Search (the slow way)</h3>
             <ul>
               <li>
-                It checks one item at a time — first item, then second, then
-                third, and so on.
+                It checks one item at a time — first item, then second, then third, and so on.
               </li>
               <li>
                 In the worst case, it checks
-                <strong>all 1 billion items</strong> before finding the answer
-                or realizing it is not there.
+                <strong>all 1 billion items</strong> before finding the answer or realizing it is
+                not there.
               </li>
               <li>That is a LOT of work.</li>
             </ul>
             <h3>Binary Search (the fast way)</h3>
             <ul>
-              <li>
-                It cuts the search area in <strong>half</strong> every single
-                time.
-              </li>
+              <li>It cuts the search area in <strong>half</strong> every single time.</li>
               <li>
                 For 1 billion items, it only needs about
                 <strong>30 steps</strong> to find the answer.
@@ -434,135 +415,111 @@
               <li>Just 30 steps, instead of a billion.</li>
             </ul>
             <p>
-              <strong>Simple takeaway:</strong> Linear Search = check everything
-              = slow (called O(N)). Binary Search = cut in half each time = fast
-              (called O(log N)). For big data, this difference is huge. This is
-              <strong>why</strong> we learn Binary Search.
+              <strong>Simple takeaway:</strong> Linear Search = check everything = slow (called
+              O(N)). Binary Search = cut in half each time = fast (called O(log N)). For big data,
+              this difference is huge. This is <strong>why</strong> we learn Binary Search.
             </p>
           </section>
           <section id="condition">
             <h2>2. CONDITION (Prerequisite) — The Data Must Be Sorted</h2>
             <p>
-              Binary Search only works if the list is <strong>sorted</strong>,
-              arranged in order, small to large or large to small.
+              Binary Search only works if the list is <strong>sorted</strong>, arranged in order,
+              small to large or large to small.
             </p>
             <p>
-              <strong>Why?</strong> The whole trick is this: if we check the
-              middle item and our answer is smaller, we can safely skip the
-              entire right side because everything there is even bigger. This
-              only works if the numbers are in order. If the list is not sorted,
-              the middle item tells us nothing useful.
+              <strong>Why?</strong> The whole trick is this: if we check the middle item and our
+              answer is smaller, we can safely skip the entire right side because everything there
+              is even bigger. This only works if the numbers are in order. If the list is not
+              sorted, the middle item tells us nothing useful.
             </p>
             <blockquote>
-              <strong>Rule to remember:</strong> No sorted data = No Binary
-              Search. If your data is not sorted, sort it first, or use Linear
-              Search instead.
+              <strong>Rule to remember:</strong> No sorted data = No Binary Search. If your data is
+              not sorted, sort it first, or use Linear Search instead.
             </blockquote>
           </section>
           <section id="intuition">
-            <h2>3. INTUITION (The Core Logic) — The “Guess the Number” Game</h2>
+            <h2>3. INTUITION (The Core Logic) — The â€œGuess the Number” Game</h2>
             <p>
-              You have probably played this game before: “I am thinking of a
-              number between 1 and 100. Try to guess it in as few tries as
-              possible. After every guess, I will only say higher or lower.” The
-              smartest first guess is <strong>50</strong> — right in the middle.
+              You have probably played this game before: â€œI am thinking of a number between 1 and
+              100. Try to guess it in as few tries as possible. After every guess, I will only say
+              higher or lower.” The smartest first guess is <strong>50</strong> — right in the
+              middle.
             </p>
             <ul>
               <li>
-                Guess <strong>50</strong>. If the friend says “higher,” numbers
-                1–50 are gone forever.
+                Guess <strong>50</strong>. If the friend says â€œhigher,” numbers 1“50 are gone
+                forever.
               </li>
               <li>
-                Guess <strong>75</strong>. If the friend says “lower,” the
-                answer is between 51 and 74.
+                Guess <strong>75</strong>. If the friend says â€œlower,” the answer is between 51
+                and 74.
               </li>
               <li>Guess the middle of what remains, and repeat.</li>
             </ul>
             <p>
-              Every guess <strong>cuts the remaining numbers in half</strong>.
-              In just 7 guesses, you can find any number between 1 and 100.
+              Every guess <strong>cuts the remaining numbers in half</strong>. In just 7 guesses,
+              you can find any number between 1 and 100.
             </p>
             <p>
-              <strong>This exact idea is Binary Search:</strong> “Higher” means
-              the target is bigger than the middle, so search the right half.
-              “Lower” means the target is smaller, so search the left half.
-              Repeat until you land on the answer. Throwing away half the
-              possibilities every time is called
-              <strong>Divide and Conquer</strong>.
+              <strong>This exact idea is Binary Search:</strong> â€œHigher” means the target is
+              bigger than the middle, so search the right half. â€œLower” means the target is
+              smaller, so search the left half. Repeat until you land on the answer. Throwing away
+              half the possibilities every time is called <strong>Divide and Conquer</strong>.
             </p>
           </section>
           <section id="dry-run">
             <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
             <p>
-              We use three pointers: <code>low</code> (L) is the start of the
-              current search area, <code>high</code> (H) is the end, and
-              <code>mid</code> (M) is the middle point we check.
+              We use three pointers: <code>low</code> (L) is the start of the current search area,
+              <code>high</code> (H) is the end, and <code>mid</code> (M) is the middle point we
+              check.
             </p>
             <pre>
-Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value: [2,  4,  6,  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</pre
-            >
+Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value: [2,  4,  6,  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</pre>
             <p>We are searching for the number <strong>26</strong>.</p>
-            <h3>Step 1 → L=0, H=15, M=7</h3>
+            <h3>Step 1 â†’ L=0, H=15, M=7</h3>
             <p>
-              <code>arr[M] = 16</code>. The target 26 is bigger, so throw away
-              the left half, indexes 0–7. Move L to 8.
+              <code>arr[M] = 16</code>. The target 26 is bigger, so throw away the left half,
+              indexes 0“7. Move L to 8.
             </p>
-            <h3>Step 2 → L=8, H=15, M=11</h3>
+            <h3>Step 2 â†’ L=8, H=15, M=11</h3>
             <p>
-              <code>arr[M] = 24</code>. The target is still bigger, so throw
-              away indexes 8–11. Move L to 12.
+              <code>arr[M] = 24</code>. The target is still bigger, so throw away indexes 8“11. Move
+              L to 12.
             </p>
-            <h3>Step 3 → L=12, H=15, M=13</h3>
+            <h3>Step 3 â†’ L=12, H=15, M=13</h3>
             <p>
-              <code>arr[M] = 28</code>. The target 26 is smaller, so throw away
-              indexes 13–15 and move H to 12.
+              <code>arr[M] = 28</code>. The target 26 is smaller, so throw away indexes 13“15 and
+              move H to 12.
             </p>
-            <h3>Step 4 → L=12, H=12, M=12</h3>
+            <h3>Step 4 â†’ L=12, H=12, M=12</h3>
             <p>
-              <code>arr[M] = 26</code> →
+              <code>arr[M] = 26</code> â†’
               <strong>Match found! Return index 12.</strong>
             </p>
             <p>
-              The search area shrinks: 16 numbers → 8 → 4 → 1. We found the
-              answer in just <strong>4 checks</strong>, out of 16 numbers.
+              The search area shrinks: 16 numbers â†’ 8 â†’ 4 â†’ 1. We found the answer in just
+              <strong>4 checks</strong>, out of 16 numbers.
             </p>
           </section>
           <section id="code">
             <h2>5. CODE (Implementation + Comments)</h2>
             <p class="code-note">
-              Here is the same logic written in three popular languages. Read
-              the comments because they explain what each line does. The
-              visualizer button opens the same algorithm with that language
-              selected.
+              Here is the same logic written in three popular languages. Read the comments because
+              they explain what each line does. The visualizer button opens the same algorithm with
+              that language selected.
             </p>
-            <div
-              class="code-switch"
-              role="tablist"
-              aria-label="Programming language"
-            >
-              <button
-                class="visualizer-button active"
-                type="button"
-                data-code-language="python"
-              >
+            <div class="code-switch" role="tablist" aria-label="Programming language">
+              <button class="visualizer-button active" type="button" data-code-language="python">
                 Python</button
-              ><button
-                class="visualizer-button"
-                type="button"
-                data-code-language="java"
-              >
+              ><button class="visualizer-button" type="button" data-code-language="java">
                 Java</button
-              ><button
-                class="visualizer-button"
-                type="button"
-                data-code-language="cpp"
-              >
-                C++</button
+              ><button class="visualizer-button" type="button" data-code-language="cpp">C++</button
               ><a
                 class="visualizer-button"
                 id="open-code-visualizer"
                 href="../visualizer.html?language=python"
-                >Open visualizer →</a
+                >Open visualizer â†’</a
               >
             </div>
             <pre id="language-code"><code>def binary_search(arr, target):
@@ -586,28 +543,25 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             <ol>
               <li>
                 <strong>Writing <code>mid = (low + high) / 2</code>:</strong>
-                If low and high are very large, adding them can cause an error
-                called overflow. Use
+                If low and high are very large, adding them can cause an error called overflow. Use
                 <code>low + (high - low) / 2</code> instead.
               </li>
               <li>
-                <strong>Forgetting to return -1:</strong> If the number is not
-                in the list, return <code>-1</code> to clearly say “not found.”
+                <strong>Forgetting to return -1:</strong> If the number is not in the list, return
+                <code>-1</code> to clearly say â€œnot found.”
               </li>
               <li>
-                <strong>Using <code>low &lt; high</code>:</strong> This might
-                miss checking the last possible item. Always use
-                <code>low &lt;= high</code>.
+                <strong>Using <code>low &lt; high</code>:</strong> This might miss checking the last
+                possible item. Always use <code>low &lt;= high</code>.
               </li>
               <li>
-                <strong>Wrong pointer update:</strong> Use
-                <code>low = mid + 1</code> and <code>high = mid - 1</code> or
-                the search area may never get smaller and the loop can run
-                forever.
+                <strong>Wrong pointer update:</strong> Use <code>low = mid + 1</code> and
+                <code>high = mid - 1</code> or the search area may never get smaller and the loop
+                can run forever.
               </li>
               <li>
-                <strong>Using Binary Search on unsorted data:</strong> Always
-                check that the list is sorted before searching.
+                <strong>Using Binary Search on unsorted data:</strong> Always check that the list is
+                sorted before searching.
               </li>
             </ol>
           </section>
@@ -615,97 +569,79 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             <h2>7. COMPLEXITY (The Math)</h2>
             <h3>Time Complexity: O(log N)</h3>
             <p>
-              Every step cuts the list in half: N → N/2 → N/4 → N/8 → ... → 1.
-              The number of steps needed to get from N down to 1 is called
-              log₂(N). For 1 billion items, log₂(N) is only about
-              <strong>30</strong>. This is why the time barely grows even when
-              the data grows massively.
+              Every step cuts the list in half: N â†’ N/2 â†’ N/4 â†’ N/8 â†’ ... â†’ 1. The number
+              of steps needed to get from N down to 1 is called logâ‚‚(N). For 1 billion items,
+              logâ‚‚(N) is only about
+              <strong>30</strong>. This is why the time barely grows even when the data grows
+              massively.
             </p>
             <h3>Space Complexity: O(1)</h3>
             <p>
               The iterative version uses only three small variables:
-              <code>low</code>, <code>high</code>, and <code>mid</code>. It does
-              not matter whether the list has 10 items or 10 billion; it still
-              uses these same variables. A recursive version uses O(log N) stack
-              space because function calls are stored in memory.
+              <code>low</code>, <code>high</code>, and <code>mid</code>. It does not matter whether
+              the list has 10 items or 10 billion; it still uses these same variables. A recursive
+              version uses O(log N) stack space because function calls are stored in memory.
             </p>
           </section>
           <section id="real-world">
             <h2>8. REAL WORLD (Applications)</h2>
             <ul>
               <li>
-                <strong>Git Bisect:</strong> When a bug appears after hundreds
-                of commits, it finds the exact commit by checking only a handful
-                of them.
+                <strong>Git Bisect:</strong> When a bug appears after hundreds of commits, it finds
+                the exact commit by checking only a handful of them.
               </li>
               <li>
-                <strong>Database Indexing:</strong> Databases use tree
-                structures similar to Binary Search to find rows quickly in
-                tables with millions of records.
+                <strong>Database Indexing:</strong> Databases use tree structures similar to Binary
+                Search to find rows quickly in tables with millions of records.
               </li>
+              <li><strong>Autocomplete &amp; Spell Checkers:</strong> Search sorted word lists.</li>
               <li>
-                <strong>Autocomplete &amp; Spell Checkers:</strong> Search
-                sorted word lists.
+                <strong>Photo/Video Editing:</strong> Jump to a specific point in a large history or
+                timeline.
               </li>
-              <li>
-                <strong>Photo/Video Editing:</strong> Jump to a specific point
-                in a large history or timeline.
-              </li>
-              <li>
-                <strong>Rate Limiters &amp; Logs:</strong> Find events in
-                time-ordered logs.
-              </li>
+              <li><strong>Rate Limiters &amp; Logs:</strong> Find events in time-ordered logs.</li>
             </ul>
           </section>
           <section id="answer">
-            <h2>
-              9. PATTERN RECOGNITION (Advanced) — “Binary Search on the Answer”
-            </h2>
+            <h2>9. PATTERN RECOGNITION (Advanced) — â€œBinary Search on the Answer”</h2>
             <p>
-              Binary Search is not only for finding a number in a list. It can
-              cut any search area in half when it has a special property called
-              <strong>monotonicity</strong>: things keep getting better or worse
-              in one direction, like a sorted list does.
+              Binary Search is not only for finding a number in a list. It can cut any search area
+              in half when it has a special property called
+              <strong>monotonicity</strong>: things keep getting better or worse in one direction,
+              like a sorted list does.
             </p>
             <p>
-              <strong>Example:</strong> Find the smallest possible truck
-              capacity needed to deliver all packages within 5 days. You are
-              searching a range of possible answers, from the smallest to the
-              largest capacity. For any capacity, ask: “Is this capacity enough
-              to finish in 5 days?”
+              <strong>Example:</strong> Find the smallest possible truck capacity needed to deliver
+              all packages within 5 days. You are searching a range of possible answers, from the
+              smallest to the largest capacity. For any capacity, ask: â€œIs this capacity enough to
+              finish in 5 days?”
             </p>
             <ul>
-              <li>Yes → try a smaller capacity by searching the left half.</li>
-              <li>No → try a bigger capacity by searching the right half.</li>
+              <li>Yes â†’ try a smaller capacity by searching the left half.</li>
+              <li>No â†’ try a bigger capacity by searching the right half.</li>
             </ul>
             <p>
-              This is called <strong>Binary Search on the Answer</strong>. It
-              appears in “minimize the maximum” and “maximize the minimum”
-              problems, finding square roots or ranked values, and splitting
-              resources fairly.
+              This is called <strong>Binary Search on the Answer</strong>. It appears in â€œminimize
+              the maximum” and â€œmaximize the minimum” problems, finding square roots or ranked
+              values, and splitting resources fairly.
             </p>
             <blockquote>
-              <strong>Key takeaway:</strong> Whenever possible answers behave in
-              an ordered, predictable way, think Binary Search — even when there
-              is no actual sorted array.
+              <strong>Key takeaway:</strong> Whenever possible answers behave in an ordered,
+              predictable way, think Binary Search — even when there is no actual sorted array.
             </blockquote>
           </section>
           <section id="practice">
             <h2>10. PRACTICE &amp; NEXT STEP (Retention)</h2>
             <ol>
               <li>
-                <a href="https://leetcode.com/problems/binary-search/"
-                  >Binary Search (Easy)</a
-                >
+                <a href="https://leetcode.com/problems/binary-search/">Binary Search (Easy)</a>
                 — the basic version, to lock in the pattern from Section 5.
               </li>
               <li>
-                <a
-                  href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
+                <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
                   >Search in Rotated Sorted Array (Medium)</a
                 >
-                — checks whether you understand low, high, and mid, not just
-                memorized the code.
+                — checks whether you understand low, high, and mid, not just memorized the code.
               </li>
               <li>
                 <a href="https://leetcode.com/problems/koko-eating-bananas/"
@@ -716,21 +652,16 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             </ol>
             <p>
               Once you are comfortable with these three, study
-              <strong>Binary Search on the Answer</strong> as its own topic.
-              This is where many interview-level Binary Search problems live,
-              and it builds directly on everything in this guide.
+              <strong>Binary Search on the Answer</strong> as its own topic. This is where many
+              interview-level Binary Search problems live, and it builds directly on everything in
+              this guide.
             </p>
           </section>
           <section id="download-notes">
             <h2>Download Binary Search Notes</h2>
-            <p>
-              Save this complete Binary Search lesson for offline reading and
-              revision.
-            </p>
-            <a
-              class="download-notes"
-              href="../../../notes-visualizer/?topic=binary-search-intro"
-              >Watch notes &amp; download ↓</a
+            <p>Save this complete Binary Search lesson for offline reading and revision.</p>
+            <a class="download-notes" href="../../../notes-visualizer/?topic=binary-search-intro"
+              >Watch notes &amp; download â†“</a
             >
           </section>
         </article>
@@ -738,20 +669,16 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
           <p class="article-nav-title">On this page</p>
           <a href="#download-notes">Study sheet</a>
           <a href="#why">01 · Why</a><a href="#condition">02 · Condition</a
-          ><a href="#intuition">03 · Intuition</a
-          ><a href="#dry-run">04 · Dry run</a><a href="#code">05 · Code</a
-          ><a href="#mistakes">06 · Mistakes</a
-          ><a href="#complexity">07 · Complexity</a
-          ><a href="#real-world">08 · Real world</a
-          ><a href="#answer">09 · Pattern</a
-          ><a href="#practice">10 · Practice</a
-          ><a href="#download-notes">↓ Download Notes</a>
+          ><a href="#intuition">03 · Intuition</a><a href="#dry-run">04 · Dry run</a
+          ><a href="#code">05 · Code</a><a href="#mistakes">06 · Mistakes</a
+          ><a href="#complexity">07 · Complexity</a><a href="#real-world">08 · Real world</a
+          ><a href="#answer">09 · Pattern</a><a href="#practice">10 · Practice</a
+          ><a href="#download-notes">â†“ Download Notes</a>
         </nav>
       </div>
     </main>
     <footer class="site-footer page-width">
-      <span>Maurekar · Binary Search · Intro</span
-      ><a href="../">Back to library</a>
+      <span>Maurekar · Binary Search · Intro</span><a href="../">Back to library</a>
     </footer>
     <script>
       const codeByLanguage = {
@@ -805,19 +732,14 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
     return -1;                             // target is not in the list
   }`,
       };
-      const codePanel = document.querySelector("#language-code code");
-      const visualizerLink = document.querySelector("#open-code-visualizer");
+      const codePanel = document.querySelector('#language-code code');
+      const visualizerLink = document.querySelector('#open-code-visualizer');
       const escapeCode = (value) =>
-        value
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
+        value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const colorizeCode = (line) => {
         const commentMatch = line.match(/(\/\/|#)/);
-        const codePart = commentMatch
-          ? line.slice(0, commentMatch.index)
-          : line;
-        const commentPart = commentMatch ? line.slice(commentMatch.index) : "";
+        const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
+        const commentPart = commentMatch ? line.slice(commentMatch.index) : '';
         const colored = escapeCode(codePart)
           .replace(
             /\b(public|static|int|while|if|else|return|def|elif|vector|class)\b/g,
@@ -830,50 +752,45 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
           .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
         return (
           colored +
-          (commentPart
-            ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>`
-            : "")
+          (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : '')
         );
       };
       const showCode = (language) => {
         codePanel.innerHTML = codeByLanguage[language]
-          .split("\n")
+          .split('\n')
           .map(
             (line, index) =>
               `<span class="code-line" data-line="${index + 1}">${colorizeCode(line)}</span>`,
           )
-          .join("");
+          .join('');
       };
-      showCode("python");
-      document.querySelectorAll("[data-code-language]").forEach((button) => {
-        button.addEventListener("click", () => {
+      showCode('python');
+      document.querySelectorAll('[data-code-language]').forEach((button) => {
+        button.addEventListener('click', () => {
           const language = button.dataset.codeLanguage;
           showCode(language);
           visualizerLink.href = `../visualizer.html?language=${language}`;
-          document.querySelectorAll("[data-code-language]").forEach((item) => {
-            item.classList.toggle("active", item === button);
+          document.querySelectorAll('[data-code-language]').forEach((item) => {
+            item.classList.toggle('active', item === button);
           });
         });
       });
-      const articleSections = document.querySelectorAll(
-        ".article > section[id]",
-      );
-      const articleLinks = document.querySelectorAll(".article-nav a");
+      const articleSections = document.querySelectorAll('.article > section[id]');
+      const articleLinks = document.querySelectorAll('.article-nav a');
       const sectionObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             articleLinks.forEach((link) => {
-              link.classList.toggle(
-                "active",
-                link.hash === `#${entry.target.id}`,
-              );
+              link.classList.toggle('active', link.hash === `#${entry.target.id}`);
             });
           });
         },
-        { rootMargin: "-18% 0px -68% 0px" },
+        { rootMargin: '-18% 0px -68% 0px' },
       );
       articleSections.forEach((section) => sectionObserver.observe(section));
     </script>
+    <script src="../../../js/article-nav.js"></script>
+    <script src="../../../js/site-navigation.js"></script>
   </body>
 </html>

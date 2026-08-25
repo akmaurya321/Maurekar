@@ -1,11 +1,11 @@
-const revealItems = document.querySelectorAll(".scroll-reveal");
+const revealItems = document.querySelectorAll('.scroll-reveal');
 
-if ("IntersectionObserver" in window) {
+if ('IntersectionObserver' in window) {
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
+        entry.target.classList.add('is-visible');
         revealObserver.unobserve(entry.target);
       });
     },
@@ -14,5 +14,5 @@ if ("IntersectionObserver" in window) {
 
   revealItems.forEach((item) => revealObserver.observe(item));
 } else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
+  revealItems.forEach((item) => item.classList.add('is-visible'));
 }

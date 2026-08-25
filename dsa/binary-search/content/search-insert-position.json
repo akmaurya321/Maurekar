@@ -1,0 +1,62 @@
+{
+  "array": [2, 5, 7, 9, 12, 15, 18, 21, 24, 28, 31, 35, 39, 42, 46, 50],
+  "target": 40,
+  "mode": "search-insert-position",
+  "label": "Search Insert Position",
+  "languages": {
+    "python": {
+      "label": "Python",
+      "code": "def search_insert(nums, target):\n    low = 0                         # left edge of the unresolved range\n    high = len(nums)                # exclusive right edge; end insertion is valid\n\n    while low < high:               # narrow the first value >= target\n        mid = low + (high - low) // 2  # overflow-safe midpoint\n        if nums[mid] < target:       # too small; discard this prefix\n            low = mid + 1\n        else:                        # candidate boundary; search for an earlier one\n            high = mid\n\n    return low                      # target index or insertion position"
+    },
+    "java": {
+      "label": "Java",
+      "code": "public static int searchInsert(int[] nums, int target) {\n    int low = 0;                          // left edge of the search range\n    int high = nums.length;               // exclusive right edge\n    while (low < high) {                  // narrow the first value >= target\n        int mid = low + (high - low) / 2; // overflow-safe midpoint\n        if (nums[mid] < target) low = mid + 1; // discard the smaller prefix\n        else high = mid;                  // retain this possible boundary\n    }\n    return low;                           // target index or insertion position\n}"
+    },
+    "cpp": {
+      "label": "C++",
+      "code": "int searchInsert(vector<int>& nums, int target) {\n    int low = 0;                          // left edge of the search range\n    int high = nums.size();               // exclusive right edge\n    while (low < high) {                  // search for the first value >= target\n        int mid = low + (high - low) / 2; // overflow-safe midpoint\n        if (nums[mid] < target) low = mid + 1; // answer is to the right\n        else high = mid;                  // keep mid and search left\n    }\n    return low;                           // target index or insertion position\n}"
+    }
+  },
+  "steps": [
+    {
+      "low": 0,
+      "middle": 8,
+      "high": 16,
+      "highlightLine": 6,
+      "comparison": "mid = 0 + (16 - 0) / 2 = 8",
+      "message": "24 is smaller than 40, so the insertion boundary must be to the right. Move low to 9."
+    },
+    {
+      "low": 9,
+      "middle": 12,
+      "high": 16,
+      "highlightLine": 6,
+      "comparison": "mid = 9 + (16 - 9) / 2 = 12",
+      "message": "39 is smaller than 40, so move low to 13."
+    },
+    {
+      "low": 13,
+      "middle": 14,
+      "high": 16,
+      "highlightLine": 8,
+      "comparison": "46 >= 40  ->  Search left",
+      "message": "46 is large enough to be the boundary. Keep it and move high to 14."
+    },
+    {
+      "low": 13,
+      "middle": 13,
+      "high": 14,
+      "highlightLine": 8,
+      "comparison": "42 >= 40  ->  Search left",
+      "message": "42 is also large enough, so move high to 13."
+    },
+    {
+      "low": 13,
+      "middle": null,
+      "high": 13,
+      "highlightLine": 11,
+      "comparison": "low = high = 13  ->  Insert position found",
+      "message": "The pointers meet at index 13, between 39 and 42."
+    }
+  ]
+}

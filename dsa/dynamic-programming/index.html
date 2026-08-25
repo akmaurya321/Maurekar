@@ -1,45 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DP, Greedy and backtracking | Maurekar</title>
-    <meta name="description" content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Maurekar">
-    <meta property="og:title" content="DP, Greedy and backtracking | Maurekar">
-    <meta property="og:description" content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="DP, Greedy and backtracking | Maurekar">
-    <meta name="twitter:description" content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="theme-color" content="#15211d">
-    <link rel="stylesheet" href="../../css/style.css" >
-      <script type="application/ld+json" id="seo-schema">{"@context":"https://schema.org","@type":"LearningResource","name":"DP, Greedy and backtracking","description":"Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources.","url":"https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Maurekar","url":"https://akmaurya321.github.io/Maurekar/"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DSA","item":"https://akmaurya321.github.io/Maurekar/dsa/"},{"@type":"ListItem","position":2,"name":"DP, Greedy and backtracking","item":"https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/"}]}}</script>
+    <meta
+      name="description"
+      content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="DP, Greedy and backtracking | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="DP, Greedy and backtracking | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "DP, Greedy and backtracking",
+        "description": "Learn DP, Greedy and backtracking with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "DP, Greedy and backtracking",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/dynamic-programming/"
+            }
+          ]
+        }
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../../"
-        ><span class="brand-mark">MK</span><span>Maurekar</span></a
-      >
+      <a class="brand" href="../../"><span class="brand-mark">MK</span><span>Maurekar</span></a>
       <nav><a href="../">DSA Library</a></nav>
     </header>
     <main class="page-width library-page">
       <p class="eyebrow">DSA / Optimization</p>
       <h1>DP, Greedy <em>and backtracking.</em></h1>
       <p class="listing-intro">
-        Build the habits for state transitions, local choices, and exhaustive
-        search.
+        Build the habits for state transitions, local choices, and exhaustive search.
       </p>
       <div class="topic-directory">
         <a class="directory-row" href="1d-dp/"
           ><span>01</span><strong>1D Dynamic Programming</strong
           ><small>State and transition fundamentals</small><b>→</b></a
         ><a class="directory-row" href="2d-grids-and-paths/"
-          ><span>02</span><strong>2D Grids and Paths</strong
-          ><small>Grid state and movement</small><b>→</b></a
+          ><span>02</span><strong>2D Grids and Paths</strong><small>Grid state and movement</small
+          ><b>→</b></a
         ><a class="directory-row" href="../greedy/"
           ><span>03</span><strong>Greedy Algorithms</strong
           ><small>Make and prove local choices</small><b>→</b></a
@@ -52,5 +92,6 @@
     <footer class="site-footer page-width">
       <span>Maurekar · Optimization</span><a href="../">Back to library</a>
     </footer>
+    <script src="../../js/site-navigation.js"></script>
   </body>
 </html>

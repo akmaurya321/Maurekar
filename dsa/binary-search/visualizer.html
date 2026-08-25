@@ -421,35 +421,20 @@
   </head>
   <body>
     <header class="site-header">
-      <a
-        id="back-to-code"
-        class="header-button"
-        href="questions/search-x-in-sorted-array.html#code"
+      <a id="back-to-code" class="header-button" href="questions/search-x-in-sorted-array.html#code"
         >← Back</a
       >
     </header>
     <main class="page-width visual-page">
       <div class="visual-grid">
         <section class="visual-panel">
-          <span id="visual-target-label" class="panel-label"
-            >Sorted array · target 26</span
-          >
+          <span id="visual-target-label" class="panel-label">Sorted array · target 26</span>
           <div id="array-view" class="array-view"></div>
           <p id="comparison" class="comparison"></p>
-          <div
-            class="variable-grid"
-            role="group"
-            aria-label="Current pointer values"
-          >
-            <div class="variable-card">
-              <span>low</span><strong id="low-value">-</strong>
-            </div>
-            <div class="variable-card">
-              <span>mid</span><strong id="mid-value">-</strong>
-            </div>
-            <div class="variable-card">
-              <span>high</span><strong id="high-value">-</strong>
-            </div>
+          <div class="variable-grid" role="group" aria-label="Current pointer values">
+            <div class="variable-card"><span>low</span><strong id="low-value">-</strong></div>
+            <div class="variable-card"><span>mid</span><strong id="mid-value">-</strong></div>
+            <div class="variable-card"><span>high</span><strong id="high-value">-</strong></div>
           </div>
           <p id="step-count" class="step-count"></p>
           <p id="step-detail" class="step-detail"></p>
@@ -460,14 +445,8 @@
           </div>
         </section>
         <section class="visual-panel">
-          <span id="language-label" class="panel-label"
-            >Java implementation</span
-          >
-          <div
-            class="language-controls"
-            role="group"
-            aria-label="Choose programming language"
-          >
+          <span id="language-label" class="panel-label">Java implementation</span>
+          <div class="language-controls" role="group" aria-label="Choose programming language">
             <button type="button" data-language="python">Python</button>
             <button type="button" data-language="java">Java</button>
             <button type="button" data-language="cpp">C++</button>
@@ -477,183 +456,161 @@
       </div>
     </main>
     <script>
-      document
-        .querySelector("#back-to-code")
-        .addEventListener("click", (event) => {
-          if (document.referrer.includes("search-x-in-sorted-array.html")) {
-            event.preventDefault();
-            window.history.back();
-          }
-        });
+      document.querySelector('#back-to-code').addEventListener('click', (event) => {
+        if (document.referrer.includes('search-x-in-sorted-array.html')) {
+          event.preventDefault();
+          window.history.back();
+        }
+      });
       let data;
-      let language =
-        new URLSearchParams(window.location.search).get("language") || "java";
+      let language = new URLSearchParams(window.location.search).get('language') || 'java';
       let step = 0;
       const render = () => {
         const state = data.steps[step];
-        const cells = document.querySelectorAll(".array-cell");
+        const cells = document.querySelectorAll('.array-cell');
         cells.forEach((cell, index) => {
           const inRange =
             state.low === null ||
             state.high === null ||
             (index >= state.low && index <= state.high);
           const pointers = [
-            index === state.low ? '<span class="pointer-low">LOW</span>' : "",
-            index === state.middle
-              ? '<span class="pointer-mid">MID</span>'
-              : "",
-            index === state.high
-              ? '<span class="pointer-high">HIGH</span>'
-              : "",
-          ].join("");
-          cell.className = `array-cell ${inRange ? "active" : "discarded"} ${index === state.middle ? "mid" : ""} ${data.array[index] === data.target ? "target" : ""}`;
-          cell.querySelector(".cell-pointers").innerHTML = pointers;
+            index === state.low ? '<span class="pointer-low">LOW</span>' : '',
+            index === state.middle ? '<span class="pointer-mid">MID</span>' : '',
+            index === state.high ? '<span class="pointer-high">HIGH</span>' : '',
+          ].join('');
+          cell.className = `array-cell ${inRange ? 'active' : 'discarded'} ${index === state.middle ? 'mid' : ''} ${data.array[index] === data.target ? 'target' : ''}`;
+          cell.querySelector('.cell-pointers').innerHTML = pointers;
         });
         requestAnimationFrame(() => {
           [
-            ["pointer-low", state.low],
-            ["pointer-mid", state.middle],
-            ["pointer-high", state.high],
+            ['pointer-low', state.low],
+            ['pointer-mid', state.middle],
+            ['pointer-high', state.high],
           ].forEach(([pointerId, index]) => {
             const pointer = document.querySelector(`#${pointerId}`);
             if (index === null) {
-              pointer.style.opacity = "0";
+              pointer.style.opacity = '0';
               return;
             }
             const cell = cells[index];
             if (!cell) {
-              pointer.style.opacity = "0";
+              pointer.style.opacity = '0';
               return;
             }
-            pointer.style.opacity = "1";
+            pointer.style.opacity = '1';
             pointer.style.left = `${cell.offsetLeft + cell.offsetWidth / 2}px`;
           });
         });
-        document.querySelector("#comparison").textContent = state.comparison;
-        document.querySelector("#step-message").textContent = state.message;
-        document.querySelector("#step-count").textContent =
+        document.querySelector('#comparison').textContent = state.comparison;
+        document.querySelector('#step-message').textContent = state.message;
+        document.querySelector('#step-count').textContent =
           `Step ${step + 1} of ${data.steps.length}`;
         const nextState = data.steps[step + 1];
         const nextMove = nextState
           ? ` Next step: low = ${nextState.low}, mid = ${nextState.middle}, high = ${nextState.high}.`
-          : " This is the final step: the target is found.";
+          : ' This is the final step: the target is found.';
         const middleText =
           state.middle === null
-            ? "not calculated yet"
+            ? 'not calculated yet'
             : `${state.middle} (value ${data.array[state.middle]})`;
-        document.querySelector("#step-detail").textContent =
-          `This step: low = ${state.low ?? "not set"}, mid = ${middleText}, high = ${state.high ?? "not set"}.${nextMove}`;
-        document.querySelector("#low-value").textContent = state.low ?? "—";
-        document.querySelector("#mid-value").textContent = state.middle ?? "—";
-        document.querySelector("#high-value").textContent = state.high ?? "—";
-        document.querySelector("#previous").disabled = step === 0;
-        document.querySelector("#next").disabled =
-          step === data.steps.length - 1;
+        document.querySelector('#step-detail').textContent =
+          `This step: low = ${state.low ?? 'not set'}, mid = ${middleText}, high = ${state.high ?? 'not set'}.${nextMove}`;
+        document.querySelector('#low-value').textContent = state.low ?? '—';
+        document.querySelector('#mid-value').textContent = state.middle ?? '—';
+        document.querySelector('#high-value').textContent = state.high ?? '—';
+        document.querySelector('#previous').disabled = step === 0;
+        document.querySelector('#next').disabled = step === data.steps.length - 1;
         const highlightedLine = state.highlightLine;
         const escapeCode = (value) =>
-          value
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
+          value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         const colorize = (line) => {
           const commentMatch = line.match(/(\/\/|#)/);
-          const codePart = commentMatch
-            ? line.slice(0, commentMatch.index)
-            : line;
-          const commentPart = commentMatch
-            ? line.slice(commentMatch.index)
-            : "";
+          const codePart = commentMatch ? line.slice(0, commentMatch.index) : line;
+          const commentPart = commentMatch ? line.slice(commentMatch.index) : '';
           let colored = escapeCode(codePart)
             .replace(
               /\b(public|static|int|while|if|else|return|def|elif|vector)\b/g,
               '<span class="syntax-keyword">$1</span>',
             )
-            .replace(
-              /\b(arr|target|low|high|mid)\b/g,
-              '<span class="syntax-type">$1</span>',
-            )
+            .replace(/\b(arr|target|low|high|mid)\b/g, '<span class="syntax-type">$1</span>')
             .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>');
           return (
             colored +
-            (commentPart
-              ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>`
-              : "")
+            (commentPart ? `<span class="syntax-comment">${escapeCode(commentPart)}</span>` : '')
           );
         };
-        const codeBlock = document.querySelector("#code-block");
+        const codeBlock = document.querySelector('#code-block');
         if (codeBlock.dataset.language !== language) {
           codeBlock.innerHTML = data.languages[language].code
-            .split("\n")
+            .split('\n')
             .map(
               (line, index) =>
                 `<span class="code-line" data-line="${index + 1}">${colorize(line)}</span>`,
             )
-            .join("");
+            .join('');
           codeBlock.dataset.language = language;
         }
-        codeBlock.querySelectorAll(".code-line").forEach((line, index) => {
-          line.classList.toggle("highlight", index + 1 === highlightedLine);
+        codeBlock.querySelectorAll('.code-line').forEach((line, index) => {
+          line.classList.toggle('highlight', index + 1 === highlightedLine);
         });
-        document.querySelector("#language-label").textContent =
-          data.languages[language].label + " implementation";
+        document.querySelector('#language-label').textContent =
+          data.languages[language].label + ' implementation';
         document
-          .querySelectorAll("[data-language]")
+          .querySelectorAll('[data-language]')
           .forEach((button) =>
-            button.classList.toggle(
-              "active",
-              button.dataset.language === language,
-            ),
+            button.classList.toggle('active', button.dataset.language === language),
           );
       };
-      document.querySelector("#previous").onclick = () => {
+      document.querySelector('#previous').onclick = () => {
         step--;
         render();
       };
-      document.querySelector("#next").onclick = () => {
+      document.querySelector('#next').onclick = () => {
         step++;
         render();
       };
-      document.querySelectorAll("[data-language]").forEach((button) => {
+      document.querySelectorAll('[data-language]').forEach((button) => {
         button.onclick = () => {
           language = button.dataset.language;
           render();
         };
       });
       const visualizerTopic =
-        new URLSearchParams(window.location.search).get("topic") ||
-        "binary-search";
-      const visualizerTitle =
-        visualizerTopic === "lower-bound"
-          ? "Lower Bound Visualizer"
-          : "Binary Search Visualizer";
+        new URLSearchParams(window.location.search).get('topic') || 'binary-search';
+      const visualizerName = visualizerTopic
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+      const visualizerTitle = `${visualizerName} Visualizer`;
       document.title = `${visualizerTitle} | Maurekar`;
-      if (visualizerTopic === "lower-bound") {
-        document.querySelector("#back-to-code").href =
-          "questions/lower-bound.html#code";
-      }
+      document.querySelector('#back-to-code').href =
+        visualizerTopic === 'binary-search'
+          ? 'questions/search-x-in-sorted-array.html#code'
+          : `questions/${visualizerTopic}.html#code`;
       fetch(
-        visualizerTopic === "lower-bound"
-          ? "content/lower-bound.json"
-          : "content/visual.json",
+        visualizerTopic === 'binary-search'
+          ? 'content/visual.json'
+          : `content/${visualizerTopic}.json`,
       )
         .then((response) => response.json())
         .then((json) => {
           data = json;
-          document.querySelector("#visual-target-label").textContent =
-            `${data.mode === "lower-bound" ? "Lower Bound array" : "Sorted array"} · target ${data.target}`;
-          document.querySelector("#array-view").innerHTML =
+          document.querySelector('#visual-target-label').textContent =
+            `${data.label || data.mode || visualizerName} array · target ${data.target}`;
+          document.querySelector('#array-view').innerHTML =
             data.array
               .map(
                 (value, index) =>
                   `<span class="array-cell"><span class="cell-pointers"></span><span class="cell-index">${index}</span><span class="cell-value">${value}</span></span>`,
               )
-              .join("") +
+              .join('') +
             '<span id="pointer-low" class="pointer-float">LOW</span><span id="pointer-mid" class="pointer-float">MID</span><span id="pointer-high" class="pointer-float">HIGH</span>';
           render();
         });
-      window.addEventListener("resize", () => {
+      window.addEventListener('resize', () => {
         if (data) render();
       });
     </script>
+    <script src="../../js/site-navigation.js"></script>
   </body>
 </html>

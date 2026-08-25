@@ -3,17 +3,75 @@
   "target": 20,
   "mode": "lower-bound",
   "languages": {
-    "python": {"label": "Python", "code": "def lower_bound(arr, target):\n    low = 0                      # start of the search area\n    high = len(arr)              # one past the last index\n\n    while low < high:            # keep searching while a range remains\n        mid = low + (high - low) // 2   # safe middle point\n\n        if arr[mid] < target:    # too small, answer is to the right\n            low = mid + 1\n        else:                    # big enough, but maybe not the first one\n            high = mid            # keep it and search left\n\n    return low                   # low == high: lower bound index"},
-    "java": {"label": "Java", "code": "public static int lowerBound(int[] arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.length;                // one past the last index\n\n    while (low < high) {                  // keep searching while a range remains\n        int mid = low + (high - low) / 2; // safe middle point\n\n        if (arr[mid] < target) {          // too small, answer is to the right\n            low = mid + 1;\n        } else {                          // possible answer, search left\n            high = mid;                   // keep mid in the search area\n        }\n    }\n    return low;                           // lower bound index\n}"},
-    "cpp": {"label": "C++", "code": "int lowerBound(vector<int>& arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.size();                // one past the last index\n\n    while (low < high) {                  // keep searching while a range remains\n        int mid = low + (high - low) / 2; // safe middle point\n\n        if (arr[mid] < target) {          // too small, answer is to the right\n            low = mid + 1;\n        } else {                          // possible answer, search left\n            high = mid;                   // keep mid in the search area\n        }\n    }\n    return low;                           // lower bound index\n}"}
+    "python": {
+      "label": "Python",
+      "code": "def lower_bound(arr, target):\n    low = 0                      # start of the search area\n    high = len(arr)              # one past the last index\n\n    while low < high:            # keep searching while a range remains\n        mid = low + (high - low) // 2   # safe middle point\n\n        if arr[mid] < target:    # too small, answer is to the right\n            low = mid + 1\n        else:                    # big enough, but maybe not the first one\n            high = mid            # keep it and search left\n\n    return low                   # low == high: lower bound index"
+    },
+    "java": {
+      "label": "Java",
+      "code": "public static int lowerBound(int[] arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.length;                // one past the last index\n\n    while (low < high) {                  // keep searching while a range remains\n        int mid = low + (high - low) / 2; // safe middle point\n\n        if (arr[mid] < target) {          // too small, answer is to the right\n            low = mid + 1;\n        } else {                          // possible answer, search left\n            high = mid;                   // keep mid in the search area\n        }\n    }\n    return low;                           // lower bound index\n}"
+    },
+    "cpp": {
+      "label": "C++",
+      "code": "int lowerBound(vector<int>& arr, int target) {\n    int low = 0;                          // start of the search area\n    int high = arr.size();                // one past the last index\n\n    while (low < high) {                  // keep searching while a range remains\n        int mid = low + (high - low) / 2; // safe middle point\n\n        if (arr[mid] < target) {          // too small, answer is to the right\n            low = mid + 1;\n        } else {                          // possible answer, search left\n            high = mid;                   // keep mid in the search area\n        }\n    }\n    return low;                           // lower bound index\n}"
+    }
   },
   "steps": [
-    {"low": 0, "middle": 3, "high": 7, "highlightLine": 6, "comparison": "mid = 0 + (7 - 0) / 2 = 3", "message": "Start with low = 0 and high = 7, one past the last index. mid is 3 and arr[mid] is 20."},
-    {"low": 0, "middle": 3, "high": 3, "highlightLine": 10, "comparison": "20 >= 20  →  Keep mid, search left", "message": "20 is big enough, so it could be the first valid position. Move high to mid = 3."},
-    {"low": 0, "middle": 1, "high": 3, "highlightLine": 6, "comparison": "mid = 0 + (3 - 0) / 2 = 1", "message": "Now mid is 1 and arr[mid] is 20. This could still be the first 20."},
-    {"low": 0, "middle": 1, "high": 1, "highlightLine": 10, "comparison": "20 >= 20  →  Keep mid, search left", "message": "Keep this possible answer and move high to mid = 1."},
-    {"low": 0, "middle": 0, "high": 1, "highlightLine": 6, "comparison": "mid = 0 + (1 - 0) / 2 = 0", "message": "Now mid is 0 and arr[mid] is 10, which is too small."},
-    {"low": 1, "middle": 0, "high": 1, "highlightLine": 7, "comparison": "10 < 20  →  Search right", "message": "10 cannot be the answer, so move low to mid + 1 = 1."},
-    {"low": 1, "middle": null, "high": 1, "highlightLine": 13, "comparison": "low = high = 1  →  Lower bound found", "message": "low and high meet at index 1. The first value greater than or equal to 20 is at index 1."}
+    {
+      "low": 0,
+      "middle": 3,
+      "high": 7,
+      "highlightLine": 6,
+      "comparison": "mid = 0 + (7 - 0) / 2 = 3",
+      "message": "Start with low = 0 and high = 7, one past the last index. mid is 3 and arr[mid] is 20."
+    },
+    {
+      "low": 0,
+      "middle": 3,
+      "high": 3,
+      "highlightLine": 10,
+      "comparison": "20 >= 20  →  Keep mid, search left",
+      "message": "20 is big enough, so it could be the first valid position. Move high to mid = 3."
+    },
+    {
+      "low": 0,
+      "middle": 1,
+      "high": 3,
+      "highlightLine": 6,
+      "comparison": "mid = 0 + (3 - 0) / 2 = 1",
+      "message": "Now mid is 1 and arr[mid] is 20. This could still be the first 20."
+    },
+    {
+      "low": 0,
+      "middle": 1,
+      "high": 1,
+      "highlightLine": 10,
+      "comparison": "20 >= 20  →  Keep mid, search left",
+      "message": "Keep this possible answer and move high to mid = 1."
+    },
+    {
+      "low": 0,
+      "middle": 0,
+      "high": 1,
+      "highlightLine": 6,
+      "comparison": "mid = 0 + (1 - 0) / 2 = 0",
+      "message": "Now mid is 0 and arr[mid] is 10, which is too small."
+    },
+    {
+      "low": 1,
+      "middle": 0,
+      "high": 1,
+      "highlightLine": 7,
+      "comparison": "10 < 20  →  Search right",
+      "message": "10 cannot be the answer, so move low to mid + 1 = 1."
+    },
+    {
+      "low": 1,
+      "middle": null,
+      "high": 1,
+      "highlightLine": 13,
+      "comparison": "low = high = 1  →  Lower bound found",
+      "message": "low and high meet at index 1. The first value greater than or equal to 20 is at index 1."
+    }
   ]
 }

@@ -36,7 +36,7 @@
   width: 34%;
   height: 4px;
   background: var(--lime);
-  content: "";
+  content: '';
   animation: journey-progress 6s linear infinite;
 }
 
@@ -51,9 +51,16 @@
   box-shadow: 0 0 0 4px rgba(200, 243, 107, 0.12);
 }
 
-.road-dot-start { left: 0; }
-.road-dot-middle { left: 48%; background: var(--orange); }
-.road-dot-end { right: 0; }
+.road-dot-start {
+  left: 0;
+}
+.road-dot-middle {
+  left: 48%;
+  background: var(--orange);
+}
+.road-dot-end {
+  right: 0;
+}
 
 .journey-student {
   position: absolute;
@@ -117,8 +124,13 @@
   transform-origin: top center;
 }
 
-.student-leg-front { transform: rotate(-20deg); }
-.student-leg-back { left: 41px; transform: rotate(24deg); }
+.student-leg-front {
+  transform: rotate(-20deg);
+}
+.student-leg-back {
+  left: 41px;
+  transform: rotate(24deg);
+}
 
 .student-leg-front,
 .student-leg-back {
@@ -133,7 +145,7 @@
   height: 6px;
   border-radius: 6px 3px 3px 2px;
   background: #edf2e8;
-  content: "";
+  content: '';
 }
 
 .student-leg-back {
@@ -170,7 +182,7 @@
   height: 3px;
   border-radius: 2px;
   background: #edf2e8;
-  content: "";
+  content: '';
 }
 
 .journey-labels {
@@ -185,37 +197,73 @@
 }
 
 @keyframes journey-progress {
-  0% { width: 8%; }
-  45% { width: 45%; }
-  75% { width: 72%; }
-  100% { width: 88%; }
+  0% {
+    width: 8%;
+  }
+  45% {
+    width: 45%;
+  }
+  75% {
+    width: 72%;
+  }
+  100% {
+    width: 88%;
+  }
 }
 
 @keyframes student-walk {
-  0% { left: 8%; transform: translate(-50%, 0) scale(0.46); }
-  45% { left: 45%; transform: translate(-50%, -4px) scale(0.46); }
-  75% { left: 72%; transform: translate(-50%, 0) scale(0.46); }
-  100% { left: 88%; transform: translate(-50%, 0) scale(0.46); }
+  0% {
+    left: 8%;
+    transform: translate(-50%, 0) scale(0.46);
+  }
+  45% {
+    left: 45%;
+    transform: translate(-50%, -4px) scale(0.46);
+  }
+  75% {
+    left: 72%;
+    transform: translate(-50%, 0) scale(0.46);
+  }
+  100% {
+    left: 88%;
+    transform: translate(-50%, 0) scale(0.46);
+  }
 }
 
 @keyframes leg-swing {
-  0% { transform: rotate(-25deg); }
-  100% { transform: rotate(25deg); }
+  0% {
+    transform: rotate(-25deg);
+  }
+  100% {
+    transform: rotate(25deg);
+  }
 }
 
 @keyframes body-run {
-  0% { transform: translateY(1px) rotate(-7deg); }
-  100% { transform: translateY(-2px) rotate(2deg); }
+  0% {
+    transform: translateY(1px) rotate(-7deg);
+  }
+  100% {
+    transform: translateY(-2px) rotate(2deg);
+  }
 }
 
 @keyframes arm-run {
-  0% { transform: rotate(-44deg); }
-  100% { transform: rotate(-25deg); }
+  0% {
+    transform: rotate(-44deg);
+  }
+  100% {
+    transform: rotate(-25deg);
+  }
 }
 
 @keyframes laptop-run {
-  0% { transform: translateY(2px) rotate(8deg); }
-  100% { transform: translateY(-2px) rotate(16deg); }
+  0% {
+    transform: translateY(2px) rotate(8deg);
+  }
+  100% {
+    transform: translateY(-2px) rotate(16deg);
+  }
 }
 
 .board-code span {
@@ -316,6 +364,12 @@
 }
 
 @media (max-width: 760px) {
-  .journey-title { font-size: 31px; }
-  .journey-student { left: 8%; transform: translateX(-50%) scale(0.4); transform-origin: bottom center; }
+  .journey-title {
+    font-size: 31px;
+  }
+  .journey-student {
+    left: 8%;
+    transform: translateX(-50%) scale(0.4);
+    transform-origin: bottom center;
+  }
 }

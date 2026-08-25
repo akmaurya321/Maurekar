@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "articles": [
+    {
+      "title": "Lower Bound",
+      "slug": "lower-bound",
+      "section": "Binary Search",
+      "group": "Basics",
+      "complexity": "O(log n)",
+      "page": "dsa/binary-search/questions/lower-bound.html",
+      "visualizer": "dsa/binary-search/content/lower-bound.json",
+      "notes": "content/notes/binary-search/lower bound.png",
+      "status": "legacy-preserved"
+    },
+    {
+      "title": "Upper Bound",
+      "slug": "upper-bound",
+      "section": "Binary Search",
+      "group": "Basics",
+      "complexity": "O(log n)",
+      "page": "dsa/binary-search/questions/upper-bound.html",
+      "visualizer": "dsa/binary-search/content/upper-bound.json",
+      "notes": "content/notes/binary-search/upper bound.png",
+      "status": "legacy-preserved"
+    },
+    {
+      "title": "Search Insert Position",
+      "slug": "search-insert-position",
+      "section": "Binary Search",
+      "group": "Basics",
+      "complexity": "O(log n)",
+      "page": "dsa/binary-search/questions/search-insert-position.html",
+      "visualizer": "dsa/binary-search/content/search-insert-position.json",
+      "notes": "content/notes/binary-search/insert position.png",
+      "status": "complete"
+    }
+  ]
+}

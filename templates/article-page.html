@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{title}} | Maurekar</title>
+    <meta name="description" content="{{description}}" />
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../../../css/problem.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../../index.html"
+        ><span class="brand-mark">MK</span><span>Maurekar</span></a
+      >
+      <nav aria-label="Primary">
+        <a href="../../index.html">DSA Library</a><a href="../index.html">{{section}}</a>
+      </nav>
+      <a class="header-button" href="../visualizer.html?topic={{slug}}"
+        >Visualizer <span>→</span></a
+      >
+    </header>
+    <main class="page-width problem-page">
+      <p class="eyebrow">{{section}} / {{group}}</p>
+      <h1>{{title}}</h1>
+      <p class="problem-lead">{{intro}}</p>
+      <div class="problem-meta">
+        <span>Complexity</span><strong>{{complexity}}</strong><span>Topic</span
+        ><strong>{{section}}</strong>
+      </div>
+      <article class="prose">{{content}}</article>
+    </main>
+    <script src="../../../js/article-nav.js"></script>
+    <script src="../js/site-navigation.js"></script>
+  </body>
+</html>

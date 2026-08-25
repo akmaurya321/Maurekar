@@ -42,10 +42,10 @@ For `[2, 5, 8, 12, 16, 23, 38]` and target `23`, the first range is indexes `0` 
 
 ## A small trace table
 
-| Round | Low | Mid | High | Middle value | Decision |
-| --- | --- | --- | --- | --- | --- |
-| 1 | 0 | 3 | 6 | 12 | Search right half |
-| 2 | 4 | 5 | 6 | 23 | Target found |
+| Round | Low | Mid | High | Middle value | Decision          |
+| ----- | --- | --- | ---- | ------------ | ----------------- |
+| 1     | 0   | 3   | 6    | 12           | Search right half |
+| 2     | 4   | 5   | 6    | 23           | Target found      |
 
 ## Java implementation
 
@@ -61,10 +61,10 @@ The **Previous** button is useful when a comparison feels too quick. Use **Reset
 
 ## Complexity
 
-| Measure | Cost | Why |
-| --- | --- | --- |
-| Time | $O(\log n)$ | The remaining range is halved after each comparison. |
-| Space | $O(1)$ | Only three index variables are used in the iterative version. |
+| Measure | Cost        | Why                                                           |
+| ------- | ----------- | ------------------------------------------------------------- |
+| Time    | $O(\log n)$ | The remaining range is halved after each comparison.          |
+| Space   | $O(1)$      | Only three index variables are used in the iterative version. |
 
 The logarithm comes from repeatedly dividing the input by two. After $k$ rounds, the remaining range is approximately $n / 2^k$. It becomes one item when $2^k$ is about $n$, so $k$ is about $\log_2 n$.
 

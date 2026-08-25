@@ -1,18 +1,257 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search Insert Position | Maurekar</title><meta name="description" content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="robots" content="index,follow"><link rel="canonical" href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Maurekar">
-    <meta property="og:title" content="Search Insert Position | Maurekar">
-    <meta property="og:description" content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta property="og:url" content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Search Insert Position | Maurekar">
-    <meta name="twitter:description" content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources.">
-    <meta name="theme-color" content="#15211d"><link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/problem.css">
-      <script type="application/ld+json" id="seo-schema">{"@context":"https://schema.org","@type":"LearningResource","name":"Search Insert Position","description":"Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources.","url":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Maurekar","url":"https://akmaurya321.github.io/Maurekar/"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DSA","item":"https://akmaurya321.github.io/Maurekar/dsa/"},{"@type":"ListItem","position":2,"name":"Search Insert Position","item":"https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html"}]}}</script>
-  </head><body><header class="site-header"><a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a><nav aria-label="Primary"><a href="../../">DSA Library</a><a href="../">Binary Search</a></nav><a class="header-button" href="../visualizer.html">Visualizer <span>→</span></a></header><main class="page-width problem-page"><p class="eyebrow">Binary Search / Basics</p><h1>Search Insert Position</h1><p class="problem-lead">A focused explanation of this Binary Search pattern, with the key decision and the complexity to remember.</p><div class="problem-meta"><span>Complexity</span><strong>O(log n)</strong><span>Topic</span><strong>Binary Search</strong></div><article class="prose"><h2>Problem idea</h2><p>Work with the sorted structure and use the middle position to eliminate the part of the search space that cannot contain the answer.</p><h2>How to think about it</h2><ol><li>Define the search range clearly.</li><li>Choose the middle safely with <code>low + (high - low) / 2</code>.</li><li>Keep the half that can still contain the answer.</li></ol><h2>Java pattern</h2><pre class="code-block"><code>int low = 0, high = numbers.length - 1;
-while (low &lt;= high) {
-    int middle = low + (high - low) / 2;
-    // Compare and keep the valid half.
-}</code></pre></article><p class="back-link"><a href="../">← All Binary Search questions</a></p></main><footer class="site-footer page-width"><span>Maurekar · Focused problem page</span><a href="../visualizer.html">Open visualizer</a></footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search Insert Position | Maurekar</title>
+    <meta
+      name="description"
+      content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Maurekar" />
+    <meta property="og:title" content="Search Insert Position | Maurekar" />
+    <meta
+      property="og:description"
+      content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta
+      property="og:url"
+      content="https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Search Insert Position | Maurekar" />
+    <meta
+      name="twitter:description"
+      content="Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources."
+    />
+    <meta name="theme-color" content="#15211d" />
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="../../../css/problem.css" />
+    <script type="application/ld+json" id="seo-schema">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Search Insert Position",
+        "description": "Learn Search Insert Position with clear explanations, examples, complexity analysis, code, and visual learning resources.",
+        "url": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Maurekar",
+          "url": "https://akmaurya321.github.io/Maurekar/"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "DSA",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Search Insert Position",
+              "item": "https://akmaurya321.github.io/Maurekar/dsa/binary-search/questions/search-insert-position.html"
+            }
+          ]
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../../"><span class="brand-mark">MK</span><span>Maurekar</span></a>
+      <nav aria-label="Primary">
+        <a href="../../">DSA Library</a><a href="../">Binary Search</a>
+      </nav>
+      <a class="header-button" href="../visualizer.html">Visualizer <span>â†’</span></a>
+    </header>
+    <main class="page-width problem-page">
+      <p class="eyebrow">Binary Search / Basics · Topic 02</p>
+      <h1>Search Insert Position</h1>
+      <p class="problem-lead">
+        <strong>Big Picture:</strong> Given a sorted array and a target, return its index if it
+        exists. Otherwise return the index where it belongs so the array stays sorted. This is
+        Lower Bound with a different name.
+      </p>
+      <div class="problem-meta">
+        <span>Requirement</span><strong>Sorted array</strong><span>Complexity</span
+        ><strong>O(log n)</strong>
+      </div>
+      <article class="prose">
+        <section id="problem">
+          <h2>0. THE PROBLEM (Exact Statement)</h2>
+          <blockquote>
+            Given a sorted array of distinct integers and a target, return its index if found. If
+            it is missing, return the index where it should be inserted in order.
+          </blockquote>
+          <p>The algorithm must run in <strong>O(log n)</strong> time.</p>
+          <pre>
+Input: nums = [1, 3, 5, 6], target = 5  →  Output: 2
+Input: nums = [1, 3, 5, 6], target = 2  →  Output: 1
+Input: nums = [1, 3, 5, 6], target = 7  →  Output: 4
+Input: nums = [1, 3, 5, 6], target = 0  →  Output: 0</pre
+          >
+        </section>
+        <section id="why">
+          <h2>1. WHY (Motive) — Why Not Just Loop Through the Array?</h2>
+          <p>
+            With one million sorted values, scanning left to right can take one million checks. The
+            O(log n) requirement points directly to Binary Search: check the middle, discard half,
+            and repeat. One million values need only about 20 checks.
+          </p>
+          <p>
+            The important change is that we are not only searching for an exact match. We are
+            finding the first position where the value is at least the target.
+          </p>
+        </section>
+        <section id="condition">
+          <h2>2. CONDITION (Prerequisite) — The Array Must Be Sorted</h2>
+          <p>
+            Sorting makes the condition monotonic. Once a value is greater than or equal to the
+            target, every value after it is also greater than or equal to the target. Without that
+            guarantee, discarding half the array would be unsafe.
+          </p>
+          <blockquote><strong>Rule:</strong> Sorted array means Lower Bound is available.</blockquote>
+        </section>
+        <section id="intuition">
+          <h2>3. INTUITION (The Core Logic) — The Library Shelf Story</h2>
+          <p>
+            Books on a shelf have IDs <code>1, 3, 5, 6</code>. A new book with ID <code>2</code>
+            must be placed between 1 and 3. Look at the middle book and ask whether its ID is big
+            enough to be the insertion boundary.
+          </p>
+          <ul>
+            <li>If <code>nums[mid] &gt;= target</code>, keep mid and search left.</li>
+            <li>If <code>nums[mid] &lt; target</code>, discard the left side and search right.</li>
+            <li>When the pointers meet, that position is the target index or its insert position.</li>
+          </ul>
+          <p>
+            In one sentence: find the first position where a number becomes big enough. That is
+            exactly the Lower Bound pattern.
+          </p>
+        </section>
+        <section id="dry-run">
+          <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
+          <p>
+            Use <code>nums = [2, 5, 7, 9, 12, 15, 18, 21, 24, 28, 31, 35, 39, 42, 46, 50]</code>
+            and <code>target = 40</code>. The target belongs between 39 and 42.
+          </p>
+          <pre>
+Index:  0   1   2   3    4    5    6    7    8    9   10   11   12   13   14   15
+Value: [2,  5,  7,  9,  12,  15,  18,  21,  24,  28,  31,  35,  39,  42,  46,  50]</pre
+          >
+          <ol>
+            <li><strong>L=0, H=16, M=8:</strong> 24 is too small, so L becomes 9.</li>
+            <li><strong>L=9, H=16, M=12:</strong> 39 is too small, so L becomes 13.</li>
+            <li><strong>L=13, H=16, M=14:</strong> 46 is big enough, so H becomes 14.</li>
+            <li><strong>L=13, H=14, M=13:</strong> 42 is big enough, so H becomes 13.</li>
+            <li><strong>L=13, H=13:</strong> pointers meet; insert position is index 13.</li>
+          </ol>
+          <p>Index 12 contains 39 and index 13 contains 42, so 40 correctly slots at index 13.</p>
+        </section>
+        <section id="code">
+          <h2>5. CODE (Implementation + Comments)</h2>
+          <pre class="code-block"><code>def search_insert(nums, target):
+    low = 0                         # left edge of the unresolved range
+    high = len(nums)                # exclusive right edge; end insertion is valid
+
+    while low &lt; high:               # narrow the first value >= target
+        mid = low + (high - low) // 2  # overflow-safe midpoint
+        if nums[mid] &lt; target:       # too small; discard this prefix
+            low = mid + 1
+        else:                        # candidate boundary; search for an earlier one
+            high = mid
+
+    return low                      # target index or insertion position</code></pre>
+          <pre class="code-block"><code>int searchInsert(vector&lt;int&gt;&amp; nums, int target) {
+    int low = 0;                          // left edge of the search range
+    int high = nums.size();               // exclusive right edge
+    while (low &lt; high) {                  // search for the first value >= target
+        int mid = low + (high - low) / 2; // overflow-safe midpoint
+        if (nums[mid] &lt; target) low = mid + 1; // answer is to the right
+        else high = mid;                  // keep mid and search left
+    }
+    return low;                           // target index or insertion position
+}</code></pre>
+          <pre class="code-block"><code>public static int searchInsert(int[] nums, int target) {
+    int low = 0;                          // left edge of the search range
+    int high = nums.length;               // exclusive right edge
+    while (low &lt; high) {                  // narrow the first value >= target
+        int mid = low + (high - low) / 2; // overflow-safe midpoint
+        if (nums[mid] &lt; target) low = mid + 1; // discard the smaller prefix
+        else high = mid;                  // retain this possible boundary
+    }
+    return low;                           // target index or insertion position
+}</code></pre>
+          <p>This is the same algorithm as Lower Bound. Only the problem story has changed.</p>
+        </section>
+        <section id="mistakes">
+          <h2>6. MISTAKES &amp; EDGE CASES (The Bugs)</h2>
+          <ol>
+            <li><strong>Starting high at length - 1:</strong> use length so insertion at the end is reachable.</li>
+            <li><strong>Forgetting target larger than all values:</strong> the correct answer is the array length.</li>
+            <li><strong>Forgetting target smaller than all values:</strong> the correct answer is 0.</li>
+            <li><strong>Using low &lt;= high:</strong> this boundary template narrows with low &lt; high.</li>
+            <li><strong>Unsafe midpoint:</strong> use <code>low + (high - low) / 2</code>.</li>
+            <li><strong>Separate found and missing logic:</strong> one Lower Bound loop handles both cases.</li>
+          </ol>
+        </section>
+        <section id="complexity">
+          <h2>7. COMPLEXITY (The Math)</h2>
+          <p><strong>Time:</strong> O(log n), because every iteration removes half the range.</p>
+          <p><strong>Space:</strong> O(1), because only low, high, and mid are maintained.</p>
+        </section>
+        <section id="real-world">
+          <h2>8. REAL WORLD (Applications)</h2>
+          <ul>
+            <li>Insert a score, price, date, or timestamp while keeping data sorted.</li>
+            <li>Maintain autocomplete suggestions in sorted order.</li>
+            <li>Update a leaderboard at the correct rank without re-sorting everything.</li>
+            <li>Find the start of a database range or sorted index segment.</li>
+            <li>Recognize first-valid-position problems in version control and scheduling.</li>
+          </ul>
+        </section>
+        <section id="answer">
+          <h2>9. PATTERN RECOGNITION (Advanced) — Lower Bound in Disguise</h2>
+          <p>
+            Whenever a problem says sorted array and O(log n), think Binary Search. When it asks
+            for an insert position, first occurrence, boundary, floor, or ceiling, think Lower
+            Bound. The same first-true template solves each story.
+          </p>
+          <blockquote>
+            Learn the pattern once: first position where <code>arr[i] &gt;= target</code>.
+          </blockquote>
+        </section>
+        <section id="practice">
+          <h2>10. PRACTICE &amp; NEXT STEP (Retention)</h2>
+          <ol>
+            <li>Search Insert Position on LeetCode: solve it with the exact template above.</li>
+            <li>Find First and Last Position: combine Lower Bound and Upper Bound.</li>
+            <li>Implement Lower Bound on GeeksforGeeks without looking at the solution.</li>
+          </ol>
+          <p>Next, practice Find Smallest Letter Greater Than Target and Peak Index in a Mountain Array.</p>
+        </section>
+        <section id="download-notes">
+          <h2>Search Insert Position Notes</h2>
+          <p>Open or download the supplied visual revision sheet.</p>
+          <a class="notes-link" href="../../../notes-visualizer/?topic=search-insert-position">View notes and download →</a>
+        </section>
+      </article>
+      <p class="back-link"><a href="../">← All Binary Search questions</a></p>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Maurekar · Focused problem page</span><a href="../visualizer.html">Open visualizer</a>
+    </footer>
+    <script src="../../../js/article-nav.js"></script>
+    <script src="../../../js/site-navigation.js"></script>
+  </body>
+</html>

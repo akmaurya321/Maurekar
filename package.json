@@ -1,5 +1,17 @@
 {
   "name": "maurekar-dsa",
   "private": true,
-  "scripts": { "dev": "npx serve .", "seo": "node scripts/seo-optimize.js" }
+  "scripts": {
+    "dev": "npx serve .",
+    "seo": "node scripts/seo-optimize.js",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
+    "validate": "npm run format:check && node scripts/validate-site.js",
+    "navigation:ensure": "node scripts/ensure-navigation.js",
+    "article:new": "node scripts/create-article.js && npm run navigation:ensure && npm run format",
+    "questions:generate": "node scripts/generate-question-pages.js && npm run navigation:ensure && npm run format"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6"
+  }
 }
