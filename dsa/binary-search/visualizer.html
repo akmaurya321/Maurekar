@@ -431,7 +431,9 @@
     <main class="page-width visual-page">
       <div class="visual-grid">
         <section class="visual-panel">
-          <span class="panel-label">Sorted array · target 26</span>
+          <span id="visual-target-label" class="panel-label"
+            >Sorted array · target 26</span
+          >
           <div id="array-view" class="array-view"></div>
           <p id="comparison" class="comparison"></p>
           <div
@@ -519,6 +521,10 @@
               return;
             }
             const cell = cells[index];
+            if (!cell) {
+              pointer.style.opacity = "0";
+              return;
+            }
             pointer.style.opacity = "1";
             pointer.style.left = `${cell.offsetLeft + cell.offsetWidth / 2}px`;
           });
@@ -613,10 +619,28 @@
           render();
         };
       });
-      fetch("content/visual.json")
+      const visualizerTopic =
+        new URLSearchParams(window.location.search).get("topic") ||
+        "binary-search";
+      const visualizerTitle =
+        visualizerTopic === "lower-bound"
+          ? "Lower Bound Visualizer"
+          : "Binary Search Visualizer";
+      document.title = `${visualizerTitle} | Maurekar`;
+      if (visualizerTopic === "lower-bound") {
+        document.querySelector("#back-to-code").href =
+          "questions/lower-bound.html#code";
+      }
+      fetch(
+        visualizerTopic === "lower-bound"
+          ? "content/lower-bound.json"
+          : "content/visual.json",
+      )
         .then((response) => response.json())
         .then((json) => {
           data = json;
+          document.querySelector("#visual-target-label").textContent =
+            `${data.mode === "lower-bound" ? "Lower Bound array" : "Sorted array"} · target ${data.target}`;
           document.querySelector("#array-view").innerHTML =
             data.array
               .map(

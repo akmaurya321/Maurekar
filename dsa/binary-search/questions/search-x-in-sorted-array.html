@@ -434,10 +434,10 @@
               <li>Just 30 steps, instead of a billion.</li>
             </ul>
             <p>
-              <strong>Simple takeaway:</strong> Linear Search = check
-              everything = slow (called O(N)). Binary Search = cut in half each
-              time = fast (called O(log N)). For big data, this difference is
-              huge. This is <strong>why</strong> we learn Binary Search.
+              <strong>Simple takeaway:</strong> Linear Search = check everything
+              = slow (called O(N)). Binary Search = cut in half each time = fast
+              (called O(log N)). For big data, this difference is huge. This is
+              <strong>why</strong> we learn Binary Search.
             </p>
           </section>
           <section id="condition">
@@ -450,8 +450,8 @@
               <strong>Why?</strong> The whole trick is this: if we check the
               middle item and our answer is smaller, we can safely skip the
               entire right side because everything there is even bigger. This
-              only works if the numbers are in order. If the list is not
-              sorted, the middle item tells us nothing useful.
+              only works if the numbers are in order. If the list is not sorted,
+              the middle item tells us nothing useful.
             </p>
             <blockquote>
               <strong>Rule to remember:</strong> No sorted data = No Binary
@@ -464,9 +464,8 @@
             <p>
               You have probably played this game before: “I am thinking of a
               number between 1 and 100. Try to guess it in as few tries as
-              possible. After every guess, I will only say higher or lower.”
-              The smartest first guess is <strong>50</strong> — right in the
-              middle.
+              possible. After every guess, I will only say higher or lower.” The
+              smartest first guess is <strong>50</strong> — right in the middle.
             </p>
             <ul>
               <li>
@@ -627,8 +626,8 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               The iterative version uses only three small variables:
               <code>low</code>, <code>high</code>, and <code>mid</code>. It does
               not matter whether the list has 10 items or 10 billion; it still
-              uses these same variables. A recursive version uses O(log N)
-              stack space because function calls are stored in memory.
+              uses these same variables. A recursive version uses O(log N) stack
+              space because function calls are stored in memory.
             </p>
           </section>
           <section id="real-world">
@@ -636,8 +635,8 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             <ul>
               <li>
                 <strong>Git Bisect:</strong> When a bug appears after hundreds
-                of commits, it finds the exact commit by checking only a
-                handful of them.
+                of commits, it finds the exact commit by checking only a handful
+                of them.
               </li>
               <li>
                 <strong>Database Indexing:</strong> Databases use tree
@@ -665,8 +664,8 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
             <p>
               Binary Search is not only for finding a number in a list. It can
               cut any search area in half when it has a special property called
-              <strong>monotonicity</strong>: things keep getting better or
-              worse in one direction, like a sorted list does.
+              <strong>monotonicity</strong>: things keep getting better or worse
+              in one direction, like a sorted list does.
             </p>
             <p>
               <strong>Example:</strong> Find the smallest possible truck
@@ -686,9 +685,9 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               resources fairly.
             </p>
             <blockquote>
-              <strong>Key takeaway:</strong> Whenever possible answers behave
-              in an ordered, predictable way, think Binary Search — even when
-              there is no actual sorted array.
+              <strong>Key takeaway:</strong> Whenever possible answers behave in
+              an ordered, predictable way, think Binary Search — even when there
+              is no actual sorted array.
             </blockquote>
           </section>
           <section id="practice">
@@ -697,19 +696,22 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               <li>
                 <a href="https://leetcode.com/problems/binary-search/"
                   >Binary Search (Easy)</a
-                > — the basic version, to lock in the pattern from Section 5.
+                >
+                — the basic version, to lock in the pattern from Section 5.
               </li>
               <li>
                 <a
                   href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
                   >Search in Rotated Sorted Array (Medium)</a
-                > — checks whether you understand low, high, and mid, not just
+                >
+                — checks whether you understand low, high, and mid, not just
                 memorized the code.
               </li>
               <li>
                 <a href="https://leetcode.com/problems/koko-eating-bananas/"
                   >Koko Eating Bananas (Medium)</a
-                > — your first real Binary Search on the Answer problem.
+                >
+                — your first real Binary Search on the Answer problem.
               </li>
             </ol>
             <p>
