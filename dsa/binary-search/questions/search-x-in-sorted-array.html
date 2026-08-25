@@ -383,8 +383,10 @@
           Search finds a number in a <strong>sorted</strong> list by checking
           the <strong>middle</strong> item, then throwing away half the list
           based on whether your target is bigger or smaller. It repeats this on
-          the smaller half until it finds the answer. For 1 billion items, it
-          needs only about 30 checks instead of a billion.
+          the smaller half, again and again, until it finds the answer. This is
+          why it is so fast: for 1 billion items, it needs only about 30 checks
+          instead of a billion. Keep this one line in your head — everything
+          below explains it in full detail, step by step.
         </p>
       </section>
       <section class="article-facts" aria-label="Binary Search quick facts">
@@ -403,94 +405,118 @@
           <section id="why">
             <h2>1. WHY (Motive) — Linear Search vs Binary Search</h2>
             <p>
-              Imagine you have <strong>1 Billion sorted numbers</strong> and
-              need to find one number.
+              Imagine you have <strong>1 Billion sorted numbers</strong> in a
+              list. You need to find one number in it.
             </p>
             <h3>Linear Search (the slow way)</h3>
             <ul>
-              <li>Checks one item at a time.</li>
               <li>
-                In the worst case, checks <strong>all 1 billion items</strong>.
+                It checks one item at a time — first item, then second, then
+                third, and so on.
+              </li>
+              <li>
+                In the worst case, it checks
+                <strong>all 1 billion items</strong> before finding the answer
+                or realizing it is not there.
               </li>
               <li>That is a LOT of work.</li>
             </ul>
             <h3>Binary Search (the fast way)</h3>
             <ul>
-              <li>Cuts the search area in <strong>half</strong> every time.</li>
               <li>
-                Needs about <strong>30 steps</strong> for 1 billion items.
+                It cuts the search area in <strong>half</strong> every single
+                time.
               </li>
+              <li>
+                For 1 billion items, it only needs about
+                <strong>30 steps</strong> to find the answer.
+              </li>
+              <li>Just 30 steps, instead of a billion.</li>
             </ul>
             <p>
-              <strong>Simple takeaway:</strong> Linear Search = O(N). Binary
-              Search = O(log N). For big data, this difference is huge. This is
-              <strong>why</strong> we learn Binary Search.
+              <strong>Simple takeaway:</strong> Linear Search = check
+              everything = slow (called O(N)). Binary Search = cut in half each
+              time = fast (called O(log N)). For big data, this difference is
+              huge. This is <strong>why</strong> we learn Binary Search.
             </p>
           </section>
           <section id="condition">
             <h2>2. CONDITION (Prerequisite) — The Data Must Be Sorted</h2>
             <p>
               Binary Search only works if the list is <strong>sorted</strong>,
-              small to large or large to small.
+              arranged in order, small to large or large to small.
             </p>
             <p>
-              <strong>Why?</strong> If the middle is checked and the answer is
-              smaller, we can skip the right side because everything there is
-              even bigger. Without order, the middle tells us nothing.
+              <strong>Why?</strong> The whole trick is this: if we check the
+              middle item and our answer is smaller, we can safely skip the
+              entire right side because everything there is even bigger. This
+              only works if the numbers are in order. If the list is not
+              sorted, the middle item tells us nothing useful.
             </p>
             <blockquote>
               <strong>Rule to remember:</strong> No sorted data = No Binary
-              Search. Sort first, or use Linear Search.
+              Search. If your data is not sorted, sort it first, or use Linear
+              Search instead.
             </blockquote>
           </section>
           <section id="intuition">
             <h2>3. INTUITION (The Core Logic) — The “Guess the Number” Game</h2>
             <p>
-              “I am thinking of a number between 1 and 100. Guess it. I will
-              only say higher or lower.” The smartest first guess is
-              <strong>50</strong>.
+              You have probably played this game before: “I am thinking of a
+              number between 1 and 100. Try to guess it in as few tries as
+              possible. After every guess, I will only say higher or lower.”
+              The smartest first guess is <strong>50</strong> — right in the
+              middle.
             </p>
             <ul>
-              <li>Guess 50; “higher” means 1–50 are gone.</li>
-              <li>Guess 75; “lower” means the answer is 51–74.</li>
-              <li>Guess the middle again, and repeat.</li>
+              <li>
+                Guess <strong>50</strong>. If the friend says “higher,” numbers
+                1–50 are gone forever.
+              </li>
+              <li>
+                Guess <strong>75</strong>. If the friend says “lower,” the
+                answer is between 51 and 74.
+              </li>
+              <li>Guess the middle of what remains, and repeat.</li>
             </ul>
             <p>
-              Every guess <strong>cuts possibilities in half</strong>. In 7
-              guesses, any number from 1 to 100 can be found.
+              Every guess <strong>cuts the remaining numbers in half</strong>.
+              In just 7 guesses, you can find any number between 1 and 100.
             </p>
             <p>
-              <strong>This exact idea is Binary Search:</strong> Higher → right
-              half. Lower → left half. Repeat until you land on the answer.
-              Throwing away half each time is
+              <strong>This exact idea is Binary Search:</strong> “Higher” means
+              the target is bigger than the middle, so search the right half.
+              “Lower” means the target is smaller, so search the left half.
+              Repeat until you land on the answer. Throwing away half the
+              possibilities every time is called
               <strong>Divide and Conquer</strong>.
             </p>
           </section>
           <section id="dry-run">
             <h2>4. DRY RUN (Simulation) — Watching the Pointers Move</h2>
             <p>
-              <code>low</code> (L) is the start, <code>high</code> (H) is the
-              end, and <code>mid</code> (M) is the middle of the current search
-              area.
+              We use three pointers: <code>low</code> (L) is the start of the
+              current search area, <code>high</code> (H) is the end, and
+              <code>mid</code> (M) is the middle point we check.
             </p>
             <pre>
 Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value: [2,  4,  6,  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</pre
             >
-            <p>Target: <strong>26</strong>.</p>
+            <p>We are searching for the number <strong>26</strong>.</p>
             <h3>Step 1 → L=0, H=15, M=7</h3>
             <p>
-              <code>arr[M] = 16</code>; target 26 is bigger. Throw away 0–7.
-              L=8.
+              <code>arr[M] = 16</code>. The target 26 is bigger, so throw away
+              the left half, indexes 0–7. Move L to 8.
             </p>
             <h3>Step 2 → L=8, H=15, M=11</h3>
             <p>
-              <code>arr[M] = 24</code>; target 26 is bigger. Throw away 8–11.
-              L=12.
+              <code>arr[M] = 24</code>. The target is still bigger, so throw
+              away indexes 8–11. Move L to 12.
             </p>
             <h3>Step 3 → L=12, H=15, M=13</h3>
             <p>
-              <code>arr[M] = 28</code>; target 26 is smaller. Throw away 13–15.
-              H=12.
+              <code>arr[M] = 28</code>. The target 26 is smaller, so throw away
+              indexes 13–15 and move H to 12.
             </p>
             <h3>Step 4 → L=12, H=12, M=12</h3>
             <p>
@@ -498,14 +524,15 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               <strong>Match found! Return index 12.</strong>
             </p>
             <p>
-              The area shrinks: 16 → 8 → 4 → 1. Answer in
-              <strong>4 checks</strong>.
+              The search area shrinks: 16 numbers → 8 → 4 → 1. We found the
+              answer in just <strong>4 checks</strong>, out of 16 numbers.
             </p>
           </section>
           <section id="code">
             <h2>5. CODE (Implementation + Comments)</h2>
             <p class="code-note">
-              Choose a language to read its commented implementation. The
+              Here is the same logic written in three popular languages. Read
+              the comments because they explain what each line does. The
               visualizer button opens the same algorithm with that language
               selected.
             </p>
@@ -543,73 +570,87 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
         low = 0                      # start of the search area
         high = len(arr) - 1          # end of the search area
 
-        while low &lt;= high:           # keep going while something remains
-          mid = low + (high - low) // 2   # safe middle point
+        while low &lt;= high:           # keep going while there is still something to check
+          mid = low + (high - low) // 2   # find the middle point (safe way, avoids errors)
 
           if arr[mid] == target:   # middle value matches what we want
-            return mid           # we found it
-          elif arr[mid] &lt; target:  # our target is bigger
-            low = mid + 1        # search the right half
-          else:                    # our target is smaller
-            high = mid - 1       # search the left half
+            return mid           # we found it — return its position
+          elif arr[mid] &lt; target:  # our number is bigger than the middle value
+            low = mid + 1        # so skip the left half, search the right half
+          else:                    # our number is smaller than the middle value
+            high = mid - 1       # so skip the right half, search the left half
 
-        return -1                    # not in the list</code></pre>
+        return -1                    # loop ended without finding it — not in the list</code></pre>
           </section>
           <section id="mistakes">
             <h2>6. MISTAKES &amp; EDGE CASES (The Bugs)</h2>
             <ol>
               <li>
-                <strong>Overflow:</strong> Use
-                <code>low + (high - low) / 2</code>, not
-                <code>(low + high) / 2</code>.
+                <strong>Writing <code>mid = (low + high) / 2</code>:</strong>
+                If low and high are very large, adding them can cause an error
+                called overflow. Use
+                <code>low + (high - low) / 2</code> instead.
               </li>
               <li>
-                <strong>Forgotten -1:</strong> Return <code>-1</code> when
-                absent.
+                <strong>Forgetting to return -1:</strong> If the number is not
+                in the list, return <code>-1</code> to clearly say “not found.”
               </li>
               <li>
-                <strong>Wrong condition:</strong> Use
-                <code>low &lt;= high</code>, not <code>low &lt; high</code>.
+                <strong>Using <code>low &lt; high</code>:</strong> This might
+                miss checking the last possible item. Always use
+                <code>low &lt;= high</code>.
               </li>
               <li>
-                <strong>Wrong update:</strong> Use
+                <strong>Wrong pointer update:</strong> Use
                 <code>low = mid + 1</code> and <code>high = mid - 1</code> or
-                the loop can run forever.
+                the search area may never get smaller and the loop can run
+                forever.
               </li>
-              <li><strong>Unsorted data:</strong> Sort it first.</li>
+              <li>
+                <strong>Using Binary Search on unsorted data:</strong> Always
+                check that the list is sorted before searching.
+              </li>
             </ol>
           </section>
           <section id="complexity">
             <h2>7. COMPLEXITY (The Math)</h2>
             <h3>Time Complexity: O(log N)</h3>
             <p>
-              N → N/2 → N/4 → N/8 → ... → 1. For 1 billion items, log₂(N) is
-              about <strong>30</strong>.
+              Every step cuts the list in half: N → N/2 → N/4 → N/8 → ... → 1.
+              The number of steps needed to get from N down to 1 is called
+              log₂(N). For 1 billion items, log₂(N) is only about
+              <strong>30</strong>. This is why the time barely grows even when
+              the data grows massively.
             </p>
             <h3>Space Complexity: O(1)</h3>
             <p>
-              The iterative version uses only <code>low</code>,
-              <code>high</code>, and <code>mid</code>. A recursive version uses
-              O(log N) stack space.
+              The iterative version uses only three small variables:
+              <code>low</code>, <code>high</code>, and <code>mid</code>. It does
+              not matter whether the list has 10 items or 10 billion; it still
+              uses these same variables. A recursive version uses O(log N)
+              stack space because function calls are stored in memory.
             </p>
           </section>
           <section id="real-world">
             <h2>8. REAL WORLD (Applications)</h2>
             <ul>
               <li>
-                <strong>Git Bisect:</strong> Finds the commit that caused a bug.
+                <strong>Git Bisect:</strong> When a bug appears after hundreds
+                of commits, it finds the exact commit by checking only a
+                handful of them.
               </li>
               <li>
-                <strong>Database Indexing:</strong> Finds rows quickly in huge
-                tables.
+                <strong>Database Indexing:</strong> Databases use tree
+                structures similar to Binary Search to find rows quickly in
+                tables with millions of records.
               </li>
               <li>
                 <strong>Autocomplete &amp; Spell Checkers:</strong> Search
                 sorted word lists.
               </li>
               <li>
-                <strong>Photo/Video Editing:</strong> Jump through large
-                histories or timelines.
+                <strong>Photo/Video Editing:</strong> Jump to a specific point
+                in a large history or timeline.
               </li>
               <li>
                 <strong>Rate Limiters &amp; Logs:</strong> Find events in
@@ -622,25 +663,32 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               9. PATTERN RECOGNITION (Advanced) — “Binary Search on the Answer”
             </h2>
             <p>
-              Binary Search can cut any search area in half when it has
-              <strong>monotonicity</strong>: answers keep getting better or
-              worse in one direction.
+              Binary Search is not only for finding a number in a list. It can
+              cut any search area in half when it has a special property called
+              <strong>monotonicity</strong>: things keep getting better or
+              worse in one direction, like a sorted list does.
             </p>
             <p>
-              Example: Find the smallest truck capacity to deliver packages
-              within 5 days. Guess a capacity and ask, “Is it enough?”
+              <strong>Example:</strong> Find the smallest possible truck
+              capacity needed to deliver all packages within 5 days. You are
+              searching a range of possible answers, from the smallest to the
+              largest capacity. For any capacity, ask: “Is this capacity enough
+              to finish in 5 days?”
             </p>
             <ul>
-              <li>Yes → try a smaller capacity.</li>
-              <li>No → try a bigger capacity.</li>
+              <li>Yes → try a smaller capacity by searching the left half.</li>
+              <li>No → try a bigger capacity by searching the right half.</li>
             </ul>
             <p>
-              This appears in “minimize the maximum,” “maximize the minimum,”
-              square roots, ranked values, and fair resource splitting.
+              This is called <strong>Binary Search on the Answer</strong>. It
+              appears in “minimize the maximum” and “maximize the minimum”
+              problems, finding square roots or ranked values, and splitting
+              resources fairly.
             </p>
             <blockquote>
-              <strong>Key takeaway:</strong> Ordered, predictable possible
-              answers mean Binary Search may apply, even without a sorted array.
+              <strong>Key takeaway:</strong> Whenever possible answers behave
+              in an ordered, predictable way, think Binary Search — even when
+              there is no actual sorted array.
             </blockquote>
           </section>
           <section id="practice">
@@ -649,23 +697,26 @@ Index:  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15&#10;Value:
               <li>
                 <a href="https://leetcode.com/problems/binary-search/"
                   >Binary Search (Easy)</a
-                >
+                > — the basic version, to lock in the pattern from Section 5.
               </li>
               <li>
                 <a
                   href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
                   >Search in Rotated Sorted Array (Medium)</a
-                >
+                > — checks whether you understand low, high, and mid, not just
+                memorized the code.
               </li>
               <li>
                 <a href="https://leetcode.com/problems/koko-eating-bananas/"
                   >Koko Eating Bananas (Medium)</a
-                >
+                > — your first real Binary Search on the Answer problem.
               </li>
             </ol>
             <p>
-              After these 3, study
+              Once you are comfortable with these three, study
               <strong>Binary Search on the Answer</strong> as its own topic.
+              This is where many interview-level Binary Search problems live,
+              and it builds directly on everything in this guide.
             </p>
           </section>
           <section id="download-notes">
